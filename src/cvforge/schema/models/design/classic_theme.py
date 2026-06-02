@@ -510,7 +510,7 @@ class Sections(BaseModelWithoutExtraKeys):
 
 # Entries
 
-type Bullet = Literal["●", "•", "◦", "-", "◆", "★", "■", "—", "○"]
+type Bullet = Literal["●", "•", "◦", "-", "◆", "★", "■", "—", "○", "▹", "▸"]
 
 
 class Summary(BaseModelWithoutExtraKeys):

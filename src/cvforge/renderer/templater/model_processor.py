@@ -132,8 +132,7 @@ def process_model(
     for section in cvforge_model.cv.cvforge_sections:
         section.title = apply_string_processors(section.title, string_processors)
         show_time_span = (
-            section.snake_case_title
-            in cvforge_model.design.sections.show_time_spans_in
+            section.snake_case_title in cvforge_model.design.sections.show_time_spans_in
         )
         for i, entry in enumerate(section.entries):
             processed_entry = render_entry_templates(

@@ -89,7 +89,7 @@ def test_entries_with_extra_attributes(EntryType, request: pytest.FixtureRequest
     ("key", "expected_section_title"),
     [
         ("this_is_a_test", "This Is a Test"),
-        ("welcome_to_cvforge!", "Welcome to Rendercv!"),
+        ("welcome_to_cvforge!", "Welcome to Cvforge!"),
         ("Welcome to RenderCV!", "Welcome to RenderCV!"),
         ("\\faGraduationCap_education", "\\faGraduationCap_education"),
         ("\\faGraduationCap Education", "\\faGraduationCap Education"),

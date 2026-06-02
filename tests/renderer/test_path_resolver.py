@@ -7,8 +7,8 @@ from hypothesis import strategies as st
 
 from cvforge.renderer.path_resolver import (
     build_name_variants,
-    resolve_output_folder_placeholder,
     resolve_cvforge_file_path,
+    resolve_output_folder_placeholder,
 )
 from cvforge.schema.models.cv.cv import Cv
 from cvforge.schema.models.cvforge_model import RenderCVModel
@@ -242,9 +242,9 @@ class TestBuildNameVariants:
 
     @settings(deadline=None)
     @given(name=st.text(min_size=1, max_size=50))
-    def test_always_7_keys(self, name: str) -> None:
+    def test_always_8_keys(self, name: str) -> None:
         result = build_name_variants(name)
-        assert len(result) == 7
+        assert len(result) == 8
 
     @settings(deadline=None)
     @given(name=st.text(min_size=1, max_size=50))

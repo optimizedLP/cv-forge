@@ -25,7 +25,9 @@ def build_name_variants(name: str | None) -> dict[str, str]:
     return {
         "NAME": name,
         "NAME_IN_SNAKE_CASE": name.replace(" ", "_"),
-        "NAME_IN_TITLE_SNAKE_CASE": "_".join(w.capitalize() for w in name.replace(" ", "_").split("_")),
+        "NAME_IN_TITLE_SNAKE_CASE": "_".join(
+            w.capitalize() for w in name.replace(" ", "_").split("_")
+        ),
         "NAME_IN_LOWER_SNAKE_CASE": name.replace(" ", "_").lower(),
         "NAME_IN_UPPER_SNAKE_CASE": name.replace(" ", "_").upper(),
         "NAME_IN_KEBAB_CASE": name.replace(" ", "-"),

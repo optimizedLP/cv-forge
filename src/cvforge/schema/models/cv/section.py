@@ -343,7 +343,10 @@ def get_cvforge_sections(
         # Determine iteration order: use section_order if provided, else YAML order
         if section_order:
             # Build lookup for quick access while preserving order
-            sections_lookup = {dictionary_key_to_proper_section_title(k): (k, v) for k, v in sections.items()}
+            sections_lookup = {
+                dictionary_key_to_proper_section_title(k): (k, v)
+                for k, v in sections.items()
+            }
             ordered_keys = []
             for title in section_order:
                 if title in sections_lookup:

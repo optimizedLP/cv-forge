@@ -6,13 +6,13 @@ import pytest
 import ruamel.yaml
 
 from cvforge.exception import RenderCVUserError, RenderCVUserValidationError
-from cvforge.schema.models.cvforge_model import RenderCVModel
 from cvforge.schema.cvforge_model_builder import (
     build_cvforge_dictionary,
     build_cvforge_dictionary_and_model,
     build_cvforge_model_from_commented_map,
     get_yaml_error_location,
 )
+from cvforge.schema.models.cvforge_model import RenderCVModel
 from cvforge.schema.sample_generator import dictionary_to_yaml
 
 

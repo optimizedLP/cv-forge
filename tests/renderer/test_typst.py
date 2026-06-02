@@ -1,8 +1,8 @@
 import pytest
 
 from cvforge.renderer.typst import generate_typst
-from cvforge.schema.models.design.built_in_design import available_themes
 from cvforge.schema.models.cvforge_model import RenderCVModel
+from cvforge.schema.models.design.built_in_design import available_themes
 
 
 @pytest.mark.parametrize("theme", available_themes)

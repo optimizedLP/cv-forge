@@ -3,7 +3,6 @@
 import pathlib
 import re
 import string
-from collections import Counter
 from typing import Annotated
 
 import typer
@@ -41,12 +40,60 @@ def extract_text_from_pdf(pdf_path: pathlib.Path) -> str:
 def tokenize(text: str) -> set[str]:
     """Tokenize text into lowercase words, removing punctuation and stopwords."""
     stopwords = {
-        "a", "an", "the", "and", "or", "but", "in", "on", "at", "to", "for",
-        "of", "with", "by", "from", "is", "are", "was", "were", "be", "been",
-        "being", "have", "has", "had", "do", "does", "did", "will", "would",
-        "could", "should", "may", "might", "can", "shall", "you", "your",
-        "we", "they", "their", "our", "its", "it", "this", "that", "these",
-        "those", "not", "no", "very", "just", "about", "also",
+        "a",
+        "an",
+        "the",
+        "and",
+        "or",
+        "but",
+        "in",
+        "on",
+        "at",
+        "to",
+        "for",
+        "of",
+        "with",
+        "by",
+        "from",
+        "is",
+        "are",
+        "was",
+        "were",
+        "be",
+        "been",
+        "being",
+        "have",
+        "has",
+        "had",
+        "do",
+        "does",
+        "did",
+        "will",
+        "would",
+        "could",
+        "should",
+        "may",
+        "might",
+        "can",
+        "shall",
+        "you",
+        "your",
+        "we",
+        "they",
+        "their",
+        "our",
+        "its",
+        "it",
+        "this",
+        "that",
+        "these",
+        "those",
+        "not",
+        "no",
+        "very",
+        "just",
+        "about",
+        "also",
     }
     text = text.lower()
     text = text.translate(str.maketrans("", "", string.punctuation))
@@ -57,22 +104,28 @@ def tokenize(text: str) -> set[str]:
 def extract_keywords(job_description: str) -> list[str]:
     """Extract meaningful single and multi-word keywords from a job description."""
     # Remove common filler words
-    cleaned = re.sub(r"(?i)\b(a|an|the|and|or|but|in|on|at|to|for|of|with|by|from|is|are|was|were|be|been|being|have|has|had|do|does|did|will|would|could|should|may|might|can|shall|you|your|we|they|their|our)\b", "", job_description)
-    
+    cleaned = re.sub(
+        r"(?i)\b(a|an|the|and|or|but|in|on|at|to|for|of|with|by|from|is|are|was|were|be|been|being|have|has|had|do|does|did|will|would|could|should|may|might|can|shall|you|your|we|they|their|our)\b",
+        "",
+        job_description,
+    )
+
     # Extract capitalized phrases (likely proper nouns/technologies)
     capitalized = re.findall(r"\b[A-Z][a-z]*(?:\s+[A-Z][a-z]*)*\b", job_description)
-    
+
     # Extract technical terms (words containing special chars or numbers)
     technical = re.findall(r"\b\w*[\d.]+\w*\b", job_description)
-    
+
     # Standard single words
     words = tokenize(job_description)
-    
+
     # Combine and deduplicate
     all_keywords = set(
-        w.lower().strip() for w in [*capitalized, *technical, *words] if len(w.strip()) > 2
+        w.lower().strip()
+        for w in [*capitalized, *technical, *words]
+        if len(w.strip()) > 2
     )
-    
+
     return sorted(all_keywords)
 
 
@@ -167,7 +220,9 @@ def cli_command_ats(
         score = 0
 
     # Display results
-    table = Table(title="ATS Compatibility Report", show_header=True, header_style="bold")
+    table = Table(
+        title="ATS Compatibility Report", show_header=True, header_style="bold"
+    )
     table.add_column("Metric", style="cyan")
     table.add_column("Value", style="green")
     table.add_row("Total Keywords in Job", str(len(target_keywords)))
@@ -205,4 +260,6 @@ def cli_command_ats(
         console.print("\n[yellow]Tips to improve your score:[/yellow]")
         console.print("  • Add missing technical skills if you have them")
         console.print("  • Use industry-standard terminology from the job description")
-        console.print("  • Ensure all relevant experience is listed with proper keywords")
+        console.print(
+            "  • Ensure all relevant experience is listed with proper keywords"
+        )

@@ -14,13 +14,13 @@ from cvforge.renderer.templater.connections import (
 from cvforge.schema.models.cv.custom_connection import CustomConnection
 from cvforge.schema.models.cv.cv import Cv
 from cvforge.schema.models.cv.social_network import SocialNetwork, SocialNetworkName
+from cvforge.schema.models.cvforge_model import RenderCVModel
 from cvforge.schema.models.design.classic_theme import (
     ClassicTheme,
     Connections,
     Header,
 )
 from cvforge.schema.models.locale.locale import EnglishLocale
-from cvforge.schema.models.cvforge_model import RenderCVModel
 
 
 def create_cv(

@@ -1,4 +1,4 @@
-// Import the cvforge function and all the refactored components
+// Import the rendercv function and all the refactored components
 #import "@preview/rendercv:0.3.0": *
 
 // Apply the rendercv template with custom configuration
@@ -6,7 +6,7 @@
   name: "John Doe",
   title: "John Doe - CV",
   footer: context { [#emph[John Doe -- #str(here().page())\/#str(counter(page).final().first())]] },
-  top-note: [ #emph[Last updated in Mar 2026] ],
+  top-note: [ #emph[Last updated in June 2026] ],
   locale-catalog-language: "en",
   text-direction: ltr,
   page-size: "us-letter",
@@ -80,8 +80,8 @@
   entries-highlights-space-between-bullet-and-text: 0.5em,
   date: datetime(
     year: 2026,
-    month: 3,
-    day: 20,
+    month: 6,
+    day: 2,
   ),
 )
 
@@ -92,8 +92,8 @@
   [#connection-with-icon("location-dot")[San Francisco, CA]],
   [#link("mailto:john.doe@email.com", icon: false, if-underline: false, if-color: false)[#connection-with-icon("envelope")[john.doe\@email.com]]],
   [#link("https://rendercv.com/", icon: false, if-underline: false, if-color: false)[#connection-with-icon("link")[rendercv.com]]],
-  [#link("https://linkedin.com/in/cvforge", icon: false, if-underline: false, if-color: false)[#connection-with-icon("linkedin")[cvforge]]],
-  [#link("https://github.com/cvforge", icon: false, if-underline: false, if-color: false)[#connection-with-icon("github")[cvforge]]],
+  [#link("https://linkedin.com/in/rendercv", icon: false, if-underline: false, if-color: false)[#connection-with-icon("linkedin")[rendercv]]],
+  [#link("https://github.com/rendercv", icon: false, if-underline: false, if-color: false)[#connection-with-icon("github")[rendercv]]],
 )
 
 
@@ -171,7 +171,9 @@ Markdown syntax is supported everywhere. This is #strong[bold], #emph[italic], a
 
     June 2023 – present
 
-    2 years 10 months
+    
+
+    3 years 1 month
 
   ],
 )
@@ -190,6 +192,8 @@ Markdown syntax is supported everywhere. This is #strong[bold], #emph[italic], a
 
     May 2022 – Aug 2022
 
+    
+
     4 months
 
   ],
@@ -203,17 +207,19 @@ Markdown syntax is supported everywhere. This is #strong[bold], #emph[italic], a
 
     - Published research at top-tier venues with significant academic impact
 
-      - ICML 2022 main conference paper, cited 340+ times within two years
+    - ICML 2022 main conference paper, cited 340+ times within two years
 
-      - NeurIPS 2022 workshop paper on emergent communication protocols
+    - NeurIPS 2022 workshop paper on emergent communication protocols
 
-      - Invited journal extension in JMLR (2023)
+    - Invited journal extension in JMLR (2023)
 
   ],
   [
     London, UK
 
     May 2021 – Aug 2021
+
+    
 
     4 months
 
@@ -234,6 +240,8 @@ Markdown syntax is supported everywhere. This is #strong[bold], #emph[italic], a
 
     May 2020 – Aug 2020
 
+    
+
     4 months
 
   ],
@@ -252,6 +260,8 @@ Markdown syntax is supported everywhere. This is #strong[bold], #emph[italic], a
     Redmond, WA
 
     May 2019 – Aug 2019
+
+    
 
     4 months
 

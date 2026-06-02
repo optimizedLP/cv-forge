@@ -181,7 +181,7 @@ def get_package_path() -> pathlib.Path:
     renderer_dir = pathlib.Path(__file__).parent
 
     install_bundled_typst_package(
-        bundled_path=renderer_dir / "rendercv_typst",
+        bundled_path=renderer_dir / "cvforge_typst",
         package_name="cvforge",
         temp_dir=temp_dir,
         typ_files=["lib.typ"],
@@ -226,7 +226,7 @@ def get_typst_compiler(
     return typst.Compiler(
         root=root,
         font_paths=[
-            *cvforge_fonts.paths_to_font_folders,
+            *rendercv_fonts.paths_to_font_folders,
             (
                 input_file_path.parent / "fonts"
                 if input_file_path

@@ -1,0 +1,97 @@
+// Import the rendercv function and all the refactored components
+#import "@preview/rendercv:0.3.0": *
+
+// Apply the rendercv template with custom configuration
+#show: rendercv.with(
+  name: "John Doe",
+  title: "John Doe - CV",
+  footer: context { [#emph[John Doe · #str(here().page())\/#str(counter(page).final().first())]] },
+  top-note: [ #emph[Last updated in Nov 2025] ],
+  locale-catalog-language: "en",
+  text-direction: ltr,
+  page-size: "us-letter",
+  page-top-margin: 0.7in,
+  page-bottom-margin: 0.7in,
+  page-left-margin: 0.75in,
+  page-right-margin: 0.75in,
+  page-show-footer: true,
+  page-show-top-note: false,
+  colors-body: rgb(30, 30, 40),
+  colors-name: rgb(15, 30, 60),
+  colors-headline: rgb(90, 100, 120),
+  colors-connections: rgb(110, 120, 140),
+  colors-section-titles: rgb(15, 30, 60),
+  colors-links: rgb(15, 30, 60),
+  colors-footer: rgb(140, 145, 155),
+  colors-top-note: rgb(140, 145, 155),
+  typography-line-spacing: 0.6em,
+  typography-alignment: "justified-with-no-hyphenation",
+  typography-date-and-location-column-alignment: right,
+  typography-font-family-body: "Source Sans 3",
+  typography-font-family-name: "EB Garamond",
+  typography-font-family-headline: "Source Sans 3",
+  typography-font-family-connections: "Source Sans 3",
+  typography-font-family-section-titles: "EB Garamond",
+  typography-font-size-body: 10pt,
+  typography-font-size-name: 34pt,
+  typography-font-size-headline: 11pt,
+  typography-font-size-connections: 9pt,
+  typography-font-size-section-titles: 1.4em,
+  typography-small-caps-name: false,
+  typography-small-caps-headline: false,
+  typography-small-caps-connections: false,
+  typography-small-caps-section-titles: false,
+  typography-bold-name: true,
+  typography-bold-headline: false,
+  typography-bold-connections: false,
+  typography-bold-section-titles: false,
+  links-underline: false,
+  links-show-external-link-icon: false,
+  header-alignment: center,
+  header-photo-width: 4cm,
+  header-space-below-name: 0.7cm,
+  header-space-below-headline: 0.4cm,
+  header-space-below-connections: 0.6cm,
+  header-connections-hyperlink: true,
+  header-connections-show-icons: true,
+  header-connections-display-urls-instead-of-usernames: false,
+  header-connections-separator: "",
+  header-connections-space-between-connections: 0.5cm,
+  section-titles-type: "centered_with_partial_line",
+  section-titles-line-thickness: 0.6pt,
+  section-titles-space-above: 0.6cm,
+  section-titles-space-below: 0.3cm,
+  sections-allow-page-break: true,
+  sections-space-between-text-based-entries: 0.3em,
+  sections-space-between-regular-entries: 1.3em,
+  entries-date-and-location-width: 4.2cm,
+  entries-side-space: 0.15cm,
+  entries-space-between-columns: 0.2cm,
+  entries-allow-page-break: false,
+  entries-short-second-row: false,
+  entries-degree-width: 1cm,
+  entries-summary-space-left: 0cm,
+  entries-summary-space-above: 0.1cm,
+  entries-highlights-bullet:  "▹" ,
+  entries-highlights-nested-bullet:  "◦" ,
+  entries-highlights-space-left: 0.2cm,
+  entries-highlights-space-above: 0.1cm,
+  entries-highlights-space-between-items: 0.08cm,
+  entries-highlights-space-between-bullet-and-text: 0.5em,
+  date: datetime(
+    year: 2025,
+    month: 11,
+    day: 30,
+  ),
+)
+
+
+= John Doe
+
+#connections(
+)
+
+
+== Experience
+
+Software Engineer at Company X, 2020-2023

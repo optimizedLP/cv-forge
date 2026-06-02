@@ -2,14 +2,14 @@ import pytest
 import ruamel.yaml
 
 from cvforge.exception import RenderCVUserError
+from cvforge.schema.models.cvforge_model import RenderCVModel
 from cvforge.schema.models.design.built_in_design import available_themes
 from cvforge.schema.models.locale.locale import available_locales
-from cvforge.schema.models.cvforge_model import RenderCVModel
 from cvforge.schema.sample_generator import (
     create_sample_cv_file,
+    create_sample_cvforge_pydantic_model,
     create_sample_design_file,
     create_sample_locale_file,
-    create_sample_cvforge_pydantic_model,
     create_sample_settings_file,
     create_sample_yaml_file,
     create_sample_yaml_input_file,

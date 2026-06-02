@@ -22,9 +22,7 @@ from cvforge.cli.app import (
 
 
 def test_all_commands_are_registered():
-    cli_folder = (
-        pathlib.Path(__file__).parent.parent.parent / "src" / "cvforge" / "cli"
-    )
+    cli_folder = pathlib.Path(__file__).parent.parent.parent / "src" / "cvforge" / "cli"
     command_files = list(cli_folder.rglob("*_command.py"))
 
     registered_commands = app.registered_commands

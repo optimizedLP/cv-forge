@@ -9,9 +9,9 @@ cv:
   website: https://rendercv.com/
   social_networks:
     - network: LinkedIn
-      username: cvforge
+      username: rendercv
     - network: GitHub
-      username: cvforge
+      username: rendercv
   custom_connections:
   sections:
     Welcome to RenderCV:
@@ -365,5 +365,6 @@ settings:
     dont_generate_typst: false
     dont_generate_pdf: false
     dont_generate_png: false
+  section_order:
   bold_keywords: []
   pdf_title: NAME - CV

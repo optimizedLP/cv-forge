@@ -1,8 +1,8 @@
-// Import the cvforge function and all the refactored components
+// Import the rendercv function and all the refactored components
 #import "@preview/rendercv:0.3.0": *
 
-// Apply the cvforge template with custom configuration
-#show: cvforge.with(
+// Apply the rendercv template with custom configuration
+#show: rendercv.with(
   name: "John Doe",
   title: "John Doe - CV",
   footer: context { [#emph[John Doe -- #str(here().page())\/#str(counter(page).final().first())]] },

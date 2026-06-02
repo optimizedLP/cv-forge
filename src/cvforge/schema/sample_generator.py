@@ -11,11 +11,11 @@ import ruamel.yaml.representer
 from cvforge import __version__
 from cvforge.exception import RenderCVUserError
 
+from .cvforge_model_builder import read_yaml
 from .models.cv.cv import Cv
+from .models.cvforge_model import RenderCVModel
 from .models.design.built_in_design import available_themes, built_in_design_adapter
 from .models.locale.locale import available_locales, locale_adapter
-from .models.cvforge_model import RenderCVModel
-from .cvforge_model_builder import read_yaml
 
 
 def comment_out_section_sub_fields(

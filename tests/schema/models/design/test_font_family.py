@@ -1,3 +1,4 @@
+import pytest
 import rendercv_fonts
 
 from cvforge.schema.models.design.font_family import available_font_families

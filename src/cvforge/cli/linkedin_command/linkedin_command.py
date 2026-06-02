@@ -61,7 +61,9 @@ def parse_linkedin_text(text: str) -> dict:
     current_entry = {}
 
     section_patterns = {
-        "experience": re.compile(r"(?i)^(experience|work experience|professional experience)$"),
+        "experience": re.compile(
+            r"(?i)^(experience|work experience|professional experience)$"
+        ),
         "education": re.compile(r"(?i)^(education|academic background)$"),
         "skills": re.compile(r"(?i)^(skills|top skills|expertise)$"),
     }
@@ -118,13 +120,17 @@ def parse_linkedin_text(text: str) -> dict:
                     "company": company_name,
                     "position": position_title,
                     "location": location,
-                    "start_date": date.split(" - ")[0].strip() if " - " in date else date,
-                    "end_date": date.split(" - ")[1].strip() if " - " in date else "present",
+                    "start_date": date.split(" - ")[0].strip()
+                    if " - " in date
+                    else date,
+                    "end_date": date.split(" - ")[1].strip()
+                    if " - " in date
+                    else "present",
                     "highlights": [],
                 }
                 i += 2
                 continue
-            elif current_entry and line and not _is_section_header(line):
+            if current_entry and line and not _is_section_header(line):
                 current_entry.setdefault("highlights", []).append(
                     line.lstrip("·- ").strip()
                 )
@@ -207,17 +213,19 @@ def generate_yaml(data: dict, theme: str) -> str:
     if location:
         yaml_lines.append(f"  location: {location}")
 
-    yaml_lines.extend([
-        "  email:",
-        "  phone:",
-        "  website:",
-        "  social_networks:",
-        "    - network: LinkedIn",
-        "      username: yourusername",
-        "    - network: GitHub",
-        "      username: yourusername",
-        "  sections:",
-    ])
+    yaml_lines.extend(
+        [
+            "  email:",
+            "  phone:",
+            "  website:",
+            "  social_networks:",
+            "    - network: LinkedIn",
+            "      username: yourusername",
+            "    - network: GitHub",
+            "      username: yourusername",
+            "  sections:",
+        ]
+    )
 
     # Experience
     if data.get("experience"):
@@ -252,14 +260,16 @@ def generate_yaml(data: dict, theme: str) -> str:
             yaml_lines.append(f"      - label: {skill_clean}")
             yaml_lines.append("        details: ''")
 
-    yaml_lines.extend([
-        "",
-        "design:",
-        f"  theme: {theme}",
-        "",
-        "locale:",
-        "  language: english",
-    ])
+    yaml_lines.extend(
+        [
+            "",
+            "design:",
+            f"  theme: {theme}",
+            "",
+            "locale:",
+            "  language: english",
+        ]
+    )
 
     return "\n".join(yaml_lines)
 
@@ -318,9 +328,7 @@ def cli_command_linkedin(
     4. Paste the text and press Ctrl+D
     """
     if paste:
-        console.print(
-            "[bold cyan]Paste your LinkedIn profile text below.[/bold cyan]"
-        )
+        console.print("[bold cyan]Paste your LinkedIn profile text below.[/bold cyan]")
         console.print(
             "[dim](Copy from your LinkedIn profile, paste here, then press"
             " Ctrl+D)[/dim]\n"
