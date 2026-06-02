@@ -2,7 +2,7 @@
 
 1. Add network name to `SocialNetworkName` type
 
-    Edit `src/rendercv/schema/models/cv/social_network.py`:
+    Edit `src/cvforge/schema/models/cv/social_network.py`:
 
     ```python
     type SocialNetworkName = Literal[
@@ -15,7 +15,7 @@
 
 2. Add URL pattern to `url_dictionary`
 
-    Edit `src/rendercv/schema/models/cv/social_network.py`:
+    Edit `src/cvforge/schema/models/cv/social_network.py`:
 
     ```python
     url_dictionary: dict[SocialNetworkName, str] = {
@@ -27,7 +27,7 @@
 
 3. (Optional) Add username validation
 
-    If your network has special username format requirements, edit `src/rendercv/schema/models/cv/social_network.py`:
+    If your network has special username format requirements, edit `src/cvforge/schema/models/cv/social_network.py`:
 
     ```python
     match network:
@@ -39,7 +39,7 @@
 
 4. (Optional) Add custom URL generation
 
-    If URL generation requires special logic (not just base + username), edit `src/rendercv/schema/models/cv/social_network.py`:
+    If URL generation requires special logic (not just base + username), edit `src/cvforge/schema/models/cv/social_network.py`:
 
     ```python
     @functools.cached_property
@@ -55,7 +55,7 @@
 
 5. Add Font Awesome icon
 
-    Edit `src/rendercv/renderer/templater/connections.py`:
+    Edit `src/cvforge/renderer/templater/connections.py`:
 
     ```python
     typst_fa_icons = {

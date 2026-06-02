@@ -6,8 +6,8 @@ import pytest
 from hypothesis import assume, given, settings
 from hypothesis import strategies as st
 
-from rendercv.exception import RenderCVInternalError
-from rendercv.renderer.templater.entry_templates_from_input import (
+from cvforge.exception import RenderCVInternalError
+from cvforge.renderer.templater.entry_templates_from_input import (
     clean_trailing_parts,
     process_authors,
     process_date,
@@ -19,18 +19,18 @@ from rendercv.renderer.templater.entry_templates_from_input import (
     remove_not_provided_placeholders,
     render_entry_templates,
 )
-from rendercv.schema.models.cv.entries.education import EducationEntry
-from rendercv.schema.models.cv.entries.experience import ExperienceEntry
-from rendercv.schema.models.cv.entries.normal import NormalEntry
-from rendercv.schema.models.cv.entries.publication import PublicationEntry
-from rendercv.schema.models.design.classic_theme import (
+from cvforge.schema.models.cv.entries.education import EducationEntry
+from cvforge.schema.models.cv.entries.experience import ExperienceEntry
+from cvforge.schema.models.cv.entries.normal import NormalEntry
+from cvforge.schema.models.cv.entries.publication import PublicationEntry
+from cvforge.schema.models.design.classic_theme import (
     EducationEntryTemplate,
     NormalEntryTemplate,
     PublicationEntryTemplate,
     Templates,
 )
-from rendercv.schema.models.locale.english_locale import EnglishLocale
-from rendercv.schema.models.locale.locale import locale_adapter
+from cvforge.schema.models.locale.english_locale import EnglishLocale
+from cvforge.schema.models.locale.locale import locale_adapter
 
 
 @pytest.mark.parametrize(
@@ -705,7 +705,7 @@ class TestRenderEntryTemplatesInternalErrors:
 
         with (
             patch(
-                "rendercv.renderer.templater.entry_templates_from_input.process_date",
+                "cvforge.renderer.templater.entry_templates_from_input.process_date",
                 return_value="Jan 2020 – Jan 2021",
             ),
             pytest.raises(RenderCVInternalError),

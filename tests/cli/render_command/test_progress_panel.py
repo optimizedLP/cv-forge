@@ -3,12 +3,12 @@ import pathlib
 import pytest
 import typer
 
-from rendercv.cli.render_command.progress_panel import (
+from cvforge.cli.render_command.progress_panel import (
     CompletedStep,
     ProgressPanel,
     format_validation_error_location,
 )
-from rendercv.exception import RenderCVUserError, RenderCVValidationError
+from cvforge.exception import RenderCVUserError, RenderCVValidationError
 
 
 class TestFormatValidationErrorLocation:

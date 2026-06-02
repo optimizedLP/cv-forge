@@ -5,8 +5,8 @@ from unittest.mock import MagicMock, patch
 import typer
 import watchdog.events
 
-from rendercv.cli.render_command import watcher
-from rendercv.cli.render_command.watcher import EventHandler
+from cvforge.cli.render_command import watcher
+from cvforge.cli.render_command.watcher import EventHandler
 
 
 class TestRunFunctionIfFilesChange:

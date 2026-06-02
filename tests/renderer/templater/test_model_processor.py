@@ -5,16 +5,16 @@ from unittest.mock import MagicMock, patch
 import pydantic
 import pytest
 
-from rendercv.exception import RenderCVUserError
-from rendercv.renderer.templater.model_processor import (
+from cvforge.exception import RenderCVUserError
+from cvforge.renderer.templater.model_processor import (
     download_photo_from_url,
     process_fields,
     process_model,
 )
-from rendercv.schema.models.cv.cv import Cv
-from rendercv.schema.models.cv.entries.normal import NormalEntry
-from rendercv.schema.models.rendercv_model import RenderCVModel
-from rendercv.schema.models.settings.settings import Settings
+from cvforge.schema.models.cv.cv import Cv
+from cvforge.schema.models.cv.entries.normal import NormalEntry
+from cvforge.schema.models.cvforge_model import RenderCVModel
+from cvforge.schema.models.settings.settings import Settings
 
 
 @pytest.fixture
@@ -114,12 +114,12 @@ def model(request: pytest.FixtureRequest) -> RenderCVModel:
     }
     cv = Cv.model_validate(cv_data)
 
-    rendercv_model = RenderCVModel(
+    cvforge_model = RenderCVModel(
         cv=cv, settings=Settings(current_date=Date(2024, 2, 1))
     )
-    rendercv_model.settings.bold_keywords = request.param
+    cvforge_model.settings.bold_keywords = request.param
 
-    return rendercv_model
+    return cvforge_model
 
 
 class TestProcessModel:
@@ -136,7 +136,7 @@ class TestProcessModel:
         ]
         assert result.cv._top_note == "*Last updated in Feb 2024*"
 
-        entry = result.cv.rendercv_sections[0].entries[0]
+        entry = result.cv.cvforge_sections[0].entries[0]
         assert entry.main_column.startswith("**Backend Work**")
         if model.settings.bold_keywords:
             assert (
@@ -159,7 +159,7 @@ class TestProcessModel:
         assert result.cv.name == "Jane Doe \\@"
         assert result.cv.headline == "Software Engineer \\@"
 
-        entry = result.cv.rendercv_sections[0].entries[0]
+        entry = result.cv.cvforge_sections[0].entries[0]
         assert entry.main_column.startswith("#strong[Backend Work]")
         if model.settings.bold_keywords:
             assert "- Improved #strong[Python] performance" in entry.main_column
@@ -181,9 +181,9 @@ class TestProcessModel:
             "headline": "Software Engineer",
         }
         cv = Cv.model_validate(cv_data)
-        rendercv_model = RenderCVModel(cv=cv)
+        cvforge_model = RenderCVModel(cv=cv)
 
-        result = process_model(rendercv_model, "markdown")
+        result = process_model(cvforge_model, "markdown")
 
         assert result.cv.name == "Jane Doe"
         assert result.cv.headline == "Software Engineer"
@@ -195,12 +195,12 @@ class TestProcessModel:
 
     def test_pdf_title_custom_placeholder_resolution(self):
         cv = Cv.model_validate({"name": "John Doe"})
-        rendercv_model = RenderCVModel(
+        cvforge_model = RenderCVModel(
             cv=cv, settings=Settings(current_date=Date(2024, 3, 15))
         )
-        rendercv_model.settings.pdf_title = "NAME - Resume YEAR"
+        cvforge_model.settings.pdf_title = "NAME - Resume YEAR"
 
-        result = process_model(rendercv_model, "typst")
+        result = process_model(cvforge_model, "typst")
 
         assert result.settings.pdf_title == "John Doe - Resume 2024"
 
@@ -235,7 +235,7 @@ class TestDownloadPhotoFromUrl:
         mock_response.__exit__ = MagicMock(return_value=False)
 
         with patch(
-            "rendercv.renderer.templater.model_processor.urllib.request.urlopen",
+            "cvforge.renderer.templater.model_processor.urllib.request.urlopen",
             return_value=mock_response,
         ) as mock_urlopen:
             download_photo_from_url(model)
@@ -255,7 +255,7 @@ class TestDownloadPhotoFromUrl:
         mock_response.__exit__ = MagicMock(return_value=False)
 
         with patch(
-            "rendercv.renderer.templater.model_processor.urllib.request.urlopen",
+            "cvforge.renderer.templater.model_processor.urllib.request.urlopen",
             return_value=mock_response,
         ):
             download_photo_from_url(model)
@@ -272,7 +272,7 @@ class TestDownloadPhotoFromUrl:
         model.settings.render_command.output_folder = output_dir
 
         with patch(
-            "rendercv.renderer.templater.model_processor.urllib.request.urlopen"
+            "cvforge.renderer.templater.model_processor.urllib.request.urlopen"
         ) as mock_urlopen:
             download_photo_from_url(model)
 
@@ -287,7 +287,7 @@ class TestDownloadPhotoFromUrl:
 
         with (
             patch(
-                "rendercv.renderer.templater.model_processor.urllib.request.urlopen",
+                "cvforge.renderer.templater.model_processor.urllib.request.urlopen",
                 side_effect=OSError("network error"),
             ),
             pytest.raises(RenderCVUserError) as exc_info,

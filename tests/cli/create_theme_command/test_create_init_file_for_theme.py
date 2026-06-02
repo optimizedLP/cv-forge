@@ -1,9 +1,9 @@
 import pytest
 
-from rendercv.cli.create_theme_command.create_init_file_for_theme import (
+from cvforge.cli.create_theme_command.create_init_file_for_theme import (
     create_init_file_for_theme,
 )
-from rendercv.exception import RenderCVUserError
+from cvforge.exception import RenderCVUserError
 
 
 class TestCreateInitFileForTheme:

@@ -6,13 +6,13 @@ from unittest.mock import patch
 import pytest
 import typer
 
-from rendercv.cli.render_command.progress_panel import ProgressPanel
-from rendercv.cli.render_command.run_rendercv import (
+from cvforge.cli.render_command.progress_panel import ProgressPanel
+from cvforge.cli.render_command.run_cvforge import (
     collect_input_file_paths,
-    run_rendercv,
+    run_cvforge,
     timed_step,
 )
-from rendercv.exception import RenderCVUserError
+from cvforge.exception import RenderCVUserError
 
 
 class TestTimedStep:
@@ -92,7 +92,7 @@ class TestRunRendercv:
         progress = ProgressPanel(quiet=True)
 
         with pytest.raises(typer.Exit) as exc_info, progress:
-            run_rendercv(invalid_yaml, progress)
+            run_cvforge(invalid_yaml, progress)
 
         assert exc_info.value.exit_code == 1
 
@@ -103,7 +103,7 @@ class TestRunRendercv:
         progress = ProgressPanel(quiet=True)
 
         with pytest.raises(typer.Exit) as exc_info, progress:
-            run_rendercv(invalid_schema, progress)
+            run_cvforge(invalid_schema, progress)
 
         assert exc_info.value.exit_code == 1
 
@@ -131,7 +131,7 @@ design:
         progress = ProgressPanel(quiet=True)
 
         with pytest.raises(typer.Exit) as exc_info, progress:
-            run_rendercv(yaml_file, progress)
+            run_cvforge(yaml_file, progress)
 
         assert exc_info.value.exit_code == 1
 
@@ -139,7 +139,7 @@ design:
         yaml_file = tmp_path / "doesnt_exist.yaml"
         progress = ProgressPanel(quiet=True)
         with pytest.raises(typer.Exit) as _, progress:
-            run_rendercv(yaml_file, progress)
+            run_cvforge(yaml_file, progress)
 
     @pytest.mark.skipif(
         sys.platform == "win32", reason="chmod doesn't work the same on Windows"
@@ -157,7 +157,7 @@ design:
 
         try:
             with pytest.raises(typer.Exit) as exc_info, progress:
-                run_rendercv(yaml_file, progress)
+                run_cvforge(yaml_file, progress)
 
             assert exc_info.value.exit_code == 1
         finally:
@@ -171,14 +171,14 @@ design:
 
         with (
             patch(
-                "rendercv.cli.render_command.run_rendercv"
-                ".build_rendercv_dictionary_and_model",
+                "cvforge.cli.render_command.run_cvforge"
+                ".build_cvforge_dictionary_and_model",
                 side_effect=RenderCVUserError(message="test error"),
             ),
             pytest.raises(typer.Exit) as exc_info,
             progress,
         ):
-            run_rendercv(yaml_file, progress)
+            run_cvforge(yaml_file, progress)
 
         assert exc_info.value.exit_code == 1
 

@@ -3,16 +3,16 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from rendercv.exception import RenderCVInternalError
-from rendercv.renderer.pdf_png import (
+from cvforge.exception import RenderCVInternalError
+from cvforge.renderer.pdf_png import (
     generate_pdf,
     generate_png,
     get_package_path,
     read_version_from_typst_toml,
 )
-from rendercv.renderer.typst import generate_typst
-from rendercv.schema.models.design.built_in_design import available_themes
-from rendercv.schema.models.rendercv_model import RenderCVModel
+from cvforge.renderer.typst import generate_typst
+from cvforge.schema.models.design.built_in_design import available_themes
+from cvforge.schema.models.cvforge_model import RenderCVModel
 
 
 @pytest.mark.parametrize("theme", available_themes)
@@ -23,7 +23,7 @@ def test_generate_pdf(
     cv_variant: str,
     request: pytest.FixtureRequest,
 ):
-    base_model = request.getfixturevalue(f"{cv_variant}_rendercv_model")
+    base_model = request.getfixturevalue(f"{cv_variant}_cvforge_model")
 
     model = RenderCVModel(
         cv=base_model.cv,
@@ -48,13 +48,13 @@ def test_generate_pdf(
 def test_generate_png(
     compare_file_with_reference,
     theme: str,
-    minimal_rendercv_model: RenderCVModel,
+    minimal_cvforge_model: RenderCVModel,
 ):
     model = RenderCVModel(
-        cv=minimal_rendercv_model.cv,
+        cv=minimal_cvforge_model.cv,
         design={"theme": theme},
-        locale=minimal_rendercv_model.locale,
-        settings=minimal_rendercv_model.settings,
+        locale=minimal_cvforge_model.locale,
+        settings=minimal_cvforge_model.settings,
     )
 
     def generate_file(output_path):
@@ -74,11 +74,11 @@ class TestGetPackagePath:
         get_package_path.cache_clear()
         result = get_package_path()
 
-        # Find the version-named directory under preview/rendercv/:
-        rendercv_package_dir = result / "preview" / "rendercv"
-        assert rendercv_package_dir.is_dir()
+        # Find the version-named directory under preview/cvforge/:
+        cvforge_package_dir = result / "preview" / "cvforge"
+        assert cvforge_package_dir.is_dir()
 
-        version_dirs = list(rendercv_package_dir.iterdir())
+        version_dirs = list(cvforge_package_dir.iterdir())
         assert len(version_dirs) == 1
 
         package_dir = version_dirs[0]
@@ -94,7 +94,7 @@ class TestGetPackagePath:
     def test_raises_error_when_version_missing_from_typst_toml(self, tmp_path):
         get_package_path.cache_clear()
         toml_file = tmp_path / "typst.toml"
-        toml_file.write_text('[package]\nname = "rendercv"\n', encoding="utf-8")
+        toml_file.write_text('[package]\nname = "cvforge"\n', encoding="utf-8")
         with pytest.raises(
             RenderCVInternalError,
             match=r"Could not find version in",
@@ -106,13 +106,13 @@ class TestGeneratePngCleansUpOldFiles:
     def test_removes_stale_png_files_from_previous_run(
         self,
         tmp_path: pathlib.Path,
-        minimal_rendercv_model: RenderCVModel,
+        minimal_cvforge_model: RenderCVModel,
     ):
         model = RenderCVModel(
-            cv=minimal_rendercv_model.cv,
+            cv=minimal_cvforge_model.cv,
             design={"theme": "classic"},
-            locale=minimal_rendercv_model.locale,
-            settings=minimal_rendercv_model.settings,
+            locale=minimal_cvforge_model.locale,
+            settings=minimal_cvforge_model.settings,
         )
         output_dir = tmp_path / "output"
         output_dir.mkdir()
@@ -132,13 +132,13 @@ class TestGeneratePngCleansUpOldFiles:
     def test_does_not_remove_unrelated_files(
         self,
         tmp_path: pathlib.Path,
-        minimal_rendercv_model: RenderCVModel,
+        minimal_cvforge_model: RenderCVModel,
     ):
         model = RenderCVModel(
-            cv=minimal_rendercv_model.cv,
+            cv=minimal_cvforge_model.cv,
             design={"theme": "classic"},
-            locale=minimal_rendercv_model.locale,
-            settings=minimal_rendercv_model.settings,
+            locale=minimal_cvforge_model.locale,
+            settings=minimal_cvforge_model.settings,
         )
         output_dir = tmp_path / "output"
         output_dir.mkdir()
@@ -157,13 +157,13 @@ class TestGeneratePngCleansUpOldFiles:
     def test_works_when_no_old_files_exist(
         self,
         tmp_path: pathlib.Path,
-        minimal_rendercv_model: RenderCVModel,
+        minimal_cvforge_model: RenderCVModel,
     ):
         model = RenderCVModel(
-            cv=minimal_rendercv_model.cv,
+            cv=minimal_cvforge_model.cv,
             design={"theme": "classic"},
-            locale=minimal_rendercv_model.locale,
-            settings=minimal_rendercv_model.settings,
+            locale=minimal_cvforge_model.locale,
+            settings=minimal_cvforge_model.settings,
         )
         output_dir = tmp_path / "output"
         output_dir.mkdir()
@@ -179,13 +179,13 @@ class TestGeneratePngCleansUpOldFiles:
 
 def test_raises_error_when_typst_returns_none_bytes(
     tmp_path: pathlib.Path,
-    minimal_rendercv_model: RenderCVModel,
+    minimal_cvforge_model: RenderCVModel,
 ):
     model = RenderCVModel(
-        cv=minimal_rendercv_model.cv,
+        cv=minimal_cvforge_model.cv,
         design={"theme": "classic"},
-        locale=minimal_rendercv_model.locale,
-        settings=minimal_rendercv_model.settings,
+        locale=minimal_cvforge_model.locale,
+        settings=minimal_cvforge_model.settings,
     )
     output_dir = tmp_path / "output"
     output_dir.mkdir()
@@ -199,7 +199,7 @@ def test_raises_error_when_typst_returns_none_bytes(
 
     with (
         patch(
-            "rendercv.renderer.pdf_png.get_typst_compiler", return_value=mock_compiler
+            "cvforge.renderer.pdf_png.get_typst_compiler", return_value=mock_compiler
         ),
         pytest.raises(RenderCVInternalError, match="Typst compiler returned None"),
     ):

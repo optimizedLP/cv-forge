@@ -48,4 +48,4 @@ jobs:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           claude_args: "--model claude-sonnet-4-6"
           prompt: |
-            Use the skills in .claude/skills/ as appropriate. For fixing issues, follow .claude/skills/solve-rendercv-issue/SKILL.md. For reviewing PRs, follow .claude/skills/review-rendercv-pr/SKILL.md.
+            Use the skills in .claude/skills/ as appropriate. For fixing issues, follow .claude/skills/solve-cvforge-issue/SKILL.md. For reviewing PRs, follow .claude/skills/review-cvforge-pr/SKILL.md.

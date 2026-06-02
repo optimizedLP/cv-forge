@@ -4,13 +4,13 @@ from hypothesis import given, settings
 from hypothesis import strategies as st
 
 # They are called dynamically in the test with `eval(f"{entry_type}(**entry)")`.
-from rendercv.schema.models.cv.entries.bullet import BulletEntry  # NOQA: F401
-from rendercv.schema.models.cv.entries.education import EducationEntry  # NOQA: F401
-from rendercv.schema.models.cv.entries.experience import ExperienceEntry  # NOQA: F401
-from rendercv.schema.models.cv.entries.normal import NormalEntry  # NOQA: F401
-from rendercv.schema.models.cv.entries.one_line import OneLineEntry  # NOQA: F401
-from rendercv.schema.models.cv.entries.publication import PublicationEntry  # NOQA: F401
-from rendercv.schema.models.cv.section import (
+from cvforge.schema.models.cv.entries.bullet import BulletEntry  # NOQA: F401
+from cvforge.schema.models.cv.entries.education import EducationEntry  # NOQA: F401
+from cvforge.schema.models.cv.entries.experience import ExperienceEntry  # NOQA: F401
+from cvforge.schema.models.cv.entries.normal import NormalEntry  # NOQA: F401
+from cvforge.schema.models.cv.entries.one_line import OneLineEntry  # NOQA: F401
+from cvforge.schema.models.cv.entries.publication import PublicationEntry  # NOQA: F401
+from cvforge.schema.models.cv.section import (
     Section,
     available_entry_models,
     dictionary_key_to_proper_section_title,
@@ -89,7 +89,7 @@ def test_entries_with_extra_attributes(EntryType, request: pytest.FixtureRequest
     ("key", "expected_section_title"),
     [
         ("this_is_a_test", "This Is a Test"),
-        ("welcome_to_rendercv!", "Welcome to Rendercv!"),
+        ("welcome_to_cvforge!", "Welcome to Rendercv!"),
         ("Welcome to RenderCV!", "Welcome to RenderCV!"),
         ("\\faGraduationCap_education", "\\faGraduationCap_education"),
         ("\\faGraduationCap Education", "\\faGraduationCap Education"),

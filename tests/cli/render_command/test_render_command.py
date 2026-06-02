@@ -3,8 +3,8 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from rendercv.cli.new_command.new_command import cli_command_new
-from rendercv.cli.render_command.render_command import cli_command_render
+from cvforge.cli.new_command.new_command import cli_command_new
+from cvforge.cli.render_command.render_command import cli_command_render
 
 
 class TestCliCommandRender:
@@ -130,11 +130,11 @@ class TestCliCommandRender:
             **{**default_arguments, "quiet": quiet, **flags},
         )
 
-        rendercv_output = input_file.parent / "rendercv_output"
+        cvforge_output = input_file.parent / "cvforge_output"
         for file in expected_files:
-            assert (rendercv_output / file).exists()
+            assert (cvforge_output / file).exists()
         for file in missing_files:
-            assert not (rendercv_output / file).exists()
+            assert not (cvforge_output / file).exists()
 
     def test_uses_custom_output_paths(self, input_file, default_arguments):
         custom_paths = {
@@ -162,10 +162,10 @@ class TestCliCommandRender:
             **default_arguments,
         )
 
-        rendercv_output = input_file.parent / "rendercv_output"
-        assert (rendercv_output / "John_Doe_CV.pdf").exists()
+        cvforge_output = input_file.parent / "cvforge_output"
+        assert (cvforge_output / "John_Doe_CV.pdf").exists()
 
-    @patch("rendercv.cli.render_command.render_command.run_rendercv")
+    @patch("cvforge.cli.render_command.render_command.run_cvforge")
     def test_converts_relative_input_path_to_absolute(
         self, mock_run, input_file, default_arguments
     ):
@@ -177,7 +177,7 @@ class TestCliCommandRender:
         called_path = mock_run.call_args[0][0]
         assert called_path.is_absolute()
 
-    @patch("rendercv.cli.render_command.render_command.run_function_if_files_change")
+    @patch("cvforge.cli.render_command.render_command.run_function_if_files_change")
     def test_calls_watcher_when_watch_flag_is_true(
         self, mock_watcher, input_file, default_arguments
     ):
@@ -214,7 +214,7 @@ class TestCliCommandRender:
         arguments = {**default_arguments, config_type: config_file}
         cli_command_render(input_file_name=input_file, **arguments)
 
-        typst_file = input_file.parent / "rendercv_output" / "John_Doe_CV.typ"
+        typst_file = input_file.parent / "cvforge_output" / "John_Doe_CV.typ"
         assert expected_in_output in typst_file.read_text()
 
     @pytest.mark.parametrize(
@@ -254,5 +254,5 @@ class TestCliCommandRender:
 
         cli_command_render(input_file_name=input_file, **default_arguments)
 
-        typst_file = tmp_path / "rendercv_output" / "John_Doe_CV.typ"
+        typst_file = tmp_path / "cvforge_output" / "John_Doe_CV.typ"
         assert expected_in_output in typst_file.read_text()

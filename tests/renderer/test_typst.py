@@ -1,8 +1,8 @@
 import pytest
 
-from rendercv.renderer.typst import generate_typst
-from rendercv.schema.models.design.built_in_design import available_themes
-from rendercv.schema.models.rendercv_model import RenderCVModel
+from cvforge.renderer.typst import generate_typst
+from cvforge.schema.models.design.built_in_design import available_themes
+from cvforge.schema.models.cvforge_model import RenderCVModel
 
 
 @pytest.mark.parametrize("theme", available_themes)
@@ -13,7 +13,7 @@ def test_generate_typst(
     cv_variant: str,
     request: pytest.FixtureRequest,
 ):
-    base_model = request.getfixturevalue(f"{cv_variant}_rendercv_model")
+    base_model = request.getfixturevalue(f"{cv_variant}_cvforge_model")
 
     model = RenderCVModel(
         cv=base_model.cv,

@@ -1,32 +1,32 @@
 ---
-name: review-rendercv-pr
+name: review-cvforge-pr
 description: Review a GitHub pull request against RenderCV's codebase standards, architecture, and test requirements, then post a detailed review.
 ---
 
 # Review a RenderCV Pull Request
 
-Review a GitHub PR for the `rendercv` repository. Analyze code quality, correctness, test coverage, and adherence to project conventions, then post a review.
+Review a GitHub PR for the `cvforge` repository. Analyze code quality, correctness, test coverage, and adherence to project conventions, then post a review.
 
 ## Step 1: Identify the PR
 
 If a PR number or URL is provided, use it. Otherwise, list open PRs:
 
 ```bash
-gh pr list --repo rendercv/rendercv --state open --json number,title,author,headRefName --limit 20
+gh pr list --repo cvforge/cvforge --state open --json number,title,author,headRefName --limit 20
 ```
 
 Read the PR details:
 
 ```bash
-gh pr view <number> --repo rendercv/rendercv
+gh pr view <number> --repo cvforge/cvforge
 ```
 
 ## Step 2: Understand RenderCV
 
 Before reviewing, build a deep understanding of the project:
 
-- @.claude/skills/rendercv-development-context/SKILL.md
-- @.claude/skills/rendercv-testing-context/SKILL.md
+- @.claude/skills/cvforge-development-context/SKILL.md
+- @.claude/skills/cvforge-testing-context/SKILL.md
 
 Read the referenced files, focusing on modules relevant to the PR.
 
@@ -35,17 +35,17 @@ Read the referenced files, focusing on modules relevant to the PR.
 Get the full diff and list of changed files:
 
 ```bash
-gh pr diff <number> --repo rendercv/rendercv
+gh pr diff <number> --repo cvforge/cvforge
 ```
 
 ```bash
-gh pr view <number> --repo rendercv/rendercv --json files --jq '.files[].path'
+gh pr view <number> --repo cvforge/cvforge --json files --jq '.files[].path'
 ```
 
 Read the linked issue (if any) to understand the motivation:
 
 ```bash
-gh pr view <number> --repo rendercv/rendercv --json body --jq '.body'
+gh pr view <number> --repo cvforge/cvforge --json body --jq '.body'
 ```
 
 ## Step 4: Read the full context of changed files
@@ -53,7 +53,7 @@ gh pr view <number> --repo rendercv/rendercv --json body --jq '.body'
 For every file touched by the PR, read the **full file on the PR branch** (not just the diff) to understand context:
 
 ```bash
-gh pr diff <number> --repo rendercv/rendercv --patch
+gh pr diff <number> --repo cvforge/cvforge --patch
 ```
 
 Also read the corresponding source and test files in the main branch to understand what existed before.
@@ -62,12 +62,12 @@ Also read the corresponding source and test files in the main branch to understa
 
 Check each of these categories systematically:
 
-Evaluate the PR against @.claude/skills/rendercv-development-context/SKILL.md and @.claude/skills/rendercv-testing-context/SKILL.md. Also check for correctness (edge cases, regressions) and security (no injection, path traversal, or hardcoded secrets).
+Evaluate the PR against @.claude/skills/cvforge-development-context/SKILL.md and @.claude/skills/cvforge-testing-context/SKILL.md. Also check for correctness (edge cases, regressions) and security (no injection, path traversal, or hardcoded secrets).
 
 ## Step 6: Check CI status
 
 ```bash
-gh pr checks <number> --repo rendercv/rendercv
+gh pr checks <number> --repo cvforge/cvforge
 ```
 
 Note any failing checks — these must be resolved before merging.
@@ -77,7 +77,7 @@ Note any failing checks — these must be resolved before merging.
 Compose a structured review and post it using `gh`:
 
 ```bash
-gh pr review <number> --repo rendercv/rendercv \
+gh pr review <number> --repo cvforge/cvforge \
   --body "$(cat <<'EOF'
 ## Review Summary
 
@@ -113,10 +113,10 @@ Where `<event>` is one of:
 For specific line-level feedback, add inline review comments:
 
 ```bash
-gh api repos/rendercv/rendercv/pulls/<number>/comments \
+gh api repos/cvforge/cvforge/pulls/<number>/comments \
   --method POST \
   -f body="<comment>" \
-  -f commit_id="$(gh pr view <number> --repo rendercv/rendercv --json headRefOid --jq '.headRefOid')" \
+  -f commit_id="$(gh pr view <number> --repo cvforge/cvforge --json headRefOid --jq '.headRefOid')" \
   -f path="<file_path>" \
   -f side="RIGHT" \
   -F line=<line_number>

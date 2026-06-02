@@ -1,6 +1,6 @@
-[submodule ".claude/skills/rendercv-skill"]
-	path = .claude/skills/rendercv-skill
-	url = https://github.com/rendercv/rendercv-skill.git
-[submodule "src/rendercv/renderer/typst_fontawesome"]
-	path = src/rendercv/renderer/typst_fontawesome
+[submodule ".claude/skills/cvforge-skill"]
+	path = .claude/skills/cvforge-skill
+	url = https://github.com/cvforge/cvforge-skill.git
+[submodule "src/cvforge/renderer/typst_fontawesome"]
+	path = src/cvforge/renderer/typst_fontawesome
 	url = https://github.com/duskmoon314/typst-fontawesome.git

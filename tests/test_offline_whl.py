@@ -1,4 +1,4 @@
-"""Test that rendercv works from a wheel in a non-networked environment."""
+"""Test that cvforge works from a wheel in a non-networked environment."""
 
 import os
 import pathlib
@@ -34,12 +34,12 @@ def run(args: list[str], **kwargs) -> subprocess.CompletedProcess[str]:
     return result
 
 
-def test_rendercv_renders_pdf_offline(tmp_path: pathlib.Path) -> None:
+def test_cvforge_renders_pdf_offline(tmp_path: pathlib.Path) -> None:
     """Build wheel, install in isolated venv, render PDF without network."""
     dist_dir = tmp_path / "dist"
     run(["uv", "build", "--wheel", "--out-dir", str(dist_dir)], cwd=PROJECT_ROOT)
 
-    wheel = next(dist_dir.glob("rendercv-*.whl"))
+    wheel = next(dist_dir.glob("cvforge-*.whl"))
     venv_dir = tmp_path / "venv"
     if sys.platform == "win32":
         venv_python = venv_dir / "Scripts" / "python.exe"
@@ -55,11 +55,11 @@ def test_rendercv_renders_pdf_offline(tmp_path: pathlib.Path) -> None:
     )
 
     run(
-        [str(venv_python), "-m", "rendercv", "render", "cv.yaml", "-nomd", "-nopng"],
+        [str(venv_python), "-m", "cvforge", "render", "cv.yaml", "-nomd", "-nopng"],
         env=OFFLINE_ENV,
         cwd=tmp_path,
     )
 
-    pdfs = list(tmp_path.glob("rendercv_output/*.pdf"))
+    pdfs = list(tmp_path.glob("cvforge_output/*.pdf"))
     assert pdfs
     assert pdfs[0].stat().st_size > 0

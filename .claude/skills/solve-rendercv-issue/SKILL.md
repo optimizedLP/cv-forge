@@ -1,18 +1,18 @@
 ---
-name: solve-rendercv-issue
+name: solve-cvforge-issue
 description: Pick up a GitHub issue (or accept one), fully understand the RenderCV codebase, implement the fix/feature with tests, and open a PR to origin/main.
 ---
 
 # Solve a RenderCV Issue
 
-Pick a GitHub issue from the `rendercv` repository, implement a complete solution with tests, and open a pull request to `origin/main`.
+Pick a GitHub issue from the `cvforge` repository, implement a complete solution with tests, and open a pull request to `origin/main`.
 
 ## Step 1: Select an issue
 
 If an issue number or URL is provided, use it. Otherwise, pick the highest-priority open issue automatically:
 
 ```bash
-gh issue list --repo rendercv/rendercv --state open --sort created --json number,title,labels,body --limit 10
+gh issue list --repo cvforge/cvforge --state open --sort created --json number,title,labels,body --limit 10
 ```
 
 Choose the most impactful issue that is not labeled `wontfix` or `question`. Prefer bugs over features, and smaller-scoped issues over vague ones.
@@ -20,15 +20,15 @@ Choose the most impactful issue that is not labeled `wontfix` or `question`. Pre
 Read the full issue body:
 
 ```bash
-gh issue view <number> --repo rendercv/rendercv
+gh issue view <number> --repo cvforge/cvforge
 ```
 
 ## Step 2: Understand RenderCV
 
 Before writing any code, build a deep understanding of the project:
 
-- @.claude/skills/rendercv-development-context/SKILL.md
-- @.claude/skills/rendercv-testing-context/SKILL.md
+- @.claude/skills/cvforge-development-context/SKILL.md
+- @.claude/skills/cvforge-testing-context/SKILL.md
 
 Read the referenced files, focusing on modules relevant to the issue.
 
@@ -54,7 +54,7 @@ For bug reports:
 
 ## Step 5: Implement the solution
 
-Write the fix or feature following @.claude/skills/rendercv-development-context/SKILL.md and @.claude/skills/rendercv-testing-context/SKILL.md.
+Write the fix or feature following @.claude/skills/cvforge-development-context/SKILL.md and @.claude/skills/cvforge-testing-context/SKILL.md.
 
 ## Step 6: Verify the solution
 
@@ -76,7 +76,7 @@ Create a PR targeting `main`:
 
 ```bash
 gh pr create \
-  --repo rendercv/rendercv \
+  --repo cvforge/cvforge \
   --base main \
   --head claude/issue-<number> \
   --title "Fix #<number>: <concise description>" \

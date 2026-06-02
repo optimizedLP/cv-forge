@@ -3,7 +3,7 @@
 
 Why:
     The SKILL.md file contains dynamic data (themes, locales, Pydantic model
-    source code, etc.) that must stay in sync with the rendercv package. This
+    source code, etc.) that must stay in sync with the cvforge package. This
     script extracts that data and renders the Jinja2 template to produce an
     always-current skill file.
 """
@@ -17,9 +17,9 @@ import zipfile
 import jinja2
 import ruamel.yaml
 
-from rendercv import __version__
-from rendercv.schema.models.locale.locale import available_locales
-from rendercv.schema.sample_generator import (
+from cvforge import __version__
+from cvforge.schema.models.locale.locale import available_locales
+from cvforge.schema.sample_generator import (
     create_sample_cv_file,
     create_sample_design_file,
 )
@@ -41,21 +41,21 @@ output_path = (
     repository_root
     / ".claude"
     / "skills"
-    / "rendercv-skill"
+    / "cvforge-skill"
     / "skills"
-    / "rendercv"
+    / "cvforge"
     / "SKILL.md"
 )
 llms_txt_path = repository_root / "docs" / "llms.txt"
-skill_zip_path = repository_root / "docs" / "assets" / "rendercv_skill.zip"
+skill_zip_path = repository_root / "docs" / "assets" / "cvforge_skill.zip"
 
 # Paths to key model source files for dynamic inclusion.
-models_dir = repository_root / "src" / "rendercv" / "schema" / "models"
+models_dir = repository_root / "src" / "cvforge" / "schema" / "models"
 
 # These source files are included in the skill so agents can see the
 # type-safe Pydantic schema for core models.
 MODEL_SOURCE_FILES: dict[str, pathlib.Path] = {
-    "rendercv_model": models_dir / "rendercv_model.py",
+    "cvforge_model": models_dir / "cvforge_model.py",
     "cv": models_dir / "cv" / "cv.py",
     "social_network": models_dir / "cv" / "social_network.py",
     "custom_connection": models_dir / "cv" / "custom_connection.py",
@@ -326,7 +326,7 @@ def generate_skill_file() -> None:
     fixed_date = (2025, 1, 1, 0, 0, 0)
     skill_zip_path.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(skill_zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
-        info = zipfile.ZipInfo("rendercv/SKILL.md", date_time=fixed_date)
+        info = zipfile.ZipInfo("cvforge/SKILL.md", date_time=fixed_date)
         zf.writestr(info, rendered)
 
 

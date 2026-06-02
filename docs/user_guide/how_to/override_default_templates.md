@@ -25,7 +25,7 @@ Use this when you want to tweak an existing theme's templates without creating a
 1. Create templates alongside your CV:
 
     ```bash
-    rendercv new "Your Name" --create-typst-templates
+    cvforge new "Your Name" --create-typst-templates
     ```
 
     This creates:
@@ -45,7 +45,7 @@ Use this when you want to tweak an existing theme's templates without creating a
 3. Render as usual:
 
     ```bash
-    rendercv render Your_Name_CV.yaml
+    cvforge render Your_Name_CV.yaml
     ```
 
 RenderCV automatically uses your local templates instead of the built-in ones.
@@ -57,7 +57,7 @@ Use this when building a reusable theme with its own design options.
 1. Create a custom theme:
 
     ```bash
-    rendercv create-theme mytheme
+    cvforge create-theme mytheme
     ```
 
     This creates:
@@ -85,7 +85,7 @@ Use this when building a reusable theme with its own design options.
 4. Render:
 
     ```bash
-    rendercv render Your_Name_CV.yaml
+    cvforge render Your_Name_CV.yaml
     ```
 
 ## Template Structure
@@ -119,7 +119,7 @@ Example accessing design options:
 
 ```typst
 // In Preamble.j2.typ
-#show: rendercv.with(
+#show: cvforge.with(
   page-size: "{{ design.page.size }}",
   colors-body: {{ design.colors.body.as_rgb() }},
   typography-font-family-body: "{{ design.typography.font_family.body }}",

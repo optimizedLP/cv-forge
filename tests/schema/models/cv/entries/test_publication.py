@@ -1,6 +1,6 @@
 import pytest
 
-from rendercv.schema.models.cv.entries.publication import PublicationEntry
+from cvforge.schema.models.cv.entries.publication import PublicationEntry
 
 
 class TestPublicationEntry:

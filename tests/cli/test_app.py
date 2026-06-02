@@ -7,8 +7,8 @@ from unittest.mock import MagicMock, patch
 import pytest
 from typer.testing import CliRunner
 
-from rendercv import __version__
-from rendercv.cli.app import (
+from cvforge import __version__
+from cvforge.cli.app import (
     VERSION_CHECK_TTL_SECONDS,
     app,
     fetch_and_cache_latest_version,
@@ -23,7 +23,7 @@ from rendercv.cli.app import (
 
 def test_all_commands_are_registered():
     cli_folder = (
-        pathlib.Path(__file__).parent.parent.parent / "src" / "rendercv" / "cli"
+        pathlib.Path(__file__).parent.parent.parent / "src" / "cvforge" / "cli"
     )
     command_files = list(cli_folder.rglob("*_command.py"))
 
@@ -33,7 +33,7 @@ def test_all_commands_are_registered():
 
 
 class TestCliCommandNoArgs:
-    @patch("rendercv.cli.app.warn_if_new_version_is_available")
+    @patch("cvforge.cli.app.warn_if_new_version_is_available")
     def test_prints_version_when_requested(self, mock_warn):
         runner = CliRunner()
         result = runner.invoke(app, ["--version"])
@@ -42,7 +42,7 @@ class TestCliCommandNoArgs:
         assert f"RenderCV v{__version__}" in result.output
         mock_warn.assert_called_once()
 
-    @patch("rendercv.cli.app.warn_if_new_version_is_available")
+    @patch("cvforge.cli.app.warn_if_new_version_is_available")
     def test_prints_version_with_short_flag(self, mock_warn):
         runner = CliRunner()
         result = runner.invoke(app, ["-v"])
@@ -51,7 +51,7 @@ class TestCliCommandNoArgs:
         assert f"RenderCV v{__version__}" in result.output
         mock_warn.assert_called_once()
 
-    @patch("rendercv.cli.app.warn_if_new_version_is_available")
+    @patch("cvforge.cli.app.warn_if_new_version_is_available")
     def test_shows_help_when_no_args(self, mock_warn):
         runner = CliRunner()
         result = runner.invoke(app, [])
@@ -65,17 +65,17 @@ class TestGetCacheDir:
     def test_returns_platform_appropriate_path(self):
         cache_dir = get_cache_dir()
 
-        assert cache_dir.name == "rendercv"
+        assert cache_dir.name == "cvforge"
         if sys.platform == "darwin":
             assert "Library/Caches" in str(cache_dir)
         elif sys.platform == "win32":
             assert "Local" in str(cache_dir)
 
     def test_respects_xdg_cache_home_on_linux(self, tmp_path, monkeypatch):
-        monkeypatch.setattr("rendercv.cli.app.sys.platform", "linux")
+        monkeypatch.setattr("cvforge.cli.app.sys.platform", "linux")
         monkeypatch.setenv("XDG_CACHE_HOME", str(tmp_path))
 
-        assert get_cache_dir() == tmp_path / "rendercv"
+        assert get_cache_dir() == tmp_path / "cvforge"
 
 
 def test_get_version_cache_file():
@@ -88,7 +88,7 @@ def test_get_version_cache_file():
 class TestReadVersionCache:
     def test_returns_none_for_missing_file(self, tmp_path, monkeypatch):
         monkeypatch.setattr(
-            "rendercv.cli.app.get_version_cache_file",
+            "cvforge.cli.app.get_version_cache_file",
             lambda: tmp_path / "nonexistent.json",
         )
 
@@ -98,7 +98,7 @@ class TestReadVersionCache:
         cache_file = tmp_path / "version_check.json"
         cache_file.write_text("not valid json!!!", encoding="utf-8")
         monkeypatch.setattr(
-            "rendercv.cli.app.get_version_cache_file",
+            "cvforge.cli.app.get_version_cache_file",
             lambda: cache_file,
         )
 
@@ -108,7 +108,7 @@ class TestReadVersionCache:
         cache_file = tmp_path / "version_check.json"
         cache_file.write_text(json.dumps({"latest_version": "1.0"}), encoding="utf-8")
         monkeypatch.setattr(
-            "rendercv.cli.app.get_version_cache_file",
+            "cvforge.cli.app.get_version_cache_file",
             lambda: cache_file,
         )
 
@@ -119,7 +119,7 @@ class TestReadVersionCache:
         cache_data = {"last_check": time.time(), "latest_version": "2.0.0"}
         cache_file.write_text(json.dumps(cache_data), encoding="utf-8")
         monkeypatch.setattr(
-            "rendercv.cli.app.get_version_cache_file",
+            "cvforge.cli.app.get_version_cache_file",
             lambda: cache_file,
         )
 
@@ -133,7 +133,7 @@ class TestWriteVersionCache:
     def test_creates_cache_file(self, tmp_path, monkeypatch):
         cache_file = tmp_path / "subdir" / "version_check.json"
         monkeypatch.setattr(
-            "rendercv.cli.app.get_version_cache_file",
+            "cvforge.cli.app.get_version_cache_file",
             lambda: cache_file,
         )
 
@@ -145,7 +145,7 @@ class TestWriteVersionCache:
 
     def test_silently_ignores_os_error(self, monkeypatch):
         monkeypatch.setattr(
-            "rendercv.cli.app.get_version_cache_file",
+            "cvforge.cli.app.get_version_cache_file",
             lambda: pathlib.Path("/nonexistent/readonly/path/version_check.json"),
         )
 
@@ -162,7 +162,7 @@ class TestFetchLatestVersionFromPypi:
         mock_response.__exit__ = MagicMock(return_value=False)
 
         monkeypatch.setattr(
-            "rendercv.cli.app.urllib.request.urlopen",
+            "cvforge.cli.app.urllib.request.urlopen",
             lambda *a, **kw: mock_response,
         )
 
@@ -171,7 +171,7 @@ class TestFetchLatestVersionFromPypi:
         assert result == "3.0.0"
 
     @patch(
-        "rendercv.cli.app.urllib.request.urlopen",
+        "cvforge.cli.app.urllib.request.urlopen",
         side_effect=ConnectionError("fail"),
     )
     def test_returns_none_on_failure(self, mock_urlopen):  # NOQA: ARG002
@@ -181,16 +181,16 @@ class TestFetchLatestVersionFromPypi:
 
 
 class TestFetchAndCacheLatestVersion:
-    @patch("rendercv.cli.app.write_version_cache")
-    @patch("rendercv.cli.app.fetch_latest_version_from_pypi", return_value="3.0.0")
+    @patch("cvforge.cli.app.write_version_cache")
+    @patch("cvforge.cli.app.fetch_latest_version_from_pypi", return_value="3.0.0")
     def test_fetches_and_writes_cache(self, mock_fetch, mock_write):
         fetch_and_cache_latest_version()
 
         mock_fetch.assert_called_once()
         mock_write.assert_called_once_with("3.0.0")
 
-    @patch("rendercv.cli.app.write_version_cache")
-    @patch("rendercv.cli.app.fetch_latest_version_from_pypi", return_value=None)
+    @patch("cvforge.cli.app.write_version_cache")
+    @patch("cvforge.cli.app.fetch_latest_version_from_pypi", return_value=None)
     def test_does_not_write_cache_on_fetch_failure(self, mock_fetch, mock_write):
         fetch_and_cache_latest_version()
 
@@ -227,7 +227,7 @@ class TestWarnIfNewVersionIsAvailable:
     ):
         write_cache(tmp_path, version, age_seconds=0)
         monkeypatch.setattr(
-            "rendercv.cli.app.get_version_cache_file",
+            "cvforge.cli.app.get_version_cache_file",
             lambda: tmp_path / "version_check.json",
         )
 
@@ -239,11 +239,11 @@ class TestWarnIfNewVersionIsAvailable:
         else:
             assert "new version" not in captured.out.lower()
 
-    @patch("rendercv.cli.app.fetch_latest_version_from_pypi")
+    @patch("cvforge.cli.app.fetch_latest_version_from_pypi")
     def test_fresh_cache_does_not_fetch(self, mock_fetch, tmp_path, monkeypatch):
         write_cache(tmp_path, "99.0.0", age_seconds=0)
         monkeypatch.setattr(
-            "rendercv.cli.app.get_version_cache_file",
+            "cvforge.cli.app.get_version_cache_file",
             lambda: tmp_path / "version_check.json",
         )
 
@@ -251,13 +251,13 @@ class TestWarnIfNewVersionIsAvailable:
 
         mock_fetch.assert_not_called()
 
-    @patch("rendercv.cli.app.fetch_latest_version_from_pypi", return_value="99.0.0")
+    @patch("cvforge.cli.app.fetch_latest_version_from_pypi", return_value="99.0.0")
     def test_stale_cache_warns_from_stale_data_and_refreshes(
         self, mock_fetch, tmp_path, capsys, monkeypatch
     ):
         write_cache(tmp_path, "98.0.0", age_seconds=VERSION_CHECK_TTL_SECONDS + 1)
         monkeypatch.setattr(
-            "rendercv.cli.app.get_version_cache_file",
+            "cvforge.cli.app.get_version_cache_file",
             lambda: tmp_path / "version_check.json",
         )
 
@@ -267,7 +267,7 @@ class TestWarnIfNewVersionIsAvailable:
         assert "new version" in captured.out.lower()
         mock_fetch.assert_called_once()
 
-    @patch("rendercv.cli.app.fetch_latest_version_from_pypi", return_value="99.0.0")
+    @patch("cvforge.cli.app.fetch_latest_version_from_pypi", return_value="99.0.0")
     def test_missing_cache_shows_no_warning_and_refreshes(
         self,
         mock_fetch,
@@ -276,7 +276,7 @@ class TestWarnIfNewVersionIsAvailable:
         monkeypatch,
     ):
         monkeypatch.setattr(
-            "rendercv.cli.app.get_version_cache_file",
+            "cvforge.cli.app.get_version_cache_file",
             lambda: tmp_path / "version_check.json",
         )
 
@@ -286,7 +286,7 @@ class TestWarnIfNewVersionIsAvailable:
         assert "new version" not in captured.out.lower()
         mock_fetch.assert_called_once()
 
-    @patch("rendercv.cli.app.fetch_latest_version_from_pypi", return_value=None)
+    @patch("cvforge.cli.app.fetch_latest_version_from_pypi", return_value=None)
     def test_network_failure_preserves_existing_cache(
         self,
         mock_fetch,  # NOQA: ARG002
@@ -296,7 +296,7 @@ class TestWarnIfNewVersionIsAvailable:
         write_cache(tmp_path, "99.0.0", age_seconds=VERSION_CHECK_TTL_SECONDS + 1)
         cache_file = tmp_path / "version_check.json"
         monkeypatch.setattr(
-            "rendercv.cli.app.get_version_cache_file",
+            "cvforge.cli.app.get_version_cache_file",
             lambda: cache_file,
         )
 
@@ -308,7 +308,7 @@ class TestWarnIfNewVersionIsAvailable:
     def test_handles_invalid_version_in_cache(self, tmp_path, capsys, monkeypatch):
         write_cache(tmp_path, "not.a.version", age_seconds=0)
         monkeypatch.setattr(
-            "rendercv.cli.app.get_version_cache_file",
+            "cvforge.cli.app.get_version_cache_file",
             lambda: tmp_path / "version_check.json",
         )
 

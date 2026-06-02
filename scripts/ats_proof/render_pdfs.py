@@ -10,8 +10,8 @@ from pathlib import Path
 
 from common import RENDERED_DIR, THEMES, find_corpus_yamls
 
-from rendercv.cli.render_command.progress_panel import ProgressPanel
-from rendercv.cli.render_command.run_rendercv import run_rendercv
+from cvforge.cli.render_command.progress_panel import ProgressPanel
+from cvforge.cli.render_command.run_cvforge import run_cvforge
 
 
 def render_with_theme(yaml_path: Path, theme: str, output_dir: Path) -> Path | None:
@@ -21,7 +21,7 @@ def render_with_theme(yaml_path: Path, theme: str, output_dir: Path) -> Path | N
     pdf_path = (output_dir / f"{stem}.pdf").resolve()
 
     with tempfile.TemporaryDirectory() as tmp:
-        run_rendercv(
+        run_cvforge(
             yaml_path.resolve(),
             progress=ProgressPanel(),
             pdf_path=pdf_path,

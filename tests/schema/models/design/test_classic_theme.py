@@ -1,4 +1,4 @@
-from rendercv.schema.models.design.classic_theme import FontFamily, Typography
+from cvforge.schema.models.design.classic_theme import FontFamily, Typography
 
 
 class TestTypography:

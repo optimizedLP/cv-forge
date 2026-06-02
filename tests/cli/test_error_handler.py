@@ -1,8 +1,8 @@
 import pytest
 import typer
 
-from rendercv.cli.error_handler import handle_user_errors
-from rendercv.exception import RenderCVUserError
+from cvforge.cli.error_handler import handle_user_errors
+from cvforge.exception import RenderCVUserError
 
 
 class TestHandleUserErrors:

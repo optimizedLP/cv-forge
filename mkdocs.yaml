@@ -1,14 +1,14 @@
 site_name: RenderCV CLI
 site_description: Typst-based CV/resume generator for academics and engineers
 copyright: Copyright &copy; 2023 - 2026 RenderCV
-repo_url: https://github.com/rendercv/rendercv
-repo_name: rendercv/rendercv
+repo_url: https://github.com/rendercv/cvforge
+repo_name: cvforge/cvforge
 edit_uri: edit/main/docs/
 
 theme:
   name: material
   icon:
-    logo: custom/rendercv
+    logo: custom/cvforge
   language: en
   custom_dir: docs/overrides
   palette:
@@ -62,7 +62,7 @@ nav:
           - locale Field: user_guide/yaml_input_structure/locale.md
           - settings Field: user_guide/yaml_input_structure/settings.md
       - How-To Guides:
-          - Set Up VS Code for RenderCV: user_guide/how_to/set_up_vs_code_for_rendercv.md
+          - Set Up VS Code for RenderCV: user_guide/how_to/set_up_vs_code_for_cvforge.md
           - Arbitrary Keys in Entries: user_guide/how_to/arbitrary_keys_in_entries.md
           - Custom Fonts: user_guide/how_to/custom_fonts.md
           - Override Default Templates: user_guide/how_to/override_default_templates.md
@@ -70,7 +70,7 @@ nav:
   - Developer Guide:
       - Setup: developer_guide/index.md
       - Project Management: developer_guide/project_management.md
-      - Understanding RenderCV: developer_guide/understanding_rendercv.md
+      - Understanding RenderCV: developer_guide/understanding_cvforge.md
       - Testing: developer_guide/testing.md
       - Documentation: developer_guide/documentation.md
       - JSON Schema: developer_guide/json_schema.md
@@ -146,12 +146,12 @@ plugins:
             show_if_no_docstring: true
 extra_javascript:
   - assets/javascripts/katex.js
-  - assets/javascripts/rendercv-logo.js
+  - assets/javascripts/cvforge-logo.js
   - https://unpkg.com/katex@0/dist/katex.min.js
   - https://unpkg.com/katex@0/dist/contrib/auto-render.min.js
 
 extra_css:
-  - assets/stylesheets/rendercv.css
+  - assets/stylesheets/cvforge.css
   - https://unpkg.com/katex@0/dist/katex.min.css
 
 extra:
@@ -162,4 +162,4 @@ extra:
     - icon: material/github
       link: https://github.com/rendercv
     - icon: material/linkedin
-      link: https://www.linkedin.com/company/rendercv/
+      link: https://www.linkedin.com/company/cvforge/

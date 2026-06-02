@@ -1,15 +1,15 @@
 import pytest
 import ruamel.yaml
 
-from rendercv.exception import RenderCVUserError
-from rendercv.schema.models.design.built_in_design import available_themes
-from rendercv.schema.models.locale.locale import available_locales
-from rendercv.schema.models.rendercv_model import RenderCVModel
-from rendercv.schema.sample_generator import (
+from cvforge.exception import RenderCVUserError
+from cvforge.schema.models.design.built_in_design import available_themes
+from cvforge.schema.models.locale.locale import available_locales
+from cvforge.schema.models.cvforge_model import RenderCVModel
+from cvforge.schema.sample_generator import (
     create_sample_cv_file,
     create_sample_design_file,
     create_sample_locale_file,
-    create_sample_rendercv_pydantic_model,
+    create_sample_cvforge_pydantic_model,
     create_sample_settings_file,
     create_sample_yaml_file,
     create_sample_yaml_input_file,
@@ -27,24 +27,24 @@ class TestCreateSampleRendercvPydanticModel:
         available_locales,
     )
     def test_creates_valid_model_for_all_themes_and_locales(self, theme, locale):
-        data_model = create_sample_rendercv_pydantic_model(
+        data_model = create_sample_cvforge_pydantic_model(
             name="John Doe", theme=theme, locale=locale
         )
         assert isinstance(data_model, RenderCVModel)
 
     def test_rejects_invalid_theme_or_locale(self):
         with pytest.raises(ValueError):  # NOQA: PT011
-            create_sample_rendercv_pydantic_model(
+            create_sample_cvforge_pydantic_model(
                 name="John Doe", theme="invalid", locale="english"
             )
         with pytest.raises(ValueError):  # NOQA: PT011
-            create_sample_rendercv_pydantic_model(
+            create_sample_cvforge_pydantic_model(
                 name="John Doe", theme="classic", locale="invalid"
             )
 
     def test_creates_model_with_unicode_name(self):
         name = "Matías"
-        data_model = create_sample_rendercv_pydantic_model(name=name)
+        data_model = create_sample_cvforge_pydantic_model(name=name)
         assert data_model.cv.name == name
 
 

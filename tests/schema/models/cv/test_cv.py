@@ -4,13 +4,13 @@ from unittest.mock import MagicMock
 import pydantic
 import pytest
 
-from rendercv.exception import RenderCVInternalError
-from rendercv.schema.models.cv.cv import Cv
-from rendercv.schema.models.cv.section import available_entry_type_names
+from cvforge.exception import RenderCVInternalError
+from cvforge.schema.models.cv.cv import Cv
+from cvforge.schema.models.cv.section import available_entry_type_names
 
 
 class TestCv:
-    def test_rendercv_sections(self, request: pytest.FixtureRequest):
+    def test_cvforge_sections(self, request: pytest.FixtureRequest):
         entry_type_names = [
             "".join(
                 ["_" + c.lower() if c.isupper() else c for c in entry_type_name]
@@ -31,8 +31,8 @@ class TestCv:
 
         cv = Cv.model_validate(input)
 
-        assert len(cv.rendercv_sections) == len(available_entry_type_names)
-        for section in cv.rendercv_sections:
+        assert len(cv.cvforge_sections) == len(available_entry_type_names)
+        for section in cv.cvforge_sections:
             assert len(section.entries) == 2
 
     def test_rejects_section_with_mixed_entry_types(
@@ -76,8 +76,8 @@ class TestCv:
     def test_empty_section(self):
         input_data = {"name": "John Doe", "sections": {"References": []}}
         cv = Cv.model_validate(input_data)
-        assert len(cv.rendercv_sections) == 1
-        section = cv.rendercv_sections[0]
+        assert len(cv.cvforge_sections) == 1
+        section = cv.cvforge_sections[0]
         assert section.title == "References"
         assert section.entry_type == "TextEntry"
         assert section.entries == []

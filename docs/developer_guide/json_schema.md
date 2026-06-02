@@ -91,13 +91,13 @@ RenderCV has the same problem. Users write their CVs in YAML, and we want them t
 
 ![JSON Schema of RenderCV](../assets/images/json_schema.gif)
 
-That's why [`schema.json`](https://github.com/rendercv/rendercv/blob/main/schema.json) exists in the repository.
+That's why [`schema.json`](https://github.com/rendercv/cvforge/blob/main/schema.json) exists in the repository.
 
 ## How the Schema is Generated?
 
 We don't write `schema.json` by hand. **It's automatically generated from Pydantic models.**
 
-RenderCV's entire data structure is defined using Pydantic models (see [Understanding RenderCV](understanding_rendercv.md) for details). Pydantic has a built-in feature: `model_json_schema()`, which generates JSON Schema from your models.
+RenderCV's entire data structure is defined using Pydantic models (see [Understanding RenderCV](understanding_cvforge.md) for details). Pydantic has a built-in feature: `model_json_schema()`, which generates JSON Schema from your models.
 
 Whenever data models change, run:
 
@@ -105,7 +105,7 @@ Whenever data models change, run:
 just update-schema
 ```
 
-This runs [`scripts/update_schema.py`](https://github.com/rendercv/rendercv/blob/main/scripts/update_schema.py), which regenerates `schema.json`.
+This runs [`scripts/update_schema.py`](https://github.com/rendercv/cvforge/blob/main/scripts/update_schema.py), which regenerates `schema.json`.
 
 ## How Editors Know to Use RenderCV's Schema?
 
@@ -116,7 +116,7 @@ There are two ways editors discover and use RenderCV's schema:
 Add a special comment at the top of your YAML file:
 
 ```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/rendercv/rendercv/refs/tags/v2.4/schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/cvforge/cvforge/refs/tags/v2.4/schema.json
 
 cv:
   name: John Doe

@@ -1,5 +1,5 @@
 ---
-name: rendercv-testing-context
+name: cvforge-testing-context
 description: RenderCV test authoring standards, structure, and conventions. Use when writing or reviewing tests.
 ---
 
@@ -12,14 +12,14 @@ description: RenderCV test authoring standards, structure, and conventions. Use 
 
 ## File structure
 
-Each test file tests all classes and functions in its corresponding source file. The structure mirrors `src/rendercv/`:
+Each test file tests all classes and functions in its corresponding source file. The structure mirrors `src/cvforge/`:
 
 ```
-src/rendercv/renderer/templater/date.py
+src/cvforge/renderer/templater/date.py
     → tests/renderer/templater/test_date.py
     (tests all functions and classes in date.py)
 
-src/rendercv/schema/models/cv/section.py
+src/cvforge/schema/models/cv/section.py
     → tests/schema/models/cv/test_section.py
     (tests all functions and classes in section.py)
 ```

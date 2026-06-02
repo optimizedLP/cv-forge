@@ -8,11 +8,11 @@ settings:
   render_command:
     design: path/to/design.yaml # (1)!
     locale: path/to/locale.yaml # (2)!
-    typst_path: rendercv_output/NAME_IN_SNAKE_CASE_CV.typ # (3)!
-    pdf_path: rendercv_output/NAME_IN_SNAKE_CASE_CV.pdf
-    markdown_path: rendercv_output/NAME_IN_SNAKE_CASE_CV.md
-    html_path: rendercv_output/NAME_IN_SNAKE_CASE_CV.html
-    png_path: rendercv_output/NAME_IN_SNAKE_CASE_CV.png
+    typst_path: cvforge_output/NAME_IN_SNAKE_CASE_CV.typ # (3)!
+    pdf_path: cvforge_output/NAME_IN_SNAKE_CASE_CV.pdf
+    markdown_path: cvforge_output/NAME_IN_SNAKE_CASE_CV.md
+    html_path: cvforge_output/NAME_IN_SNAKE_CASE_CV.html
+    png_path: cvforge_output/NAME_IN_SNAKE_CASE_CV.png
     dont_generate_markdown: false
     dont_generate_html: false
     dont_generate_typst: false

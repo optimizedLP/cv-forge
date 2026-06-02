@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from rendercv.schema.models.design.built_in_design import available_themes
+from cvforge.schema.models.design.built_in_design import available_themes
 
 
 def test_available_themes():
@@ -8,7 +8,7 @@ def test_available_themes():
     other_themes_dir = (
         Path(__file__).parent.parent.parent.parent.parent
         / "src"
-        / "rendercv"
+        / "cvforge"
         / "schema"
         / "models"
         / "design"

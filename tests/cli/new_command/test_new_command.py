@@ -4,8 +4,8 @@ import os
 import pytest
 import typer
 
-from rendercv.cli.new_command.new_command import cli_command_new
-from rendercv.schema.rendercv_model_builder import build_rendercv_dictionary_and_model
+from cvforge.cli.new_command.new_command import cli_command_new
+from cvforge.schema.cvforge_model_builder import build_cvforge_dictionary_and_model
 
 
 class TestCliCommandNew:
@@ -53,7 +53,7 @@ class TestCliCommandNew:
         else:
             # Make sure it's a valid YAML file
             yaml_content = input_file_path.read_text(encoding="utf-8")
-            build_rendercv_dictionary_and_model(
+            build_cvforge_dictionary_and_model(
                 yaml_content, input_file_path=input_file_path
             )
 

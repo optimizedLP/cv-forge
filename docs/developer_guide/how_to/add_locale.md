@@ -1,9 +1,9 @@
 # Add a New Locale
 
-1. Create a YAML file in `src/rendercv/schema/models/locale/other_locales/`
+1. Create a YAML file in `src/cvforge/schema/models/locale/other_locales/`
 
     ```bash
-    touch src/rendercv/schema/models/locale/other_locales/mylanguage.yaml
+    touch src/cvforge/schema/models/locale/other_locales/mylanguage.yaml
     ```
 
 2. Add the schema reference and provide translations
@@ -48,7 +48,7 @@
 
 3. Add ISO 639-1 language code and flag emoji to `english_locale.py`
 
-    Edit `src/rendercv/schema/models/locale/english_locale.py` and add your language to both mappings:
+    Edit `src/cvforge/schema/models/locale/english_locale.py` and add your language to both mappings:
 
     In `language_iso_639_1`:
     ```python
@@ -79,5 +79,5 @@
 5. Done. Use it:
 
     ```bash
-    rendercv new "John Doe" --locale mylanguage
+    cvforge new "John Doe" --locale mylanguage
     ```

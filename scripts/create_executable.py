@@ -24,12 +24,12 @@ machine_names = {
 with tempfile.TemporaryDirectory() as temp_dir:
     temp_path = pathlib.Path(temp_dir)
 
-    # Copy rendercv to temp directory
-    shutil.copytree(root_path / "src" / "rendercv", temp_path / "rendercv")
+    # Copy cvforge to temp directory
+    shutil.copytree(root_path / "src" / "cvforge", temp_path / "cvforge")
 
     # Create entry point script
-    rendercv_file = temp_path / "rendercv.py"
-    rendercv_file.write_text("import rendercv.cli.app as app; app.app()")
+    cvforge_file = temp_path / "cvforge.py"
+    cvforge_file.write_text("import cvforge.cli.app as app; app.app()")
 
     # Run PyInstaller
     subprocess.run(
@@ -40,12 +40,12 @@ with tempfile.TemporaryDirectory() as temp_dir:
             "--onefile",
             "--clean",
             "--collect-all",
-            "rendercv",
+            "cvforge",
             "--collect-all",
-            "rendercv_fonts",
+            "cvforge_fonts",
             "--distpath",
             "bin",
-            str(rendercv_file),
+            str(cvforge_file),
         ],
         check=True,
     )
@@ -57,11 +57,11 @@ with tempfile.TemporaryDirectory() as temp_dir:
     # Get original and new executable paths
     match sys.platform:
         case "win32":
-            original_name = "rendercv.exe"
-            new_name = f"rendercv-{platform_name}-{machine_name}.exe"
+            original_name = "cvforge.exe"
+            new_name = f"cvforge-{platform_name}-{machine_name}.exe"
         case _:
-            original_name = "rendercv"
-            new_name = f"rendercv-{platform_name}-{machine_name}"
+            original_name = "cvforge"
+            new_name = f"cvforge-{platform_name}-{machine_name}"
 
     original_path = root_path / "bin" / original_name
     executable_path = root_path / "bin" / new_name

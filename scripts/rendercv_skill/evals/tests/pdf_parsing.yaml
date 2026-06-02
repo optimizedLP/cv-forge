@@ -25,7 +25,7 @@
       Tools: AWS, Docker, Kubernetes, Terraform
   assert:
     - type: python
-      value: file://graders/rendercv_validation.py
+      value: file://graders/cvforge_validation.py
     - type: llm-rubric
       value: |
         The output correctly parses the CV text into RenderCV YAML:
@@ -65,7 +65,7 @@
       DOE Early Career Research Grant ($500,000), 2016 - 2020
   assert:
     - type: python
-      value: file://graders/rendercv_validation.py
+      value: file://graders/cvforge_validation.py
     - type: llm-rubric
       value: |
         The output correctly handles the academic CV:
@@ -97,7 +97,7 @@
       I know: Python, Java, C++, and also React and Node.js
   assert:
     - type: python
-      value: file://graders/rendercv_validation.py
+      value: file://graders/cvforge_validation.py
     - type: llm-rubric
       value: |
         Despite the messy input, the output produces clean RenderCV YAML:

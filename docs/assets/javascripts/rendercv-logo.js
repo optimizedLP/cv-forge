@@ -26,7 +26,7 @@
     requestAnimationFrame(tick);
     if (!S.has) return;
 
-    var svgs = document.querySelectorAll(".rendercv-logo-svg");
+    var svgs = document.querySelectorAll(".cvforge-logo-svg");
     for (var i = 0; i < svgs.length; i++) {
       var svg = svgs[i];
       var rect = svg.getBoundingClientRect();
@@ -36,9 +36,9 @@
       var px = ((S.mx - rect.left) / rect.width) * VBW;
       var py = ((S.my - rect.top) / rect.height) * VBH;
 
-      var li = svg.querySelector('[data-eye="left"] .rendercv-iris');
-      var ri = svg.querySelector('[data-eye="right"] .rendercv-iris');
-      var body = svg.querySelector(".rendercv-body");
+      var li = svg.querySelector('[data-eye="left"] .cvforge-iris');
+      var ri = svg.querySelector('[data-eye="right"] .cvforge-iris');
+      var body = svg.querySelector(".cvforge-body");
 
       if (li) {
         var c = clamp(px - EL.cx, py - EL.cy, MAX_PUPIL);

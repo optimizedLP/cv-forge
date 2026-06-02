@@ -6,7 +6,7 @@ from hypothesis import given
 from hypothesis import settings as hypothesis_settings
 from hypothesis import strategies as st
 
-from rendercv.schema.models.settings.settings import Settings
+from cvforge.schema.models.settings.settings import Settings
 
 
 class TestCurrentDate:

@@ -3,24 +3,24 @@ from typing import Literal, get_args
 import pydantic
 import pytest
 
-from rendercv.exception import RenderCVInternalError
-from rendercv.renderer.templater.connections import (
+from cvforge.exception import RenderCVInternalError
+from cvforge.renderer.templater.connections import (
     compute_connections,
     compute_connections_for_markdown,
     compute_connections_for_typst,
     fontawesome_icons,
     parse_connections,
 )
-from rendercv.schema.models.cv.custom_connection import CustomConnection
-from rendercv.schema.models.cv.cv import Cv
-from rendercv.schema.models.cv.social_network import SocialNetwork, SocialNetworkName
-from rendercv.schema.models.design.classic_theme import (
+from cvforge.schema.models.cv.custom_connection import CustomConnection
+from cvforge.schema.models.cv.cv import Cv
+from cvforge.schema.models.cv.social_network import SocialNetwork, SocialNetworkName
+from cvforge.schema.models.design.classic_theme import (
     ClassicTheme,
     Connections,
     Header,
 )
-from rendercv.schema.models.locale.locale import EnglishLocale
-from rendercv.schema.models.rendercv_model import RenderCVModel
+from cvforge.schema.models.locale.locale import EnglishLocale
+from cvforge.schema.models.cvforge_model import RenderCVModel
 
 
 def create_cv(
@@ -62,7 +62,7 @@ def create_cv(
     return Cv.model_validate(cv_data)
 
 
-def create_rendercv_model(
+def create_cvforge_model(
     cv: Cv,
     *,
     use_icons: bool = True,
@@ -113,7 +113,7 @@ class TestParseConnections:
     )
     def test_parse_single_field_type(self, field, value, expected_count, expected_icon):
         cv = create_cv(key_order=[field], **{field: value})
-        model = create_rendercv_model(cv)
+        model = create_cvforge_model(cv)
 
         connections = parse_connections(model)
 
@@ -122,7 +122,7 @@ class TestParseConnections:
 
     def test_email_connection_structure(self):
         cv = create_cv(key_order=["email"], email="john@example.com")
-        model = create_rendercv_model(cv)
+        model = create_cvforge_model(cv)
 
         connections = parse_connections(model)
 
@@ -139,7 +139,7 @@ class TestParseConnections:
     )
     def test_phone_formatting(self, phone, phone_format, expected_body):
         cv = create_cv(key_order=["phone"], phone=phone)
-        model = create_rendercv_model(cv, phone_format=phone_format)
+        model = create_cvforge_model(cv, phone_format=phone_format)
 
         connections = parse_connections(model)
 
@@ -147,7 +147,7 @@ class TestParseConnections:
 
     def test_website_connection_structure(self):
         cv = create_cv(key_order=["website"], website="https://example.com")
-        model = create_rendercv_model(cv)
+        model = create_cvforge_model(cv)
 
         connections = parse_connections(model)
 
@@ -157,7 +157,7 @@ class TestParseConnections:
 
     def test_location_has_no_url(self):
         cv = create_cv(key_order=["location"], location="New York, NY")
-        model = create_rendercv_model(cv)
+        model = create_cvforge_model(cv)
 
         connections = parse_connections(model)
 
@@ -167,7 +167,7 @@ class TestParseConnections:
     def test_social_network_connection(self):
         social = SocialNetwork(network="LinkedIn", username="johndoe")
         cv = create_cv(key_order=[], social_networks=[social])
-        model = create_rendercv_model(cv)
+        model = create_cvforge_model(cv)
 
         connections = parse_connections(model)
 
@@ -184,7 +184,7 @@ class TestParseConnections:
             phone="+14155552671",
             website="https://example.com",
         )
-        model = create_rendercv_model(cv)
+        model = create_cvforge_model(cv)
 
         connections = parse_connections(model)
 
@@ -205,7 +205,7 @@ class TestParseConnections:
                 SocialNetwork(network="GitHub", username="johndoe"),
             ],
         )
-        model = create_rendercv_model(cv)
+        model = create_cvforge_model(cv)
 
         connections = parse_connections(model)
 
@@ -218,7 +218,7 @@ class TestParseConnections:
 
     def test_empty_key_order_returns_empty_list(self):
         cv = create_cv(key_order=[])
-        model = create_rendercv_model(cv)
+        model = create_cvforge_model(cv)
 
         connections = parse_connections(model)
 
@@ -229,7 +229,7 @@ class TestParseConnections:
             key_order=["unknown_field", "email", "another_unknown"],
             email="john@example.com",
         )
-        model = create_rendercv_model(cv)
+        model = create_cvforge_model(cv)
 
         connections = parse_connections(model)
 
@@ -246,7 +246,7 @@ class TestParseConnections:
             key_order=["custom_connections"],
             custom_connections=[custom_connection],
         )
-        model = create_rendercv_model(cv)
+        model = create_cvforge_model(cv)
 
         connections = parse_connections(model)
 
@@ -266,7 +266,7 @@ class TestParseConnections:
             key_order=["custom_connections"],
             custom_connections=[custom_connection],
         )
-        model = create_rendercv_model(cv)
+        model = create_cvforge_model(cv)
 
         connections = parse_connections(model)
 
@@ -287,7 +287,7 @@ class TestComputeConnectionsForTypst:
     )
     def test_icon_and_link_combinations(self, use_icons, make_links, expected_patterns):
         cv = create_cv(key_order=["email"], email="john@example.com")
-        model = create_rendercv_model(cv, use_icons=use_icons, make_links=make_links)
+        model = create_cvforge_model(cv, use_icons=use_icons, make_links=make_links)
 
         result = compute_connections_for_typst(model)
 
@@ -303,7 +303,7 @@ class TestComputeConnectionsForTypst:
 
     def test_connection_without_url_has_no_link(self):
         cv = create_cv(key_order=["location"], location="New York, NY")
-        model = create_rendercv_model(cv, use_icons=True, make_links=True)
+        model = create_cvforge_model(cv, use_icons=True, make_links=True)
 
         result = compute_connections_for_typst(model)
 
@@ -312,7 +312,7 @@ class TestComputeConnectionsForTypst:
 
     def test_plain_text_output_when_no_formatting(self):
         cv = create_cv(key_order=["email"], email="john@example.com")
-        model = create_rendercv_model(cv, use_icons=False, make_links=False)
+        model = create_cvforge_model(cv, use_icons=False, make_links=False)
 
         result = compute_connections_for_typst(model)
 
@@ -328,7 +328,7 @@ class TestComputeConnectionsForTypst:
             key_order=["custom_connections"],
             custom_connections=[custom_connection],
         )
-        model = create_rendercv_model(cv, use_icons=True, make_links=True)
+        model = create_cvforge_model(cv, use_icons=True, make_links=True)
 
         result = compute_connections_for_typst(model)
 
@@ -340,7 +340,7 @@ class TestComputeConnectionsForTypst:
 class TestComputeConnectionsForMarkdown:
     def test_connection_with_url_formatted_as_markdown_link(self):
         cv = create_cv(key_order=["email"], email="john@example.com")
-        model = create_rendercv_model(cv)
+        model = create_cvforge_model(cv)
 
         result = compute_connections_for_markdown(model)
 
@@ -348,7 +348,7 @@ class TestComputeConnectionsForMarkdown:
 
     def test_connection_without_url_is_plain_text(self):
         cv = create_cv(key_order=["location"], location="New York, NY")
-        model = create_rendercv_model(cv)
+        model = create_cvforge_model(cv)
 
         result = compute_connections_for_markdown(model)
 
@@ -365,7 +365,7 @@ class TestComputeConnectionsForMarkdown:
             key_order=["custom_connections"],
             custom_connections=[custom_connection],
         )
-        model = create_rendercv_model(cv)
+        model = create_cvforge_model(cv)
 
         result = compute_connections_for_markdown(model)
 
@@ -382,7 +382,7 @@ class TestComputeConnectionsForMarkdown:
             key_order=["custom_connections"],
             custom_connections=[custom_connection],
         )
-        model = create_rendercv_model(cv)
+        model = create_cvforge_model(cv)
 
         result = compute_connections_for_markdown(model)
 
@@ -393,7 +393,7 @@ class TestComputeConnections:
     @pytest.mark.parametrize("file_type", ["typst", "markdown"])
     def test_dispatches_to_correct_formatter(self, file_type):
         cv = create_cv(key_order=["email"], email="john@example.com")
-        model = create_rendercv_model(cv, use_icons=True, make_links=True)
+        model = create_cvforge_model(cv, use_icons=True, make_links=True)
 
         result = compute_connections(model, file_type)
 
@@ -426,7 +426,7 @@ class TestParseConnectionsInternalErrors:
     def _make_model_with_none_field(self, key: str) -> RenderCVModel:
         cv = Cv.model_validate({"name": "John Doe"})
         cv._key_order = [key]
-        return create_rendercv_model(cv)
+        return create_cvforge_model(cv)
 
     @pytest.mark.parametrize(
         "key",

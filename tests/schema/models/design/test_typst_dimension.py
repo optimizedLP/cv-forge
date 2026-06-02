@@ -4,7 +4,7 @@ import pytest
 from hypothesis import given, settings
 from hypothesis import strategies as st
 
-from rendercv.schema.models.design.typst_dimension import (
+from cvforge.schema.models.design.typst_dimension import (
     TypstDimension,
     validate_typst_dimension,
 )

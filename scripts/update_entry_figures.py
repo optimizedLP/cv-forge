@@ -4,16 +4,16 @@ import tempfile
 import fitz
 import pdfCropMargins
 
-from rendercv.renderer.pdf_png import generate_pdf
-from rendercv.renderer.typst import generate_typst
-from rendercv.schema.models.cv.cv import Cv
-from rendercv.schema.models.design.built_in_design import available_themes
-from rendercv.schema.models.rendercv_model import RenderCVModel
-from rendercv.schema.rendercv_model_builder import build_rendercv_dictionary_and_model
-from rendercv.schema.yaml_reader import read_yaml
+from cvforge.renderer.pdf_png import generate_pdf
+from cvforge.renderer.typst import generate_typst
+from cvforge.schema.models.cv.cv import Cv
+from cvforge.schema.models.design.built_in_design import available_themes
+from cvforge.schema.models.cvforge_model import RenderCVModel
+from cvforge.schema.cvforge_model_builder import build_cvforge_dictionary_and_model
+from cvforge.schema.yaml_reader import read_yaml
 
 repository_root = pathlib.Path(__file__).parent.parent
-rendercv_path = repository_root / "rendercv"
+cvforge_path = repository_root / "cvforge"
 image_assets_directory = repository_root / "docs" / "assets" / "images"
 
 
@@ -58,7 +58,7 @@ with tempfile.TemporaryDirectory() as temporary_directory:
             # Create data model with only one section and one entry
             typst_path = temporary_directory_path / "typst.typ"
             pdf_path = temporary_directory_path / "pdf.pdf"
-            _, model = build_rendercv_dictionary_and_model(
+            _, model = build_cvforge_dictionary_and_model(
                 RenderCVModel(
                     cv=Cv(sections={entry_type: [entries[entry_type]]}),
                 ).model_dump_json(),

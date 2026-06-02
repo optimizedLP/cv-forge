@@ -40,7 +40,7 @@ RenderCV has 4 workflows. Each handles a specific automation task.
 
 **How workflows start:** Every workflow begins the same way: clone the repository, install `uv`, install `just`, then run some `just` commands. This recreates the same environment you'd have locally (see [Setup](index.md)).
 
-### 1. [`test.yaml`](https://github.com/rendercv/rendercv/blob/main/.github/workflows/test.yaml): Run Tests
+### 1. [`test.yaml`](https://github.com/rendercv/cvforge/blob/main/.github/workflows/test.yaml): Run Tests
 
 **When it runs:**
 
@@ -51,11 +51,11 @@ RenderCV has 4 workflows. Each handles a specific automation task.
 
 **What it does:**
 
-1. Checks out the repository with submodules (the [rendercv-skill](https://github.com/rendercv/rendercv-skill) submodule is needed for generated-file staleness tests)
+1. Checks out the repository with submodules (the [cvforge-skill](https://github.com/rendercv/cvforge-skill) submodule is needed for generated-file staleness tests)
 2. Runs `just test-coverage` across **9 different environments** (3 operating systems × 3 Python versions: 3.12, 3.13, 3.14)
 3. Combines all coverage reports and uploads them to show the coverage report
 
-### 2. [`deploy-docs.yaml`](https://github.com/rendercv/rendercv/blob/main/.github/workflows/deploy-docs.yaml): Deploy Documentation
+### 2. [`deploy-docs.yaml`](https://github.com/rendercv/cvforge/blob/main/.github/workflows/deploy-docs.yaml): Deploy Documentation
 
 **When it runs:**
 
@@ -68,7 +68,7 @@ RenderCV has 4 workflows. Each handles a specific automation task.
 2. Uploads it to GitHub Pages
 3. Documentation is now live at https://docs.rendercv.com
 
-### 3. [`create-executables.yaml`](https://github.com/rendercv/rendercv/blob/main/.github/workflows/create-executables.yaml): Create Executables
+### 3. [`create-executables.yaml`](https://github.com/rendercv/cvforge/blob/main/.github/workflows/create-executables.yaml): Create Executables
 
 **When it runs:**
 
@@ -85,7 +85,7 @@ RenderCV has 4 workflows. Each handles a specific automation task.
 
 These are single-file executables that users can download and run without installing Python.
 
-### 4. [`release.yaml`](https://github.com/rendercv/rendercv/blob/main/.github/workflows/release.yaml): Publish a Release
+### 4. [`release.yaml`](https://github.com/rendercv/cvforge/blob/main/.github/workflows/release.yaml): Publish a Release
 
 **When it runs:**
 
@@ -99,10 +99,10 @@ This is the complete release pipeline. It orchestrates everything:
 2. **Build package:** Installs `uv`, builds Python wheel and source distribution using `uv build`
 3. **Create executables:** Calls `create-executables.yaml` for all platforms
 4. **Add assets to GitHub release:** Downloads and adds executables and wheel to the release
-5. **Publish to PyPI:** Downloads and uploads package so users can `pip install rendercv`
+5. **Publish to PyPI:** Downloads and uploads package so users can `pip install cvforge`
 6. **Publish Docker image:** Builds and pushes Docker image to GitHub Container Registry
 
 ## Learn More
 
-- See [`.github/workflows/`](https://github.com/rendercv/rendercv/tree/main/.github/workflows) for RenderCV's workflow files
+- See [`.github/workflows/`](https://github.com/rendercv/cvforge/tree/main/.github/workflows) for RenderCV's workflow files
 - See [GitHub Actions Documentation](https://docs.github.com/en/actions) for the official documentation.

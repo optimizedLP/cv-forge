@@ -25,4 +25,4 @@ jobs:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           claude_args: "--model claude-sonnet-4-6"
           prompt: |
-            Follow .claude/skills/triage-rendercv-issue/SKILL.md to triage issue #${{ github.event.issue.number }}.
+            Follow .claude/skills/triage-cvforge-issue/SKILL.md to triage issue #${{ github.event.issue.number }}.

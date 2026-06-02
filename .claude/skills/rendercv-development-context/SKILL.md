@@ -1,5 +1,5 @@
 ---
-name: rendercv-development-context
+name: cvforge-development-context
 description: RenderCV codebase architecture, source code standards, and project references. Use when writing or reviewing RenderCV code.
 ---
 
@@ -7,12 +7,12 @@ description: RenderCV codebase architecture, source code standards, and project 
 
 ## Codebase references
 
-- @docs/developer_guide/understanding_rendercv.md
+- @docs/developer_guide/understanding_cvforge.md
 - @docs/developer_guide/testing.md
 - @docs/developer_guide/json_schema.md
-- @src/rendercv/schema/
-- @src/rendercv/renderer/
-- @src/rendercv/cli/
+- @src/cvforge/schema/
+- @src/cvforge/renderer/
+- @src/cvforge/cli/
 - @tests/
 - @pyproject.toml
 - @justfile

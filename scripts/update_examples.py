@@ -2,16 +2,16 @@ import pathlib
 import shutil
 import tempfile
 
-from rendercv.cli.render_command.progress_panel import ProgressPanel
-from rendercv.cli.render_command.run_rendercv import run_rendercv
-from rendercv.schema.models.design.built_in_design import available_themes
-from rendercv.schema.sample_generator import create_sample_yaml_input_file
+from cvforge.cli.render_command.progress_panel import ProgressPanel
+from cvforge.cli.render_command.run_cvforge import run_cvforge
+from cvforge.schema.models.design.built_in_design import available_themes
+from cvforge.schema.sample_generator import create_sample_yaml_input_file
 
 repository_root = pathlib.Path(__file__).parent.parent
-rendercv_path = repository_root / "rendercv"
+cvforge_path = repository_root / "cvforge"
 image_assets_directory = repository_root / "docs" / "assets" / "images" / "examples"
-rendercv_typst_examples_directory = (
-    repository_root / "src" / "rendercv" / "renderer" / "rendercv_typst" / "examples"
+cvforge_typst_examples_directory = (
+    repository_root / "src" / "cvforge" / "renderer" / "cvforge_typst" / "examples"
 )
 
 examples_directory_path = pathlib.Path(__file__).parent.parent / "examples"
@@ -33,7 +33,7 @@ for theme in available_themes:
 
     with tempfile.TemporaryDirectory() as temp_directory:
         temp_directory_path = pathlib.Path(temp_directory)
-        run_rendercv(
+        run_cvforge(
             yaml_file_path,
             progress=ProgressPanel(),
             typst_path=temp_directory_path / f"{yaml_file_path.stem}.typ",
@@ -49,10 +49,10 @@ for theme in available_themes:
             image_assets_directory / f"{theme}.png",
         )
 
-        rendercv_typst_examples_directory.mkdir(parents=True, exist_ok=True)
+        cvforge_typst_examples_directory.mkdir(parents=True, exist_ok=True)
         shutil.copy(
             temp_directory_path / f"{yaml_file_path.stem}.typ",
-            rendercv_typst_examples_directory / f"{theme}.typ",
+            cvforge_typst_examples_directory / f"{theme}.typ",
         )
 
 

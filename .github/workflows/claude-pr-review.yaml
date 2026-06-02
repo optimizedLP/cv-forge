@@ -38,4 +38,4 @@ jobs:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           claude_args: "--model claude-sonnet-4-6"
           prompt: |
-            Follow .claude/skills/review-rendercv-pr/SKILL.md to review PR #${{ github.event.pull_request.number }}.
+            Follow .claude/skills/review-cvforge-pr/SKILL.md to review PR #${{ github.event.pull_request.number }}.

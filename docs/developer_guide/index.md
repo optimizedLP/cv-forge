@@ -9,7 +9,7 @@ toc_depth: 1
 You need two tools to develop RenderCV:
 
 - **[`uv`](https://docs.astral.sh/uv/)**: Package and project manager. It also handles Python installations, so you don't need to install Python separately.
-- **[`just`](https://github.com/casey/just)**: Command runner. Development commands are defined in the [`justfile`](https://github.com/rendercv/rendercv/blob/main/justfile), and you need `just` to run them.
+- **[`just`](https://github.com/casey/just)**: Command runner. Development commands are defined in the [`justfile`](https://github.com/rendercv/cvforge/blob/main/justfile), and you need `just` to run them.
 
 Install them by following their official installation guides:
 
@@ -21,17 +21,17 @@ Install them by following their official installation guides:
 1. Clone the repository:
 
     ```bash
-    git clone --recursive https://github.com/rendercv/rendercv.git
+    git clone --recursive https://github.com/rendercv/cvforge.git
     ```
 
     and change to the repository directory:
 
     ```bash
-    cd rendercv
+    cd cvforge
     ```
 
     > [!NOTE]
-    > The `--recursive` flag clones the [rendercv-skill](https://github.com/rendercv/rendercv-skill) submodule. If you forgot it, run `git submodule update --init` inside the repo.
+    > The `--recursive` flag clones the [cvforge-skill](https://github.com/rendercv/cvforge-skill) submodule. If you forgot it, run `git submodule update --init` inside the repo.
 
 2. Set up the development environment (creates a virtual environment in `./.venv` with all dependencies):
 

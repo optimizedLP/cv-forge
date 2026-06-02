@@ -2,10 +2,10 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from rendercv.cli.render_command.parse_override_arguments import (
+from cvforge.cli.render_command.parse_override_arguments import (
     parse_override_arguments,
 )
-from rendercv.exception import RenderCVUserError
+from cvforge.exception import RenderCVUserError
 
 
 class TestParseOverrideArguments:

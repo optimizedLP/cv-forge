@@ -1,8 +1,8 @@
 import pytest
 
-from rendercv.renderer.html import generate_html
-from rendercv.renderer.markdown import generate_markdown
-from rendercv.schema.models.rendercv_model import RenderCVModel
+from cvforge.renderer.html import generate_html
+from cvforge.renderer.markdown import generate_markdown
+from cvforge.schema.models.cvforge_model import RenderCVModel
 
 
 @pytest.mark.parametrize("cv_variant", ["minimal", "full"])
@@ -11,7 +11,7 @@ def test_generate_html(
     cv_variant: str,
     request: pytest.FixtureRequest,
 ):
-    base_model = request.getfixturevalue(f"{cv_variant}_rendercv_model")
+    base_model = request.getfixturevalue(f"{cv_variant}_cvforge_model")
 
     model = RenderCVModel(
         cv=base_model.cv,

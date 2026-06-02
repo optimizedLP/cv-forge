@@ -6,47 +6,47 @@ toc_depth: 1
 
 RenderCV provides a command-line interface with three main commands:
 
-- **`rendercv new`** - Generate a sample CV to get started
-- **`rendercv render`** - Generate PDF, Markdown, HTML, and PNG from your YAML input
-- **`rendercv create-theme`** - Create a custom theme with editable templates
+- **`cvforge new`** - Generate a sample CV to get started
+- **`cvforge render`** - Generate PDF, Markdown, HTML, and PNG from your YAML input
+- **`cvforge create-theme`** - Create a custom theme with editable templates
 
 !!! tip "New to command line?"
     Commands are typed in your terminal/command prompt. Options starting with `--` modify behavior:
 
     ```bash
-    rendercv new "John Doe" --theme moderncv
+    cvforge new "John Doe" --theme moderncv
     ```
 
     **You can combine multiple options** in a single command:
 
     ```bash
-    rendercv render CV.yaml --watch --dont-generate-html --dont-generate-png
+    cvforge render CV.yaml --watch --dont-generate-html --dont-generate-png
     ```
 
     This renders your CV with auto-reload enabled, skipping HTML and PNG generation.
 
-## `rendercv`
+## `cvforge`
 
 Check your installed version:
 
 ```bash
-rendercv --version
+cvforge --version
 ```
 
 Get help anytime:
 
 ```bash
-rendercv --help
+cvforge --help
 ```
 
-## `rendercv new`
+## `cvforge new`
 
 Generate a sample CV file to start editing.
 
 **Basic usage:**
 
 ```bash
-rendercv new "John Doe"
+cvforge new "John Doe"
 ```
 
 This creates `John_Doe_CV.yaml` in your current folder.
@@ -54,7 +54,7 @@ This creates `John_Doe_CV.yaml` in your current folder.
 **Choose a different theme:**
 
 ```bash
-rendercv new "John Doe" --theme moderncv
+cvforge new "John Doe" --theme moderncv
 ```
 
 Available themes: << available_themes >>
@@ -62,7 +62,7 @@ Available themes: << available_themes >>
 **Use a different language:**
 
 ```bash
-rendercv new "John Doe" --locale french
+cvforge new "John Doe" --locale french
 ```
 
 Available locales: << available_locales >>
@@ -70,29 +70,29 @@ Available locales: << available_locales >>
 **For advanced users - generate editable templates:**
 
 ```bash
-rendercv new "John Doe" --create-typst-templates
+cvforge new "John Doe" --create-typst-templates
 ```
 
 This creates template files you can customize for complete design control. See [Override Default Templates](how_to/override_default_templates.md) for details.
 
-## `rendercv render`
+## `cvforge render`
 
 Generate your CV outputs (PDF, Markdown, HTML, PNG) from a YAML file.
 
 **Basic usage:**
 
 ```bash
-rendercv render John_Doe_CV.yaml
+cvforge render John_Doe_CV.yaml
 ```
 
-This creates a `rendercv_output` folder with all formats.
+This creates a `cvforge_output` folder with all formats.
 
 ### Common Scenarios
 
 **Auto-reload while editing:**
 
 ```bash
-rendercv render John_Doe_CV.yaml --watch
+cvforge render John_Doe_CV.yaml --watch
 ```
 
 The CV regenerates automatically whenever you save changes. Great for live preview!
@@ -100,19 +100,19 @@ The CV regenerates automatically whenever you save changes. Great for live previ
 **Only generate PDF:**
 
 ```bash
-rendercv render John_Doe_CV.yaml --dont-generate-markdown --dont-generate-html --dont-generate-png
+cvforge render John_Doe_CV.yaml --dont-generate-markdown --dont-generate-html --dont-generate-png
 ```
 
 Or use the short form:
 
 ```bash
-rendercv render John_Doe_CV.yaml -nomd -nohtml -nopng
+cvforge render John_Doe_CV.yaml -nomd -nohtml -nopng
 ```
 
 **Custom output location:**
 
 ```bash
-rendercv render John_Doe_CV.yaml --pdf-path ~/Desktop/MyCV.pdf
+cvforge render John_Doe_CV.yaml --pdf-path ~/Desktop/MyCV.pdf
 ```
 
 ### All Options
@@ -140,19 +140,19 @@ rendercv render John_Doe_CV.yaml --pdf-path ~/Desktop/MyCV.pdf
 Use dot notation to change specific fields. This overrides values in the YAML without editing the file.
 
 ```bash
-rendercv render CV.yaml --cv.phone "+1-555-555-5555"
-rendercv render CV.yaml --cv.sections.education.0.institution "MIT"
-rendercv render CV.yaml --design.theme "moderncv"
+cvforge render CV.yaml --cv.phone "+1-555-555-5555"
+cvforge render CV.yaml --cv.sections.education.0.institution "MIT"
+cvforge render CV.yaml --design.theme "moderncv"
 ```
 
-## `rendercv create-theme`
+## `cvforge create-theme`
 
 Create your own theme with full control over the design.
 
 **Basic usage:**
 
 ```bash
-rendercv create-theme "mytheme"
+cvforge create-theme "mytheme"
 ```
 
 This creates a `mytheme/` folder with template files you can edit. See [Override Default Templates](how_to/override_default_templates.md) for details.

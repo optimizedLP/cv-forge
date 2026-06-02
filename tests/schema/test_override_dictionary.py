@@ -5,8 +5,8 @@ import pytest
 from hypothesis import given, settings
 from hypothesis import strategies as st
 
-from rendercv.exception import RenderCVUserError
-from rendercv.schema.override_dictionary import (
+from cvforge.exception import RenderCVUserError
+from cvforge.schema.override_dictionary import (
     apply_overrides_to_dictionary,
     update_value_by_location,
 )

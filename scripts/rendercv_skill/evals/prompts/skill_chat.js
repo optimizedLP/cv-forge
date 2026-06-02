@@ -12,9 +12,9 @@ const skillPath = path.resolve(
   "..",
   ".claude",
   "skills",
-  "rendercv-skill",
+  "cvforge-skill",
   "skills",
-  "rendercv",
+  "cvforge",
   "SKILL.md",
 );
 const skillContent = fs.readFileSync(skillPath, "utf-8");

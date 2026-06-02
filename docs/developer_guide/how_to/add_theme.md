@@ -1,9 +1,9 @@
 # Add a New Theme
 
-1. Create a YAML file in `src/rendercv/schema/models/design/other_themes/`
+1. Create a YAML file in `src/cvforge/schema/models/design/other_themes/`
 
     ```bash
-    touch src/rendercv/schema/models/design/other_themes/mytheme.yaml
+    touch src/cvforge/schema/models/design/other_themes/mytheme.yaml
     ```
 
 2. Add the schema reference and override Classic theme defaults
@@ -31,5 +31,5 @@
 4. Done. Use it:
 
     ```bash
-    rendercv new "John Doe" --theme mytheme
+    cvforge new "John Doe" --theme mytheme
     ```

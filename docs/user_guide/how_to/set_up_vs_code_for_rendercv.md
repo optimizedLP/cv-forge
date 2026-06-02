@@ -49,10 +49,10 @@ Once the extensions are installed and auto-save is configured, follow these step
 
 1. **Open your YAML input file** (e.g. `John_Doe_CV.yaml`) in VS Code
 
-2. **Run `rendercv render` with the watch mode**:
+2. **Run `cvforge render` with the watch mode**:
 
     ```bash
-    rendercv render --watch John_Doe_CV.yaml
+    cvforge render --watch John_Doe_CV.yaml
     ```
 
     The `--watch` flag tells RenderCV to monitor the YAML file for changes and automatically re-render the PDF whenever the file is saved.
@@ -60,7 +60,7 @@ Once the extensions are installed and auto-save is configured, follow these step
 3. **Arrange your workspace**:
 
     - Place your YAML file on the left side of the editor
-    - Open the generated PDF (from `rendercv_output/`) on the right side
+    - Open the generated PDF (from `cvforge_output/`) on the right side
 
 4. **Start editing**: As you make changes to the YAML file, they will be automatically saved, triggering RenderCV to regenerate the PDF. The PDF viewer will update to show your changes in real-time.
 
@@ -74,7 +74,7 @@ Once the extensions are installed and auto-save is configured, follow these step
 If the live preview isn't working:
 
 - Make sure auto-save is enabled and the delay is set
-- Verify that `rendercv render --watch` is running in the terminal without errors
+- Verify that `cvforge render --watch` is running in the terminal without errors
 - Try closing and reopening the PDF file in VS Code
 
 With this setup, you'll have a productive environment for creating and refining your CV with instant visual feedback.

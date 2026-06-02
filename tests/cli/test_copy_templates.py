@@ -4,7 +4,7 @@ import stat
 
 import pytest
 
-from rendercv.cli.copy_templates import copy_templates, make_tree_writable
+from cvforge.cli.copy_templates import copy_templates, make_tree_writable
 
 
 @pytest.mark.parametrize("template_type", ["markdown", "typst"])

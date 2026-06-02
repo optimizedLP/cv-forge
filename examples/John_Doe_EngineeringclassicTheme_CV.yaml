@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/rendercv/rendercv/refs/tags/v2.8/schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/cvforge/cvforge/refs/tags/v2.8/schema.json
 cv:
   name: John Doe
   headline:
@@ -9,9 +9,9 @@ cv:
   website: https://rendercv.com/
   social_networks:
     - network: LinkedIn
-      username: rendercv
+      username: cvforge
     - network: GitHub
-      username: rendercv
+      username: cvforge
   custom_connections:
   sections:
     Welcome to RenderCV:
@@ -345,7 +345,7 @@ locale:
 settings:
   current_date: today
   render_command:
-    output_folder: rendercv_output
+    output_folder: cvforge_output
     design:
     locale:
     typst_path: OUTPUT_FOLDER/NAME_IN_SNAKE_CASE_CV.typ

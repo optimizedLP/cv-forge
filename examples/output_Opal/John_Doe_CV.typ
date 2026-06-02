@@ -1,8 +1,8 @@
-// Import the rendercv function and all the refactored components
+// Import the cvforge function and all the refactored components
 #import "@preview/rendercv:0.3.0": *
 
-// Apply the rendercv template with custom configuration
-#show: rendercv.with(
+// Apply the cvforge template with custom configuration
+#show: cvforge.with(
   name: "John Doe",
   title: "John Doe - CV",
   footer: context { [#emph[John Doe -- #str(here().page())\/#str(counter(page).final().first())]] },
@@ -92,8 +92,8 @@
   [#connection-with-icon("location-dot")[San Francisco, CA]],
   [#link("mailto:john.doe@email.com", icon: false, if-underline: false, if-color: false)[#connection-with-icon("envelope")[john.doe\@email.com]]],
   [#link("https://rendercv.com/", icon: false, if-underline: false, if-color: false)[#connection-with-icon("link")[rendercv.com]]],
-  [#link("https://linkedin.com/in/rendercv", icon: false, if-underline: false, if-color: false)[#connection-with-icon("linkedin")[rendercv]]],
-  [#link("https://github.com/rendercv", icon: false, if-underline: false, if-color: false)[#connection-with-icon("github")[rendercv]]],
+  [#link("https://linkedin.com/in/cvforge", icon: false, if-underline: false, if-color: false)[#connection-with-icon("linkedin")[cvforge]]],
+  [#link("https://github.com/cvforge", icon: false, if-underline: false, if-color: false)[#connection-with-icon("github")[cvforge]]],
 )
 
 

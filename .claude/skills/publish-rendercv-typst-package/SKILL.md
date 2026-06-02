@@ -1,18 +1,18 @@
 ---
-name: publish-rendercv-typst-package
-description: Create a PR to publish a new version of the rendercv-typst package to the Typst Universe (typst/packages repository). Validates package integrity, forks/clones the repo, copies files, and opens a PR.
+name: publish-cvforge-typst-package
+description: Create a PR to publish a new version of the cvforge-typst package to the Typst Universe (typst/packages repository). Validates package integrity, forks/clones the repo, copies files, and opens a PR.
 disable-model-invocation: true
 ---
 
-# Publish rendercv-typst to Typst Universe
+# Publish cvforge-typst to Typst Universe
 
-Create a pull request to `typst/packages` to publish the current version of `src/rendercv/renderer/rendercv_typst/`.
+Create a pull request to `typst/packages` to publish the current version of `src/cvforge/renderer/cvforge_typst/`.
 
-The clone location for the typst/packages fork is `$HOME/.cache/rendercv/typst-packages`.
+The clone location for the typst/packages fork is `$HOME/.cache/cvforge/typst-packages`.
 
 ## Step 1: Read package metadata
 
-Read `src/rendercv/renderer/rendercv_typst/typst.toml` to get the version and all metadata fields.
+Read `src/cvforge/renderer/cvforge_typst/typst.toml` to get the version and all metadata fields.
 
 ## Step 2: Validate package integrity
 
@@ -20,7 +20,7 @@ Run ALL checks below. Collect ALL failures and report them together. Do NOT proc
 
 ### 2a: Required files
 
-Verify these exist in `src/rendercv/renderer/rendercv_typst/`:
+Verify these exist in `src/cvforge/renderer/cvforge_typst/`:
 - `lib.typ`
 - `typst.toml`
 - `README.md`
@@ -37,21 +37,21 @@ Parse `typst.toml` and verify it has:
 ### 2c: Version consistency
 
 Check that the version string in `typst.toml` appears correctly in:
-- `README.md` import statements (`@preview/rendercv:X.Y.Z`)
-- `template/main.typ` import statement (`@preview/rendercv:X.Y.Z`)
-- All example files in `src/rendercv/renderer/rendercv_typst/examples/*.typ` (if they have import statements)
+- `README.md` import statements (`@preview/cvforge:X.Y.Z`)
+- `template/main.typ` import statement (`@preview/cvforge:X.Y.Z`)
+- All example files in `src/cvforge/renderer/cvforge_typst/examples/*.typ` (if they have import statements)
 
 If ANY file references an old version, stop and report which files need updating.
 
 ### 2d: CHANGELOG entry
 
-Read `src/rendercv/renderer/rendercv_typst/CHANGELOG.md` and verify there is an entry for the version being published.
+Read `src/cvforge/renderer/cvforge_typst/CHANGELOG.md` and verify there is an entry for the version being published.
 
 ### 2e: All themes have example files
 
-This is critical. Extract all theme names shown in the README by finding image references that match the pattern `examples/<theme-name>.png` in the image URLs. Then verify that EVERY theme has a corresponding `<theme-name>.typ` file in `src/rendercv/renderer/rendercv_typst/examples/`.
+This is critical. Extract all theme names shown in the README by finding image references that match the pattern `examples/<theme-name>.png` in the image URLs. Then verify that EVERY theme has a corresponding `<theme-name>.typ` file in `src/cvforge/renderer/cvforge_typst/examples/`.
 
-For example, if the README shows images for classic, engineeringresumes, sb2nov, moderncv, engineeringclassic, and harvard, then ALL of these must exist as `.typ` files in `src/rendercv/renderer/rendercv_typst/examples/`.
+For example, if the README shows images for classic, engineeringresumes, sb2nov, moderncv, engineeringclassic, and harvard, then ALL of these must exist as `.typ` files in `src/cvforge/renderer/cvforge_typst/examples/`.
 
 If any example file is missing, STOP and tell the user exactly which files are missing.
 
@@ -61,13 +61,13 @@ Check that the `README.md` does not reference nonexistent files within the packa
 
 ### 2g: Import style in template
 
-Verify `template/main.typ` uses the absolute package import (`@preview/rendercv:{version}`) and NOT a relative import like `../lib.typ`. The Typst packages repository requires absolute imports.
+Verify `template/main.typ` uses the absolute package import (`@preview/cvforge:{version}`) and NOT a relative import like `../lib.typ`. The Typst packages repository requires absolute imports.
 
 ## Step 3: Handle previous work
 
-1. Check for existing open PRs for rendercv in `typst/packages`:
+1. Check for existing open PRs for cvforge in `typst/packages`:
    ```
-   gh pr list --repo typst/packages --author @me --search "rendercv" --state all
+   gh pr list --repo typst/packages --author @me --search "cvforge" --state all
    ```
 
 2. If an existing PR is **open**, ask the user what to do:
@@ -75,7 +75,7 @@ Verify `template/main.typ` uses the absolute package import (`@preview/rendercv:
    - Close it and create a new one?
    - Abort?
 
-3. If the clone directory `$HOME/.cache/rendercv/typst-packages` already exists:
+3. If the clone directory `$HOME/.cache/cvforge/typst-packages` already exists:
    - If there are old branches for previous versions that have been merged/closed, delete them.
    - Reset to upstream/main before proceeding.
 
@@ -84,13 +84,13 @@ Verify `template/main.typ` uses the absolute package import (`@preview/rendercv:
 ### If clone does NOT exist:
 
 ```bash
-mkdir -p $HOME/.cache/rendercv
+mkdir -p $HOME/.cache/cvforge
 # Fork if not already forked (idempotent)
 gh repo fork typst/packages --clone=false
 # Clone with sparse checkout
-gh repo clone $(gh api user --jq .login)/packages $HOME/.cache/rendercv/typst-packages -- --filter=blob:none --sparse
-cd $HOME/.cache/rendercv/typst-packages
-git sparse-checkout set packages/preview/rendercv
+gh repo clone $(gh api user --jq .login)/packages $HOME/.cache/cvforge/typst-packages -- --filter=blob:none --sparse
+cd $HOME/.cache/cvforge/typst-packages
+git sparse-checkout set packages/preview/cvforge
 git remote add upstream https://github.com/typst/packages.git 2>/dev/null || true
 git fetch upstream main
 ```
@@ -98,7 +98,7 @@ git fetch upstream main
 ### If clone ALREADY exists:
 
 ```bash
-cd $HOME/.cache/rendercv/typst-packages
+cd $HOME/.cache/cvforge/typst-packages
 git fetch upstream main
 git checkout main
 git reset --hard upstream/main
@@ -107,9 +107,9 @@ git reset --hard upstream/main
 ## Step 5: Create the package version directory
 
 1. Read the version from `typst.toml` (e.g., `0.3.0`).
-2. Create a new branch: `git checkout -b rendercv-{version}`
-3. Create the target directory: `packages/preview/rendercv/{version}/`
-4. Copy files from the rendercv-typst source directory into the target:
+2. Create a new branch: `git checkout -b cvforge-{version}`
+3. Create the target directory: `packages/preview/cvforge/{version}/`
+4. Copy files from the cvforge-typst source directory into the target:
 
 **Files to copy:**
 - `lib.typ`
@@ -129,13 +129,13 @@ git reset --hard upstream/main
 
 ## Step 6: Determine previous version
 
-Look at existing directories in `packages/preview/rendercv/` to find the most recent previous version. This is needed for the PR description. If no previous version exists (first submission), note that this is a new package.
+Look at existing directories in `packages/preview/cvforge/` to find the most recent previous version. This is needed for the PR description. If no previous version exists (first submission), note that this is a new package.
 
 ## Step 7: Build PR description
 
-Read `src/rendercv/renderer/rendercv_typst/CHANGELOG.md` and extract the changes for the current version.
+Read `src/cvforge/renderer/cvforge_typst/CHANGELOG.md` and extract the changes for the current version.
 
-**PR title:** `rendercv:{version}`
+**PR title:** `cvforge:{version}`
 
 **PR body for updates:**
 ```
@@ -171,10 +171,10 @@ I have read and followed the submission guidelines and, in particular, I
 ## Step 8: Commit, push, and create PR
 
 ```bash
-cd $HOME/.cache/rendercv/typst-packages
-git add packages/preview/rendercv/{version}/
-git commit -m "rendercv:{version}"
-git push -u origin rendercv-{version}
+cd $HOME/.cache/cvforge/typst-packages
+git add packages/preview/cvforge/{version}/
+git commit -m "cvforge:{version}"
+git push -u origin cvforge-{version}
 ```
 
 Create the PR:
@@ -182,7 +182,7 @@ Create the PR:
 gh pr create \
   --repo typst/packages \
   --base main \
-  --title "rendercv:{version}" \
+  --title "cvforge:{version}" \
   --body "..." # Use the body from Step 7
 ```
 
@@ -190,6 +190,6 @@ gh pr create \
 
 Tell the user:
 1. The PR URL (clickable)
-2. The clone location (`$HOME/.cache/rendercv/typst-packages`)
-3. The branch name (`rendercv-{version}`)
+2. The clone location (`$HOME/.cache/cvforge/typst-packages`)
+3. The branch name (`cvforge-{version}`)
 4. Any warnings noticed during validation (even if they didn't block the PR)

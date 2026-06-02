@@ -5,7 +5,7 @@ import pytest
 from hypothesis import given, settings
 from hypothesis import strategies as st
 
-from rendercv.schema.models.cv.social_network import (
+from cvforge.schema.models.cv.social_network import (
     SocialNetwork,
     SocialNetworkName,
     url_dictionary,

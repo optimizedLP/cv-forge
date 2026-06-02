@@ -1,0 +1,94 @@
+# yaml-language-server: $schema=../../../../../../schema.json
+design:
+  theme: sleek
+  page:
+    top_margin: 0.55in
+    bottom_margin: 0.55in
+    left_margin: 0.6in
+    right_margin: 0.6in
+    show_footer: true
+    show_top_note: false
+  typography:
+    line_spacing: 0.5em
+    alignment: justified
+    font_family:
+      body: Lato
+      name: Source Sans 3
+      headline: Lato
+      connections: Lato
+      section_titles: Source Sans 3
+    font_size:
+      body: 9pt
+      name: 24pt
+      headline: 9.5pt
+      connections: 8.5pt
+      section_titles: 1.1em
+    small_caps:
+      name: false
+      headline: false
+      connections: false
+      section_titles: true
+    bold:
+      name: true
+      headline: false
+      connections: false
+      section_titles: true
+  colors:
+    body: rgb(40, 40, 50)
+    name: rgb(25, 35, 60)
+    headline: rgb(70, 80, 100)
+    connections: rgb(100, 110, 130)
+    section_titles: rgb(25, 35, 60)
+    links: rgb(25, 35, 60)
+    footer: rgb(140, 140, 150)
+    top_note: rgb(140, 140, 150)
+  header:
+    alignment: left
+    space_below_name: 0.3cm
+    space_below_headline: 0.15cm
+    space_below_connections: 0.3cm
+    connections:
+      separator: "|"
+      show_icons: true
+      display_urls_instead_of_usernames: false
+      space_between_connections: 0.35cm
+  links:
+    underline: false
+    show_external_link_icon: false
+  section_titles:
+    type: with_full_line
+    line_thickness: 0.4pt
+    space_above: 0.4cm
+    space_below: 0.15cm
+  sections:
+    space_between_regular_entries: 0.8em
+    space_between_text_based_entries: 0.2em
+    show_time_spans_in:
+      - experience
+  entries:
+    short_second_row: true
+    side_space: 0.1cm
+    space_between_columns: 0.1cm
+    date_and_location_width: 3.8cm
+    summary:
+      space_above: 0.04cm
+      space_left: 0cm
+    highlights:
+      bullet: "▸"
+      nested_bullet: "◦"
+      space_left: 0.15cm
+      space_above: 0.04cm
+      space_between_items: 0.02cm
+      space_between_bullet_and_text: 0.4em
+  templates:
+    footer: "*NAME · PAGE_NUMBER/TOTAL_PAGES*"
+    education_entry:
+      main_column: "**INSTITUTION** — LOCATION\n*DEGREE_WITH_AREA*\nSUMMARY\nHIGHLIGHTS"
+      date_and_location_column: DATE
+      degree_column: null
+    normal_entry:
+      main_column: "**NAME** · LOCATION\nSUMMARY\nHIGHLIGHTS"
+      date_and_location_column: DATE
+    experience_entry:
+      main_column: "**POSITION** · COMPANY — LOCATION\nSUMMARY\nHIGHLIGHTS"
+      date_and_location_column: DATE

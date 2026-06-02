@@ -27,23 +27,23 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 FROM python:3.12-slim-bookworm
 
 # Setup a non-root user
-RUN groupadd --system --gid 999 rendercv \
- && useradd --system --gid 999 --uid 999 --create-home rendercv
+RUN groupadd --system --gid 999 cvforge \
+ && useradd --system --gid 999 --uid 999 --create-home cvforge
 
 # Set working directory
 WORKDIR /app
 
 # Copy the virtual environment from the builder stage
-COPY --from=builder --chown=rendercv:rendercv /app/.venv /app/.venv
+COPY --from=builder --chown=cvforge:cvforge /app/.venv /app/.venv
 
 # Place executables in the environment at the front of the path
 ENV PATH="/app/.venv/bin:$PATH"
 
 # Use the non-root user to run our application
-USER rendercv
+USER cvforge
 
-# Set the entrypoint to the rendercv CLI (installed via pyproject.toml entry point)
-ENTRYPOINT ["rendercv"]
+# Set the entrypoint to the cvforge CLI (installed via pyproject.toml entry point)
+ENTRYPOINT ["cvforge"]
 
 # Default command shows help
 CMD ["--help"]

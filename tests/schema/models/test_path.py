@@ -3,11 +3,11 @@ import pathlib
 import pydantic
 import pytest
 
-from rendercv.schema.models.path import (
+from cvforge.schema.models.path import (
     ExistingPathRelativeToInput,
     PlannedPathRelativeToInput,
 )
-from rendercv.schema.models.validation_context import ValidationContext
+from cvforge.schema.models.validation_context import ValidationContext
 
 
 class PlannedPathModel(pydantic.BaseModel):

@@ -12,7 +12,7 @@ When you run an image, Docker creates a **container**: a live, isolated instance
 
 ## Why Docker for RenderCV?
 
-RenderCV installs easily with `pip install rendercv` if you have Python. Most users don't need Docker.
+RenderCV installs easily with `pip install cvforge` if you have Python. Most users don't need Docker.
 
 But Docker makes sense if you want:
 
@@ -22,16 +22,16 @@ But Docker makes sense if you want:
 
 The RenderCV Docker image is a ready-made environment with Python and RenderCV pre-installed. Just run:
 ```bash
-docker run --rm -v "$PWD":/work -u $(id -u):$(id -g) -e HOME=/tmp -w /work ghcr.io/rendercv/rendercv new "Your Name"
+docker run --rm -v "$PWD":/work -u $(id -u):$(id -g) -e HOME=/tmp -w /work ghcr.io/cvforge/cvforge new "Your Name"
 ```
 
 ## How the Image Gets Published
 
 Docker images are stored in **registries**, which are servers that host images so anyone can download and run them. Docker Hub is the most popular, but GitHub has its own called GitHub Container Registry (GHCR).
 
-When RenderCV publishes a GitHub release, the [`release.yaml` workflow](https://github.com/rendercv/rendercv/blob/main/.github/workflows/release.yaml) automatically builds and publishes the RenderCV image to GHCR at `ghcr.io/rendercv/rendercv`.
+When RenderCV publishes a GitHub release, the [`release.yaml` workflow](https://github.com/rendercv/cvforge/blob/main/.github/workflows/release.yaml) automatically builds and publishes the RenderCV image to GHCR at `ghcr.io/cvforge/cvforge`.
 
-When users run `docker run ghcr.io/rendercv/rendercv`, Docker automatically pulls the image from the registry if it's not already on their machine.
+When users run `docker run ghcr.io/cvforge/cvforge`, Docker automatically pulls the image from the registry if it's not already on their machine.
 
 ## Learn More
 

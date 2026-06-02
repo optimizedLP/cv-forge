@@ -2,11 +2,11 @@ from datetime import date as Date
 
 import pytest
 
-from rendercv.renderer.templater.footer_and_top_note import (
+from cvforge.renderer.templater.footer_and_top_note import (
     render_footer_template,
     render_top_note_template,
 )
-from rendercv.schema.models.locale.english_locale import EnglishLocale
+from cvforge.schema.models.locale.english_locale import EnglishLocale
 
 
 @pytest.mark.parametrize(

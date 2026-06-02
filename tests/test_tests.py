@@ -2,7 +2,7 @@
 
 import pathlib
 
-src_root = pathlib.Path(__file__).parent.parent.parent / "src" / "rendercv"
+src_root = pathlib.Path(__file__).parent.parent.parent / "src" / "cvforge"
 tests_root = pathlib.Path(__file__).parent.parent
 
 
@@ -84,7 +84,7 @@ def test_all_test_files_follow_naming_pattern():
             if expected_source_file not in source_files:
                 invalid_test_files.append(
                     f"tests/{subdir}/{test_file} - no corresponding source file "
-                    f"src/rendercv/{subdir}/{expected_source_file}"
+                    f"src/cvforge/{subdir}/{expected_source_file}"
                 )
 
     assert not invalid_test_files, (

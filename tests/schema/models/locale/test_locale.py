@@ -2,14 +2,14 @@ from pathlib import Path
 
 import pytest
 
-from rendercv.schema.models.locale.english_locale import EnglishLocale, Phrases
-from rendercv.schema.models.locale.locale import available_locales, locale_adapter
-from rendercv.schema.yaml_reader import read_yaml
+from cvforge.schema.models.locale.english_locale import EnglishLocale, Phrases
+from cvforge.schema.models.locale.locale import available_locales, locale_adapter
+from cvforge.schema.yaml_reader import read_yaml
 
 OTHER_LOCALES_DIR = (
     Path(__file__).parent.parent.parent.parent.parent
     / "src"
-    / "rendercv"
+    / "cvforge"
     / "schema"
     / "models"
     / "locale"

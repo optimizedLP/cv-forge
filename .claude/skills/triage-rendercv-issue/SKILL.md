@@ -1,18 +1,18 @@
 ---
-name: triage-rendercv-issue
+name: triage-cvforge-issue
 description: Analyze a newly opened GitHub issue, comment with findings and an action plan, and offer to open a PR.
 ---
 
 # Triage a RenderCV Issue
 
-Analyze a newly opened issue on the `rendercv/rendercv` repository. Post a helpful comment that demonstrates understanding of the problem and offers next steps.
+Analyze a newly opened issue on the `cvforge/cvforge` repository. Post a helpful comment that demonstrates understanding of the problem and offers next steps.
 
 ## Step 1: Read the issue
 
 Get the full issue details including all comments:
 
 ```bash
-gh issue view <number> --repo rendercv/rendercv --comments
+gh issue view <number> --repo cvforge/cvforge --comments
 ```
 
 Determine:
@@ -24,14 +24,14 @@ Determine:
 Check for duplicates:
 
 ```bash
-gh issue list --repo rendercv/rendercv --state all --search "<key terms from issue>" --json number,title,state --limit 10
+gh issue list --repo cvforge/cvforge --state all --search "<key terms from issue>" --json number,title,state --limit 10
 ```
 
 ## Step 2: Understand the relevant code
 
 Familiarize yourself with the project architecture and the specific area the issue relates to:
 
-- @.claude/skills/rendercv-development-context/SKILL.md
+- @.claude/skills/cvforge-development-context/SKILL.md
 
 Read the architecture and source structure sections, then explore the specific source files and tests related to the issue.
 
@@ -40,7 +40,7 @@ Read the architecture and source structure sections, then explore the specific s
 Comment on the issue using `gh`:
 
 ```bash
-gh issue comment <number> --repo rendercv/rendercv --body "$(cat <<'EOF'
+gh issue comment <number> --repo cvforge/cvforge --body "$(cat <<'EOF'
 <comment content>
 EOF
 )"

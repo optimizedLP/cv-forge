@@ -5,9 +5,9 @@ from unittest.mock import MagicMock, patch
 import pydantic
 import pytest
 
-from rendercv.exception import RenderCVInternalError
-from rendercv.schema.models.design.design import Design
-from rendercv.schema.models.validation_context import ValidationContext
+from cvforge.exception import RenderCVInternalError
+from cvforge.schema.models.design.design import Design
+from cvforge.schema.models.validation_context import ValidationContext
 
 
 class TestDesign:
@@ -151,7 +151,7 @@ class SomeOtherClass(BaseModel):
 
         with (
             patch(
-                "rendercv.schema.models.design.design.importlib.util"
+                "cvforge.schema.models.design.design.importlib.util"
                 ".spec_from_file_location",
                 return_value=None,
             ),
@@ -181,7 +181,7 @@ class SomeOtherClass(BaseModel):
 
         with (
             patch(
-                "rendercv.schema.models.design.design.importlib.util"
+                "cvforge.schema.models.design.design.importlib.util"
                 ".spec_from_file_location",
                 return_value=mock_spec,
             ),

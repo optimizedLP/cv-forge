@@ -3,15 +3,15 @@
 Why:
     Every RenderCV skill response that includes YAML should produce valid,
     schema-compliant YAML. This grader uses RenderCV's own pydantic validation
-    (the same pipeline as `rendercv render`) to catch syntax errors and schema
+    (the same pipeline as `cvforge render`) to catch syntax errors and schema
     violations before the LLM-as-judge even runs.
 """
 
 import re
 
-from rendercv.exception import RenderCVUserValidationError
-from rendercv.schema.rendercv_model_builder import (
-    build_rendercv_model_from_commented_map,
+from cvforge.exception import RenderCVUserValidationError
+from cvforge.schema.cvforge_model_builder import (
+    build_cvforge_model_from_commented_map,
     read_yaml_with_validation_errors,
 )
 
@@ -43,7 +43,7 @@ def get_assert(output: str, context: dict) -> dict:  # noqa: ARG001
     for i, block in enumerate(yaml_blocks):
         try:
             commented_map = read_yaml_with_validation_errors(block, "main_yaml_file")
-            build_rendercv_model_from_commented_map(commented_map)
+            build_cvforge_model_from_commented_map(commented_map)
         except RenderCVUserValidationError as e:
             error_messages = "; ".join(err.message for err in e.validation_errors)
             return {

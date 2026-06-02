@@ -12,7 +12,7 @@ from typing import get_args
 import pydantic
 import ruamel.yaml
 
-from rendercv.schema.models.cv.section import (
+from cvforge.schema.models.cv.section import (
     BulletEntry,
     EducationEntry,
     ExperienceEntry,
@@ -22,9 +22,9 @@ from rendercv.schema.models.cv.section import (
     PublicationEntry,
     ReversedNumberedEntry,
 )
-from rendercv.schema.models.cv.social_network import available_social_networks
-from rendercv.schema.models.design.built_in_design import available_themes
-from rendercv.schema.models.design.classic_theme import (
+from cvforge.schema.models.cv.social_network import available_social_networks
+from cvforge.schema.models.design.built_in_design import available_themes
+from cvforge.schema.models.design.classic_theme import (
     Alignment,
     BodyAlignment,
     Bullet,
@@ -32,12 +32,12 @@ from rendercv.schema.models.design.classic_theme import (
     PhoneNumberFormatType,
     SectionTitleType,
 )
-from rendercv.schema.models.design.font_family import available_font_families
-from rendercv.schema.models.locale.locale import available_locales
-from rendercv.schema.yaml_reader import read_yaml
+from cvforge.schema.models.design.font_family import available_font_families
+from cvforge.schema.models.locale.locale import available_locales
+from cvforge.schema.yaml_reader import read_yaml
 
 repository_root = pathlib.Path(__file__).parent.parent
-rendercv_path = repository_root / "src" / "rendercv"
+cvforge_path = repository_root / "src" / "cvforge"
 image_assets_directory = pathlib.Path(__file__).parent / "assets" / "images"
 
 

@@ -10,18 +10,18 @@ import pydantic
 import pydantic_extra_types.phone_numbers as pydantic_phone_numbers
 import pytest
 
-from rendercv.schema.models.cv.cv import Cv
-from rendercv.schema.models.cv.entries.bullet import BulletEntry
-from rendercv.schema.models.cv.entries.education import EducationEntry
-from rendercv.schema.models.cv.entries.experience import ExperienceEntry
-from rendercv.schema.models.cv.entries.normal import NormalEntry
-from rendercv.schema.models.cv.entries.numbered import NumberedEntry
-from rendercv.schema.models.cv.entries.one_line import OneLineEntry
-from rendercv.schema.models.cv.entries.publication import PublicationEntry
-from rendercv.schema.models.cv.entries.reversed_numbered import ReversedNumberedEntry
-from rendercv.schema.models.cv.social_network import SocialNetwork
-from rendercv.schema.models.rendercv_model import RenderCVModel
-from rendercv.schema.models.settings.settings import Settings
+from cvforge.schema.models.cv.cv import Cv
+from cvforge.schema.models.cv.entries.bullet import BulletEntry
+from cvforge.schema.models.cv.entries.education import EducationEntry
+from cvforge.schema.models.cv.entries.experience import ExperienceEntry
+from cvforge.schema.models.cv.entries.normal import NormalEntry
+from cvforge.schema.models.cv.entries.numbered import NumberedEntry
+from cvforge.schema.models.cv.entries.one_line import OneLineEntry
+from cvforge.schema.models.cv.entries.publication import PublicationEntry
+from cvforge.schema.models.cv.entries.reversed_numbered import ReversedNumberedEntry
+from cvforge.schema.models.cv.social_network import SocialNetwork
+from cvforge.schema.models.cvforge_model import RenderCVModel
+from cvforge.schema.models.settings.settings import Settings
 
 
 @pytest.fixture
@@ -104,7 +104,7 @@ def compare_file_with_reference(
 
 
 @pytest.fixture
-def minimal_rendercv_model() -> RenderCVModel:
+def minimal_cvforge_model() -> RenderCVModel:
     """Create a minimal RenderCVModel for testing.
 
     Returns:
@@ -122,7 +122,7 @@ def minimal_rendercv_model() -> RenderCVModel:
 
 
 @pytest.fixture
-def full_rendercv_model(testdata_dir: pathlib.Path) -> RenderCVModel:
+def full_cvforge_model(testdata_dir: pathlib.Path) -> RenderCVModel:
     """Create a comprehensive RenderCVModel with all entry combinations.
 
     Generates all possible combinations of entry types with different

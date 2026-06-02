@@ -3,17 +3,17 @@
 <div align="center" markdown>
 *Resume builder for academics and engineers, deployed at [rendercv.com](https://rendercv.com)*
 
-[![test](https://github.com/rendercv/rendercv/actions/workflows/test.yaml/badge.svg?branch=main)](https://github.com/rendercv/rendercv/actions/workflows/test.yaml)
-[![coverage](https://coverage-badge.samuelcolvin.workers.dev/rendercv/rendercv.svg)](https://coverage-badge.samuelcolvin.workers.dev/redirect/rendercv/rendercv)
+[![test](https://github.com/rendercv/cvforge/actions/workflows/test.yaml/badge.svg?branch=main)](https://github.com/rendercv/cvforge/actions/workflows/test.yaml)
+[![coverage](https://coverage-badge.samuelcolvin.workers.dev/cvforge/cvforge.svg)](https://coverage-badge.samuelcolvin.workers.dev/redirect/cvforge/cvforge)
 [![docs](https://img.shields.io/badge/docs-mkdocs-rgb(0%2C79%2C144))](https://docs.rendercv.com)
-[![pypi-version](https://img.shields.io/pypi/v/rendercv?label=PyPI%20version&color=rgb(0%2C79%2C144))](https://pypi.python.org/pypi/rendercv)
-[![pypi-downloads](https://img.shields.io/pepy/dt/rendercv?label=PyPI%20downloads&color=rgb(0%2C%2079%2C%20144))](https://pypistats.org/packages/rendercv)
+[![pypi-version](https://img.shields.io/pypi/v/cvforge?label=PyPI%20version&color=rgb(0%2C79%2C144))](https://pypi.python.org/pypi/cvforge)
+[![pypi-downloads](https://img.shields.io/pepy/dt/cvforge?label=PyPI%20downloads&color=rgb(0%2C%2079%2C%20144))](https://pypistats.org/packages/cvforge)
 </div>
 
 Write your CV or resume as YAML, then run RenderCV,
 
 ```bash
-rendercv render John_Doe_CV.yaml
+cvforge render John_Doe_CV.yaml
 ```
 
 and get a PDF with perfect typography.
@@ -34,9 +34,9 @@ cv:
   website: https://rendercv.com/
   social_networks:
     - network: LinkedIn
-      username: rendercv
+      username: cvforge
     - network: GitHub
-      username: rendercv
+      username: cvforge
   sections:
     Welcome to RenderCV:
       - RenderCV reads a CV written in a YAML file, and generates a PDF with professional typography.
@@ -59,17 +59,17 @@ cv:
 
 becomes one of these PDFs. Click on the images to preview.
 
-| [![Classic Theme Example of RenderCV](https://raw.githubusercontent.com/rendercv/rendercv/main/docs/assets/images/examples/classic.png)](https://github.com/rendercv/rendercv/blob/main/examples/John_Doe_ClassicTheme_CV.pdf) | [![Engineeringresumes Theme Example of RenderCV](https://raw.githubusercontent.com/rendercv/rendercv/main/docs/assets/images/examples/engineeringresumes.png)](https://github.com/rendercv/rendercv/blob/main/examples/John_Doe_EngineeringresumesTheme_CV.pdf) | [![Sb2nov Theme Example of RenderCV](https://raw.githubusercontent.com/rendercv/rendercv/main/docs/assets/images/examples/sb2nov.png)](https://github.com/rendercv/rendercv/blob/main/examples/John_Doe_Sb2novTheme_CV.pdf) |
+| [![Classic Theme Example of RenderCV](https://raw.githubusercontent.com/cvforge/cvforge/main/docs/assets/images/examples/classic.png)](https://github.com/rendercv/cvforge/blob/main/examples/John_Doe_ClassicTheme_CV.pdf) | [![Engineeringresumes Theme Example of RenderCV](https://raw.githubusercontent.com/cvforge/cvforge/main/docs/assets/images/examples/engineeringresumes.png)](https://github.com/rendercv/cvforge/blob/main/examples/John_Doe_EngineeringresumesTheme_CV.pdf) | [![Sb2nov Theme Example of RenderCV](https://raw.githubusercontent.com/cvforge/cvforge/main/docs/assets/images/examples/sb2nov.png)](https://github.com/rendercv/cvforge/blob/main/examples/John_Doe_Sb2novTheme_CV.pdf) |
 | --- | --- | --- |
-| [![Moderncv Theme Example of RenderCV](https://raw.githubusercontent.com/rendercv/rendercv/main/docs/assets/images/examples/moderncv.png)](https://github.com/rendercv/rendercv/blob/main/examples/John_Doe_ModerncvTheme_CV.pdf) | [![Engineeringclassic Theme Example of RenderCV](https://raw.githubusercontent.com/rendercv/rendercv/main/docs/assets/images/examples/engineeringclassic.png)](https://github.com/rendercv/rendercv/blob/main/examples/John_Doe_EngineeringclassicTheme_CV.pdf) | [![Harvard Theme Example of RenderCV](https://raw.githubusercontent.com/rendercv/rendercv/main/docs/assets/images/examples/harvard.png)](https://github.com/rendercv/rendercv/blob/main/examples/John_Doe_HarvardTheme_CV.pdf) |
-| [![Ink Theme Example of RenderCV](https://raw.githubusercontent.com/rendercv/rendercv/main/docs/assets/images/examples/ink.png)](https://github.com/rendercv/rendercv/blob/main/examples/John_Doe_InkTheme_CV.pdf) | [![Opal Theme Example of RenderCV](https://raw.githubusercontent.com/rendercv/rendercv/main/docs/assets/images/examples/opal.png)](https://github.com/rendercv/rendercv/blob/main/examples/John_Doe_OpalTheme_CV.pdf) | [![Ember Theme Example of RenderCV](https://raw.githubusercontent.com/rendercv/rendercv/main/docs/assets/images/examples/ember.png)](https://github.com/rendercv/rendercv/blob/main/examples/John_Doe_EmberTheme_CV.pdf) |
+| [![Moderncv Theme Example of RenderCV](https://raw.githubusercontent.com/cvforge/cvforge/main/docs/assets/images/examples/moderncv.png)](https://github.com/rendercv/cvforge/blob/main/examples/John_Doe_ModerncvTheme_CV.pdf) | [![Engineeringclassic Theme Example of RenderCV](https://raw.githubusercontent.com/cvforge/cvforge/main/docs/assets/images/examples/engineeringclassic.png)](https://github.com/rendercv/cvforge/blob/main/examples/John_Doe_EngineeringclassicTheme_CV.pdf) | [![Harvard Theme Example of RenderCV](https://raw.githubusercontent.com/cvforge/cvforge/main/docs/assets/images/examples/harvard.png)](https://github.com/rendercv/cvforge/blob/main/examples/John_Doe_HarvardTheme_CV.pdf) |
+| [![Ink Theme Example of RenderCV](https://raw.githubusercontent.com/cvforge/cvforge/main/docs/assets/images/examples/ink.png)](https://github.com/rendercv/cvforge/blob/main/examples/John_Doe_InkTheme_CV.pdf) | [![Opal Theme Example of RenderCV](https://raw.githubusercontent.com/cvforge/cvforge/main/docs/assets/images/examples/opal.png)](https://github.com/rendercv/cvforge/blob/main/examples/John_Doe_OpalTheme_CV.pdf) | [![Ember Theme Example of RenderCV](https://raw.githubusercontent.com/cvforge/cvforge/main/docs/assets/images/examples/ember.png)](https://github.com/rendercv/cvforge/blob/main/examples/John_Doe_EmberTheme_CV.pdf) |
 
 
 ## JSON Schema
 
 RenderCV's JSON Schema lets you fill out the YAML interactively, with autocompletion and inline documentation.
 
-![JSON Schema of RenderCV](https://raw.githubusercontent.com/rendercv/rendercv/main/docs/assets/images/json_schema.gif)
+![JSON Schema of RenderCV](https://raw.githubusercontent.com/cvforge/cvforge/main/docs/assets/images/json_schema.gif)
 
 
 ## Extensive Design Options
@@ -104,16 +104,16 @@ design:
   # ...and much more
 ```
 
-![Design Options of RenderCV](https://raw.githubusercontent.com/rendercv/rendercv/main/docs/assets/images/design_options.gif)
+![Design Options of RenderCV](https://raw.githubusercontent.com/cvforge/cvforge/main/docs/assets/images/design_options.gif)
 
 > [!TIP]
-> Want to set up a live preview environment like the one shown above? See [how to set up VS Code for RenderCV](https://docs.rendercv.com/user_guide/how_to/set_up_vs_code_for_rendercv).
+> Want to set up a live preview environment like the one shown above? See [how to set up VS Code for RenderCV](https://docs.rendercv.com/user_guide/how_to/set_up_vs_code_for_cvforge).
 
 ## Strict Validation
 
 No surprises. If something's wrong, you'll know exactly what and where. If it's valid, you get a perfect PDF.
 
-![Strict Validation Feature of RenderCV](https://raw.githubusercontent.com/rendercv/rendercv/main/docs/assets/images/validation.gif)
+![Strict Validation Feature of RenderCV](https://raw.githubusercontent.com/cvforge/cvforge/main/docs/assets/images/validation.gif)
 
 
 ## Any Language
@@ -141,7 +141,7 @@ locale:
 Let AI coding agents create and edit your CV. Install the RenderCV skill:
 
 ```bash
-npx skills add rendercv/rendercv-skill
+npx skills add cvforge/cvforge-skill
 ```
 
 Works with Claude Code, Claude Desktop, Cursor, Codex, Copilot, Windsurf, Gemini CLI, and [20+ other agents](https://docs.rendercv.com/user_guide/how_to/use_the_ai_agent_skill).
@@ -151,19 +151,19 @@ Works with Claude Code, Claude Desktop, Cursor, Codex, Copilot, Windsurf, Gemini
 Install RenderCV (Requires Python 3.12+):
 
 ```
-pip install "rendercv[full]"
+pip install "cvforge[full]"
 ```
 
 Create a new CV yaml file:
 
 ```
-rendercv new "John Doe"
+cvforge new "John Doe"
 ```
 
 Edit the YAML, then render:
 
 ```
-rendercv render "John_Doe_CV.yaml"
+cvforge render "John_Doe_CV.yaml"
 ```
 
 For more details, see the [user guide](https://docs.rendercv.com/user_guide/).

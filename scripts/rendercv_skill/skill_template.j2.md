@@ -1,5 +1,5 @@
 ---
-name: rendercv
+name: cvforge
 description: >-
   Create professional CVs and resumes with perfect typography using RenderCV
   (v{{ version }}). Users write content in YAML, and RenderCV produces
@@ -20,23 +20,23 @@ These are starting points — every aspect of the design and locale can be fully
 
 ```bash
 # Install RenderCV
-uv tool install "rendercv[full]"
+uv tool install "cvforge[full]"
 
 # Create a starter YAML file (you can specify theme and locale)
-rendercv new "John Doe"
-rendercv new "John Doe" --theme moderncv --locale german
+cvforge new "John Doe"
+cvforge new "John Doe" --theme moderncv --locale german
 
 # Render to PDF (also generates Typst, Markdown, HTML, PNG by default)
-rendercv render John_Doe_CV.yaml
+cvforge render John_Doe_CV.yaml
 
 # Watch mode: auto-re-render whenever the YAML file changes
-rendercv render John_Doe_CV.yaml --watch
+cvforge render John_Doe_CV.yaml --watch
 
 # Render only PNG (useful for previewing or checking page count)
-rendercv render John_Doe_CV.yaml --dont-generate-pdf --dont-generate-html --dont-generate-markdown
+cvforge render John_Doe_CV.yaml --dont-generate-pdf --dont-generate-html --dont-generate-markdown
 
 # Override fields from the CLI without editing the YAML
-rendercv render cv.yaml --cv.name "Jane Doe" --design.theme "moderncv"
+cvforge render cv.yaml --cv.name "Jane Doe" --design.theme "moderncv"
 ```
 
 ## YAML Structure
@@ -54,10 +54,10 @@ settings:   # Behavior: output paths, bold keywords, current date
 
 ```bash
 # Single self-contained file (all sections in one file)
-rendercv render John_Doe_CV.yaml
+cvforge render John_Doe_CV.yaml
 
 # Separate files: CV content + design + locale loaded independently
-rendercv render cv.yaml --design design.yaml --locale-catalog locale.yaml --settings settings.yaml
+cvforge render cv.yaml --design design.yaml --locale-catalog locale.yaml --settings settings.yaml
 ```
 
 When using separate files, each file contains only its section (e.g., `design.yaml` has `design:` as the top-level key). CLI-loaded files override values in the main YAML file.
@@ -71,7 +71,7 @@ The YAML input is validated against these Pydantic models.
 ### Top-Level Model
 
 ```python
-{{ model_sources.rendercv_model }}
+{{ model_sources.cvforge_model }}
 ```
 
 ### CV Content (`cv`)
@@ -223,7 +223,7 @@ highlights:
 
 ## CLI Reference
 
-### `rendercv new "Full Name"`
+### `cvforge new "Full Name"`
 
 Generate a starter YAML file.
 
@@ -233,7 +233,7 @@ Generate a starter YAML file.
 | `--locale LOCALE` | | Locale to use (default: `english`) |
 | `--create-typst-templates` | | Also create editable Typst template files for full design control |
 
-### `rendercv render <input.yaml>`
+### `cvforge render <input.yaml>`
 
 Generate PDF, Typst, Markdown, HTML, and PNG from a YAML file.
 
@@ -251,11 +251,11 @@ Per-format controls: `--{format}-path PATH` sets custom output path, `--dont-gen
 **Override any YAML field from the CLI** using dot notation (overrides without editing the file):
 
 ```bash
-rendercv render CV.yaml --cv.name "Jane Doe" --design.theme "moderncv"
-rendercv render CV.yaml --cv.sections.education.0.institution "MIT"
+cvforge render CV.yaml --cv.name "Jane Doe" --design.theme "moderncv"
+cvforge render CV.yaml --cv.sections.education.0.institution "MIT"
 ```
 
-### `rendercv create-theme "theme-name"`
+### `cvforge create-theme "theme-name"`
 
 Scaffold a custom theme directory with editable Typst templates for complete design control.
 
@@ -264,7 +264,7 @@ Scaffold a custom theme directory with editable Typst templates for complete des
 For YAML editor autocompletion and validation:
 
 ```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/rendercv/rendercv/refs/tags/v{{ version }}/schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/cvforge/cvforge/refs/tags/v{{ version }}/schema.json
 ```
 
 ## Complete Example

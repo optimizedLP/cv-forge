@@ -33,5 +33,5 @@ jobs:
       - name: Upload executable as an artifact
         uses: actions/upload-artifact@v7
         with:
-          name: rendercv-${{ matrix.os }}
+          name: cvforge-${{ matrix.os }}
           path: bin/*

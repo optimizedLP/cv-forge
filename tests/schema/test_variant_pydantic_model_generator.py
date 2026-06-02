@@ -3,8 +3,8 @@ from typing import Any, get_args
 import pydantic
 import pytest
 
-from rendercv.exception import RenderCVInternalError
-from rendercv.schema.variant_pydantic_model_generator import (
+from cvforge.exception import RenderCVInternalError
+from cvforge.schema.variant_pydantic_model_generator import (
     create_discriminator_field_spec,
     create_nested_field_spec,
     create_nested_model_variant_model,

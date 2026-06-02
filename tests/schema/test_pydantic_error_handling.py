@@ -4,15 +4,15 @@ from unittest.mock import MagicMock
 import pydantic
 import pytest
 
-from rendercv.exception import RenderCVInternalError
-from rendercv.schema.models.custom_error_types import CustomPydanticErrorTypes
-from rendercv.schema.models.rendercv_model import RenderCVModel
-from rendercv.schema.models.validation_context import ValidationContext
-from rendercv.schema.pydantic_error_handling import (
+from cvforge.exception import RenderCVInternalError
+from cvforge.schema.models.custom_error_types import CustomPydanticErrorTypes
+from cvforge.schema.models.cvforge_model import RenderCVModel
+from cvforge.schema.models.validation_context import ValidationContext
+from cvforge.schema.pydantic_error_handling import (
     get_inner_yaml_object_from_its_key,
     parse_validation_errors,
 )
-from rendercv.schema.yaml_reader import read_yaml
+from cvforge.schema.yaml_reader import read_yaml
 
 
 class TestParseValidationErrors:

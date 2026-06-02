@@ -6,17 +6,17 @@ import pytest
 from hypothesis import assume, given, settings
 from hypothesis import strategies as st
 
-from rendercv.renderer.templater.date import (
+from cvforge.renderer.templater.date import (
     build_date_placeholders,
     compute_time_span_string,
     date_object_to_string,
     format_date_range,
     format_single_date,
 )
-from rendercv.schema.models.cv.entries.bases.entry_with_complex_fields import (
+from cvforge.schema.models.cv.entries.bases.entry_with_complex_fields import (
     get_date_object,
 )
-from rendercv.schema.models.locale.english_locale import EnglishLocale
+from cvforge.schema.models.locale.english_locale import EnglishLocale
 
 
 @st.composite

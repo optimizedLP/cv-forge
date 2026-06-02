@@ -5,15 +5,15 @@ import pytest
 from hypothesis import given, settings
 from hypothesis import strategies as st
 
-from rendercv.renderer.path_resolver import (
+from cvforge.renderer.path_resolver import (
     build_name_variants,
     resolve_output_folder_placeholder,
-    resolve_rendercv_file_path,
+    resolve_cvforge_file_path,
 )
-from rendercv.schema.models.cv.cv import Cv
-from rendercv.schema.models.rendercv_model import RenderCVModel
-from rendercv.schema.models.settings.render_command import RenderCommand
-from rendercv.schema.models.settings.settings import Settings
+from cvforge.schema.models.cv.cv import Cv
+from cvforge.schema.models.cvforge_model import RenderCVModel
+from cvforge.schema.models.settings.render_command import RenderCommand
+from cvforge.schema.models.settings.settings import Settings
 
 
 class TestResolveRendercvFilePath:
@@ -86,7 +86,7 @@ class TestResolveRendercvFilePath:
             ("my_cv.pdf", "John Doe", None, "my_cv.pdf"),
         ],
     )
-    def test_resolve_rendercv_file_path(
+    def test_resolve_cvforge_file_path(
         self,
         tmp_path: pathlib.Path,
         file_path_template: str,
@@ -102,7 +102,7 @@ class TestResolveRendercvFilePath:
             model = RenderCVModel(cv=Cv(name=cv_name))
 
         file_path = tmp_path / file_path_template
-        result = resolve_rendercv_file_path(model, file_path)
+        result = resolve_cvforge_file_path(model, file_path)
 
         assert result.name == expected_filename
         assert result.parent == tmp_path
@@ -112,13 +112,13 @@ class TestResolveRendercvFilePath:
         nested_dir = tmp_path / "output" / "cv" / "final"
         file_path = nested_dir / "NAME_IN_SNAKE_CASE_CV.pdf"
 
-        result = resolve_rendercv_file_path(model, file_path)
+        result = resolve_cvforge_file_path(model, file_path)
 
         assert result.parent.exists()
         assert result == nested_dir / "John_Doe_CV.pdf"
 
     def test_output_folder_placeholder_resolved(self, tmp_path: pathlib.Path):
-        output_folder = tmp_path / "rendercv_output"
+        output_folder = tmp_path / "cvforge_output"
         model = RenderCVModel(
             cv=Cv(name="John Doe"),
             settings=Settings(
@@ -127,7 +127,7 @@ class TestResolveRendercvFilePath:
         )
         file_path = tmp_path / "OUTPUT_FOLDER" / "NAME_IN_SNAKE_CASE_CV.pdf"
 
-        result = resolve_rendercv_file_path(model, file_path)
+        result = resolve_cvforge_file_path(model, file_path)
 
         assert result == output_folder / "John_Doe_CV.pdf"
         assert result.parent.exists()
@@ -142,7 +142,7 @@ class TestResolveRendercvFilePath:
         )
         file_path = tmp_path / "OUTPUT_FOLDER" / "NAME_IN_SNAKE_CASE_CV.pdf"
 
-        result = resolve_rendercv_file_path(model, file_path)
+        result = resolve_cvforge_file_path(model, file_path)
 
         assert result == output_folder / "John_Doe_CV.pdf"
 
@@ -156,7 +156,7 @@ class TestResolveRendercvFilePath:
         )
         file_path = tmp_path / "custom_dir" / "NAME_IN_SNAKE_CASE_CV.pdf"
 
-        result = resolve_rendercv_file_path(model, file_path)
+        result = resolve_cvforge_file_path(model, file_path)
 
         assert result == tmp_path / "custom_dir" / "John_Doe_CV.pdf"
 
@@ -170,7 +170,7 @@ class TestResolveRendercvFilePath:
         )
         file_path = tmp_path / "OUTPUT_FOLDER" / "typst" / "NAME_IN_SNAKE_CASE_CV.typ"
 
-        result = resolve_rendercv_file_path(model, file_path)
+        result = resolve_cvforge_file_path(model, file_path)
 
         assert result == output_folder / "typst" / "John_Doe_CV.typ"
 

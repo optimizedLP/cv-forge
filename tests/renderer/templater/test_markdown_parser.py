@@ -4,7 +4,7 @@ import pytest
 from hypothesis import assume, given, settings
 from hypothesis import strategies as st
 
-from rendercv.renderer.templater.markdown_parser import (
+from cvforge.renderer.templater.markdown_parser import (
     escape_typst_characters,
     markdown_to_html,
     markdown_to_typst,

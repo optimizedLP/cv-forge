@@ -1,9 +1,9 @@
-- description: "Install command uses rendercv[full]"
+- description: "Install command uses cvforge[full]"
   vars:
     query: "How do I install RenderCV?"
   assert:
     - type: contains
-      value: "rendercv[full]"
+      value: "cvforge[full]"
 
 - description: "Separate design file workflow"
   vars:
@@ -16,7 +16,7 @@
         The response explains:
         - The main YAML file contains cv content (and optionally locale/settings), but no design
         - A separate YAML file contains the design configuration under the design: key
-        - Use 'rendercv render cv.yaml --design design.yaml' to combine them
+        - Use 'cvforge render cv.yaml --design design.yaml' to combine them
 
 - description: "Watch mode for live editing"
   vars:

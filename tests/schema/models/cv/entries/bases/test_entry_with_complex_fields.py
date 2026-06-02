@@ -6,12 +6,12 @@ import pytest
 from hypothesis import given, settings
 from hypothesis import strategies as st
 
-from rendercv.exception import RenderCVInternalError
-from rendercv.schema.models.cv.entries.bases.entry_with_complex_fields import (
+from cvforge.exception import RenderCVInternalError
+from cvforge.schema.models.cv.entries.bases.entry_with_complex_fields import (
     BaseEntryWithComplexFields,
     get_date_object,
 )
-from rendercv.schema.models.cv.entries.bases.entry_with_date import (
+from cvforge.schema.models.cv.entries.bases.entry_with_date import (
     validate_arbitrary_date,
 )
 

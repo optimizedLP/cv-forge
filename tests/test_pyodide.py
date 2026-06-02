@@ -69,7 +69,7 @@ def js_runtime(tmp_path: pathlib.Path) -> str:
     return bun
 
 
-def test_rendercv_installs_in_pyodide(tmp_path: pathlib.Path, js_runtime: str) -> None:
+def test_cvforge_installs_in_pyodide(tmp_path: pathlib.Path, js_runtime: str) -> None:
     # Build the wheel into tmp
     subprocess.run(
         ["uv", "build", "--wheel", "--out-dir", str(tmp_path / "dist")],
@@ -78,7 +78,7 @@ def test_rendercv_installs_in_pyodide(tmp_path: pathlib.Path, js_runtime: str) -
         capture_output=True,
         timeout=60,
     )
-    wheel = next((tmp_path / "dist").glob("rendercv-*-py3-none-any.whl"))
+    wheel = next((tmp_path / "dist").glob("cvforge-*-py3-none-any.whl"))
 
     # Use forward slashes so the path works on Windows too
     wheel_posix_path = wheel.resolve().as_posix()
@@ -105,11 +105,11 @@ import micropip
 # pydantic[email] extras notation correctly
 await micropip.install("email-validator")
 
-# Install rendercv from Pyodide's virtual filesystem
+# Install cvforge from Pyodide's virtual filesystem
 await micropip.install("emfs:/tmp/{wheel.name}")
 
 # Verify import works
-import rendercv
+import cvforge
     `);
 }}
 

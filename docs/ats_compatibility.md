@@ -109,7 +109,7 @@ RenderCV uses [Typst](https://typst.app/) as its PDF engine. Typst is a modern t
 
 ## Reproduce
 
-All scripts and test data are in [`scripts/ats_proof/`](https://github.com/rendercv/rendercv/tree/main/scripts/ats_proof).
+All scripts and test data are in [`scripts/ats_proof/`](https://github.com/rendercv/cvforge/tree/main/scripts/ats_proof).
 
 ```bash
 cd scripts/ats_proof

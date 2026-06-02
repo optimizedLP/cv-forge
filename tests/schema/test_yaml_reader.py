@@ -3,8 +3,8 @@ import pathlib
 import pytest
 from ruamel.yaml.comments import CommentedMap
 
-from rendercv.exception import RenderCVInternalError, RenderCVUserError
-from rendercv.schema.yaml_reader import read_yaml
+from cvforge.exception import RenderCVInternalError, RenderCVUserError
+from cvforge.schema.yaml_reader import read_yaml
 
 
 class TestReadYaml:

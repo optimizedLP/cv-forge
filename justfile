@@ -28,7 +28,7 @@ update-testdata:
   uv run --frozen --all-extras pytest --update-testdata
 
 test-coverage:
-  uv run --frozen --all-extras pytest --cov=src/rendercv --cov-report=term --cov-report=html --cov-report=markdown
+  uv run --frozen --all-extras pytest --cov=src/cvforge --cov-report=term --cov-report=html --cov-report=markdown
 
 # Docs:
 build-docs:
@@ -45,7 +45,7 @@ update-examples:
   uv run --frozen --all-extras scripts/update_examples.py
 
 update-skill:
-  uv run --frozen --all-extras scripts/rendercv_skill/generate.py
+  uv run --frozen --all-extras scripts/cvforge_skill/generate.py
 
 update-entry-figures:
   uv run --frozen --all-extras --group update-entry-figures scripts/update_entry_figures.py

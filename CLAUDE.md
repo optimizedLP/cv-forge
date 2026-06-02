@@ -13,7 +13,7 @@ YAML → (ruamel.yaml) → Python dict → (pydantic) → RenderCVModel → (jin
 ```
 
 1. **Parse**: `ruamel.yaml` reads YAML into Python dicts (`schema/yaml_reader.py`)
-2. **Validate**: `pydantic` validates into `RenderCVModel` (`schema/models/rendercv_model.py`)
+2. **Validate**: `pydantic` validates into `RenderCVModel` (`schema/models/cvforge_model.py`)
 3. **Template**: `jinja2` renders Typst templates with model data (`renderer/templater/templater.py`)
 4. **Compile**: `typst` Python bindings compile `.typ` to PDF (`renderer/pdf_png.py`)
 
@@ -45,17 +45,17 @@ uv run --frozen --all-extras pytest -k "test_markdown_to_typst" -x
 ## Source Layout
 
 ```
-src/rendercv/
+src/cvforge/
   cli/                          # Typer CLI (render, new, create-theme commands)
-    render_command/run_rendercv.py  # Main render orchestration
+    render_command/run_cvforge.py  # Main render orchestration
   schema/                       # Data models and validation
     models/
       cv/                       # CV content models (entries, sections)
       design/                   # Theme models (classic, moderncv, etc.)
       locale/                   # Localization model
       settings/                 # Rendering settings
-      rendercv_model.py         # Top-level RenderCVModel
-    rendercv_model_builder.py   # Builds RenderCVModel from YAML with overrides
+      cvforge_model.py         # Top-level RenderCVModel
+    cvforge_model_builder.py   # Builds RenderCVModel from YAML with overrides
   renderer/                     # Output generation
     templater/
       templates/typst/          # Jinja2 templates for Typst output (per theme)
@@ -69,12 +69,12 @@ src/rendercv/
 
 ## Testing
 
-Tests mirror the source structure: `src/rendercv/renderer/templater/date.py` → `tests/renderer/templater/test_date.py`.
+Tests mirror the source structure: `src/cvforge/renderer/templater/date.py` → `tests/renderer/templater/test_date.py`.
 
 **Reference file testing**: Renderer tests compare generated output against reference files in test data directories. Use `just update-testdata` to regenerate references when output intentionally changes.
 
 **Key fixtures** (in `tests/renderer/conftest.py`):
-- `minimal_rendercv_model` / `full_rendercv_model` — pre-built models for testing
+- `minimal_cvforge_model` / `full_cvforge_model` — pre-built models for testing
 - `compare_file_with_reference` — compares generated output against reference files
 
 ## Code Conventions

@@ -20,14 +20,14 @@ When you look at RenderCV's repository, you see:
 
 **Project management is everything except `src/`.** It's all the infrastructure that lets us:
 
-- Share RenderCV with users (`pip install rendercv`)
+- Share RenderCV with users (`pip install cvforge`)
 - Manage dependencies consistently
 - Automate testing, building, and releases
 - Ensure reproducibility across machines and time
 
 ## Why Can't We Just Write Python Code?
 
-RenderCV is a Python project. The actual source code lives in `src/rendercv/`. Why do we need all these other files - `pyproject.toml`, `uv.lock`, `justfile`, `.github/workflows/`, etc.?
+RenderCV is a Python project. The actual source code lives in `src/cvforge/`. Why do we need all these other files - `pyproject.toml`, `uv.lock`, `justfile`, `.github/workflows/`, etc.?
 
 **Because code alone doesn't solve two critical problems: distribution and development environment.**
 
@@ -35,7 +35,7 @@ RenderCV is a Python project. The actual source code lives in `src/rendercv/`. W
 
 **How do users get your code?**
 
-You could tell them "download these files, install dependencies with `pip install -r requirements.txt`, and run them with `python main.py`". But users want `pip install rendercv` and have it work instantly with `rendercv` command.
+You could tell them "download these files, install dependencies with `pip install -r requirements.txt`, and run them with `python main.py`". But users want `pip install cvforge` and have it work instantly with `cvforge` command.
 
 **This requires:** Packaging your code and uploading to [PyPI](https://pypi.org) (Python Package Index).
 
@@ -55,7 +55,7 @@ All those files you see in the repository (`pyproject.toml`, `uv.lock`, `justfil
 
 **For users:**
 ```bash
-pip install rendercv
+pip install cvforge
 ```
 
 Works instantly. Every time. Anywhere. All dependencies installed automatically.
@@ -71,7 +71,7 @@ The rest of this guide explains what each file does.
 
 ## Files and Folders in the Root
 
-### [`pyproject.toml`](https://github.com/rendercv/rendercv/blob/main/pyproject.toml)
+### [`pyproject.toml`](https://github.com/rendercv/cvforge/blob/main/pyproject.toml)
 
 The project definition file. This is the [standard way to configure a Python project](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/).
 
@@ -79,13 +79,13 @@ This file defines:
 
 - Project metadata (name, version, description)
 - Dependencies (what packages RenderCV needs)
-- Entry points (makes `rendercv` a command)
+- Entry points (makes `cvforge` a command)
 - Build configuration (how to package RenderCV)
 - Tool settings (`ruff`, `ty`, `pytest`, etc.)
 
 Open the file to see the full configuration with detailed comments.
 
-### [`justfile`](https://github.com/rendercv/rendercv/blob/main/justfile)
+### [`justfile`](https://github.com/rendercv/cvforge/blob/main/justfile)
 
 [just](https://github.com/casey/just) is a command runner, a tool that lets you define terminal commands in a file and run them easily.
 
@@ -103,25 +103,25 @@ just serve-docs     # Builds and serves documentation locally
 just update-schema  # Regenerates schema.json
 ```
 
-### [`scripts/`](https://github.com/rendercv/rendercv/tree/main/scripts)
+### [`scripts/`](https://github.com/rendercv/cvforge/tree/main/scripts)
 
 Python scripts that automate some repetitive tasks that are not part of RenderCV's functionality.
 
 **Why do we need it?** Some tasks need to be done repeatedly but are too complex for simple shell commands:
 
 - `update_schema.py`: Generate `schema.json` (see [JSON Schema](json_schema.md) for more details) from pydantic models
-- `update_examples.py`: Regenerate all example YAML files and PDFs in [`examples/`](https://github.com/rendercv/rendercv/tree/main/examples) folder
+- `update_examples.py`: Regenerate all example YAML files and PDFs in [`examples/`](https://github.com/rendercv/cvforge/tree/main/examples) folder
 - `create_executable.py`: Build standalone executable of RenderCV
 
 These scripts are called by `just` commands (`just update-schema`, `just update-examples`, etc.).
 
-### [`.pre-commit-config.yaml`](https://github.com/rendercv/rendercv/blob/main/.pre-commit-config.yaml)
+### [`.pre-commit-config.yaml`](https://github.com/rendercv/cvforge/blob/main/.pre-commit-config.yaml)
 
 Configuration file for [`pre-commit`](https://pre-commit.com/), a tool that runs code quality checks.
 
 **Why do we need it?** Pre-commit's value is **fast CI/CD**. [pre-commit.ci](https://pre-commit.ci/) (free for open-source projects) automatically checks if the source code has any `ruff` or `ty` errors on every push and pull request. Forgot to format your code? The workflow fails, making it immediately obvious.
 
-### [`uv.lock`](https://github.com/rendercv/rendercv/blob/main/uv.lock)
+### [`uv.lock`](https://github.com/rendercv/cvforge/blob/main/uv.lock)
 
 A dependency lock file. This is a record of the exact version of every package RenderCV uses (including dependencies of dependencies of dependencies...).
 

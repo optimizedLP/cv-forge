@@ -96,7 +96,7 @@ data["cv"]["sections"]["education"][0]["institution"]  # "MIT"
 
 That's it. YAML text becomes a Python dictionary we can work with.
 
-`ruamel.yaml` is being called in [`src/rendercv/schema/yaml_reader.py`](https://github.com/rendercv/rendercv/blob/main/src/rendercv/schema/yaml_reader.py).
+`ruamel.yaml` is being called in [`src/cvforge/schema/yaml_reader.py`](https://github.com/rendercv/cvforge/blob/main/src/cvforge/schema/yaml_reader.py).
 
 ### [`pydantic`](https://github.com/pydantic/pydantic): Python Dictionary Validator
 
@@ -181,7 +181,7 @@ class RenderCVModel(BaseModel):
 
 Each field is another `pydantic` model. `Cv` contains more `pydantic` models like `EducationEntry`, `ExperienceEntry`, etc. It's nested validation: when you validate `RenderCVModel`, `pydantic` automatically validates every nested model too. One `model_validate()` call checks the entire structure.
 
-See [`src/rendercv/schema/models/rendercv_model.py`](https://github.com/rendercv/rendercv/blob/main/src/rendercv/schema/models/rendercv_model.py) for the top-level model.
+See [`src/cvforge/schema/models/cvforge_model.py`](https://github.com/rendercv/cvforge/blob/main/src/cvforge/schema/models/cvforge_model.py) for the top-level model.
 
 ## Step 2: Generating the Typst File
 
@@ -249,9 +249,9 @@ San Francisco, CA
 
 Clean separation: templates define layout, Python code provides data. Users can override templates to customize their CV without touching Python code.
 
-Typst templates live in [`src/rendercv/renderer/templater/templates/typst/`](https://github.com/rendercv/rendercv/blob/main/src/rendercv/renderer/templater/templates/typst/).
+Typst templates live in [`src/cvforge/renderer/templater/templates/typst/`](https://github.com/rendercv/cvforge/blob/main/src/cvforge/renderer/templater/templates/typst/).
 
-`jinja2` is being called in [`src/rendercv/renderer/templater/templater.py`](https://github.com/rendercv/rendercv/blob/main/src/rendercv/renderer/templater/templater.py).
+`jinja2` is being called in [`src/cvforge/renderer/templater/templater.py`](https://github.com/rendercv/cvforge/blob/main/src/cvforge/renderer/templater/templater.py).
 
 ### [`markdown`](https://github.com/Python-Markdown/markdown): Markdown to Typst
 
@@ -280,7 +280,7 @@ match element.tag:
 
 Result: `#strong[Published] #link("https://example.com")[3 papers]`
 
-See [`src/rendercv/renderer/templater/markdown_parser.py`](https://github.com/rendercv/rendercv/blob/main/src/rendercv/renderer/templater/markdown_parser.py). The `markdown_to_typst()` function does this conversion.
+See [`src/cvforge/renderer/templater/markdown_parser.py`](https://github.com/rendercv/cvforge/blob/main/src/cvforge/renderer/templater/markdown_parser.py). The `markdown_to_typst()` function does this conversion.
 
 ## Step 3: Compiling to PDF
 
@@ -295,11 +295,11 @@ compile("cv.typ", output="cv.pdf")
 
 Done. Typst file has been compiled to PDF.
 
-`typst` is being called in [`src/rendercv/renderer/pdf_png.py`](https://github.com/rendercv/rendercv/blob/main/src/rendercv/renderer/pdf_png.py).
+`typst` is being called in [`src/cvforge/renderer/pdf_png.py`](https://github.com/rendercv/cvforge/blob/main/src/cvforge/renderer/pdf_png.py).
 
 ## The Complete Pipeline
 
-When you run `rendercv render cv.yaml`:
+When you run `cvforge render cv.yaml`:
 
 1. **Parse** - `ruamel.yaml` reads YAML → Python dict
 2. **Validate** - `pydantic` validates dict → `RenderCVModel` object
@@ -310,6 +310,6 @@ Everything else (Markdown support, watch mode, PNG output, HTML export) builds o
 
 ## Learn More
 
-- [`src/rendercv/cli/render_command/run_rendercv.py`](https://github.com/rendercv/rendercv/blob/main/src/rendercv/cli/render_command/run_rendercv.py): The complete flow
-- [`src/rendercv/schema/models/rendercv_model.py`](https://github.com/rendercv/rendercv/blob/main/src/rendercv/schema/models/rendercv_model.py): The top-level Pydantic model
-- [`src/rendercv/renderer/templater/templater.py`](https://github.com/rendercv/rendercv/blob/main/src/rendercv/renderer/templater/templater.py): Template rendering
+- [`src/cvforge/cli/render_command/run_cvforge.py`](https://github.com/rendercv/cvforge/blob/main/src/cvforge/cli/render_command/run_cvforge.py): The complete flow
+- [`src/cvforge/schema/models/cvforge_model.py`](https://github.com/rendercv/cvforge/blob/main/src/cvforge/schema/models/cvforge_model.py): The top-level Pydantic model
+- [`src/cvforge/renderer/templater/templater.py`](https://github.com/rendercv/cvforge/blob/main/src/cvforge/renderer/templater/templater.py): Template rendering

@@ -2,8 +2,8 @@ import pytest
 from hypothesis import assume, given, settings
 from hypothesis import strategies as st
 
-from rendercv.exception import RenderCVInternalError
-from rendercv.renderer.templater.string_processor import (
+from cvforge.exception import RenderCVInternalError
+from cvforge.renderer.templater.string_processor import (
     build_keyword_matcher_pattern,
     clean_url,
     make_keywords_bold,

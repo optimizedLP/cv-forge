@@ -13,8 +13,8 @@ import sys
 
 import pytest
 
-from rendercv.schema.models.design.built_in_design import available_themes
-from rendercv.schema.sample_generator import create_sample_yaml_input_file
+from cvforge.schema.models.design.built_in_design import available_themes
+from cvforge.schema.sample_generator import create_sample_yaml_input_file
 
 repository_root = pathlib.Path(__file__).parent.parent
 
@@ -72,9 +72,9 @@ def test_skill_md_is_up_to_date() -> None:
         repository_root
         / ".claude"
         / "skills"
-        / "rendercv-skill"
+        / "cvforge-skill"
         / "skills"
-        / "rendercv"
+        / "cvforge"
         / "SKILL.md"
     )
     before = skill_path.read_text(encoding="utf-8")
@@ -92,7 +92,7 @@ def test_skill_md_is_up_to_date() -> None:
     llms_txt_path.write_text(llms_before, encoding="utf-8")
 
     assert before == skill_after, (
-        "skills/rendercv/SKILL.md is stale. Run `just update-skill` to regenerate."
+        "skills/cvforge/SKILL.md is stale. Run `just update-skill` to regenerate."
     )
     assert llms_before == llms_after, (
         "docs/llms.txt is stale. Run `just update-skill` to regenerate."

@@ -3,7 +3,7 @@ import os
 import pytest
 import typer
 
-from rendercv.cli.create_theme_command.create_theme_command import (
+from cvforge.cli.create_theme_command.create_theme_command import (
     cli_command_create_theme,
 )
 
