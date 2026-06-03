@@ -45,43 +45,43 @@ class RenderCommand(BaseModelWithoutExtraKeys):
         description="Path to a YAML file containing the `locale` field.",
     )
     typst_path: PlannedPathRelativeToInput = pydantic.Field(
-        default=pathlib.Path("OUTPUT_FOLDER/NAME_IN_SNAKE_CASE_CV.typ"),
+        default=pathlib.Path("OUTPUT_FOLDER/NAME_IN_TITLE_SNAKE_CASE_CV.typ"),
         description=(
             "Output path for the Typst file, relative to the input YAML file. The"
-            " default value is `OUTPUT_FOLDER/NAME_IN_SNAKE_CASE_CV.typ`.\n\n"
+            " default value is `OUTPUT_FOLDER/NAME_IN_TITLE_SNAKE_CASE_CV.typ`.\n\n"
             f"{file_path_placeholders_description}"
         ),
     )
     pdf_path: PlannedPathRelativeToInput = pydantic.Field(
-        default=pathlib.Path("OUTPUT_FOLDER/NAME_IN_SNAKE_CASE_CV.pdf"),
+        default=pathlib.Path("OUTPUT_FOLDER/NAME_IN_TITLE_SNAKE_CASE_CV.pdf"),
         description=(
             "Output path for the PDF file, relative to the input YAML file. The default"
-            " value is `OUTPUT_FOLDER/NAME_IN_SNAKE_CASE_CV.pdf`.\n\n"
+            " value is `OUTPUT_FOLDER/NAME_IN_TITLE_SNAKE_CASE_CV.pdf`.\n\n"
             f"{file_path_placeholders_description}"
         ),
     )
     markdown_path: PlannedPathRelativeToInput = pydantic.Field(
-        default=pathlib.Path("OUTPUT_FOLDER/NAME_IN_SNAKE_CASE_CV.md"),
+        default=pathlib.Path("OUTPUT_FOLDER/NAME_IN_TITLE_SNAKE_CASE_CV.md"),
         title="Markdown Path",
         description=(
             "Output path for the Markdown file, relative to the input YAML file. The"
-            " default value is `OUTPUT_FOLDER/NAME_IN_SNAKE_CASE_CV.md`.\n\n"
+            " default value is `OUTPUT_FOLDER/NAME_IN_TITLE_SNAKE_CASE_CV.md`.\n\n"
             f"{file_path_placeholders_description}"
         ),
     )
     html_path: PlannedPathRelativeToInput = pydantic.Field(
-        default=pathlib.Path("OUTPUT_FOLDER/NAME_IN_SNAKE_CASE_CV.html"),
+        default=pathlib.Path("OUTPUT_FOLDER/NAME_IN_TITLE_SNAKE_CASE_CV.html"),
         description=(
             "Output path for the HTML file, relative to the input YAML file. The"
-            " default value is `OUTPUT_FOLDER/NAME_IN_SNAKE_CASE_CV.html`.\n\n"
+            " default value is `OUTPUT_FOLDER/NAME_IN_TITLE_SNAKE_CASE_CV.html`.\n\n"
             f"{file_path_placeholders_description}"
         ),
     )
     png_path: PlannedPathRelativeToInput = pydantic.Field(
-        default=pathlib.Path("OUTPUT_FOLDER/NAME_IN_SNAKE_CASE_CV.png"),
+        default=pathlib.Path("OUTPUT_FOLDER/NAME_IN_TITLE_SNAKE_CASE_CV.png"),
         description=(
             "Output path for PNG files, relative to the input YAML file. The default"
-            " value is `OUTPUT_FOLDER/NAME_IN_SNAKE_CASE_CV.png`.\n\n"
+            " value is `OUTPUT_FOLDER/NAME_IN_TITLE_SNAKE_CASE_CV.png`.\n\n"
             f"{file_path_placeholders_description}"
         ),
     )

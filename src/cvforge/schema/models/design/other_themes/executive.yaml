@@ -65,8 +65,7 @@ design:
   sections:
     space_between_regular_entries: 1.3em
     space_between_text_based_entries: 0.3em
-    show_time_spans_in:
-      - experience
+    show_time_spans_in: []
   entries:
     short_second_row: false
     side_space: 0.15cm

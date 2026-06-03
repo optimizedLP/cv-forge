@@ -9,7 +9,6 @@ __pycache__/
 # Distribution / packaging
 .Python
 build/
-venv/
 develop-eggs/
 dist/
 downloads/
@@ -183,6 +182,10 @@ PLAYGROUND.html
 # Include example files
 !/examples/*.pdf
 !/examples/*.yaml
+Academic_CV.yaml
+Harvard_CV.yaml
+Sb2nov_CV.yaml
+sleek_CV.yaml
 
 # Mac:
 .DS_Store

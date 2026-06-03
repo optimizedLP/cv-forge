@@ -78,7 +78,9 @@ def cli_command_new(
 
     print_welcome()
 
-    input_file_path = pathlib.Path(f"{full_name.replace(' ', '_')}_CV.yaml")
+    words = full_name.replace(' ', '_').split('_')
+    title_snake_name = '_'.join(w.capitalize() for w in words)
+    input_file_path = pathlib.Path(f"{title_snake_name}_CV.yaml")
     typst_templates_folder = pathlib.Path(theme)
     markdown_folder = pathlib.Path("markdown")
 

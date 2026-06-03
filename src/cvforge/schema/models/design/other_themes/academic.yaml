@@ -62,9 +62,7 @@ design:
   sections:
     space_between_regular_entries: 0.9em
     space_between_text_based_entries: 0.2em
-    show_time_spans_in:
-      - experience
-      - education
+    show_time_spans_in: []
   entries:
     short_second_row: false
     side_space: 0cm

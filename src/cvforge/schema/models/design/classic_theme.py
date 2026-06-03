@@ -494,10 +494,10 @@ class Sections(BaseModelWithoutExtraKeys):
         ),
     )
     show_time_spans_in: list[str] = pydantic.Field(
-        default=["experience"],
+        default=[],
         description=(
             "Section titles where time spans (e.g., '2 years 3 months') should be"
-            " displayed. The default value is `['experience']`."
+            " displayed. The default value is `[]` (no time spans shown)."
         ),
         examples=[["Experience"], ["Experience", "Education"]],
     )
