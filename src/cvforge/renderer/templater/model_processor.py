@@ -129,6 +129,11 @@ def process_model(
     if cvforge_model.cv.sections is None:
         return cvforge_model
 
+    # Normalize mixed experience entries: when a section contains both
+    # GroupedExperienceEntry and ExperienceEntry, convert all to grouped format.
+    from cvforge.schema.models.cv.section import normalize_mixed_experience_sections
+    normalize_mixed_experience_sections(cvforge_model.cv.cvforge_sections)
+
     for section in cvforge_model.cv.cvforge_sections:
         section.title = apply_string_processors(section.title, string_processors)
         show_time_span = (

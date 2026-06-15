@@ -72,10 +72,7 @@ cv:
         summary:
         highlights:
           - Developed reinforcement learning algorithms for multi-agent coordination
-          - Published research at top-tier venues with significant academic impact
-            - ICML 2022 main conference paper, cited 340+ times within two years
-            - NeurIPS 2022 workshop paper on emergent communication protocols
-            - Invited journal extension in JMLR (2023)
+          - Published research at top-tier venues with significant academic impact (ICML 2022, NeurIPS 2022, JMLR 2023)
         company: Google DeepMind
         position: Research Intern
       - date:

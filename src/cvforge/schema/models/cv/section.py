@@ -16,7 +16,7 @@ from .entries.numbered import NumberedEntry
 from .entries.one_line import OneLineEntry
 from .entries.publication import PublicationEntry
 from .entries.reversed_numbered import ReversedNumberedEntry
-from .entries.grouped_experience import GroupedExperienceEntry
+from .entries.grouped_experience import GroupedExperienceEntry, PositionEntry
 
 ########################################################################################
 # Below needs to be updated when new entry types are added.
@@ -183,18 +183,16 @@ def get_entry_type_name_and_section_model(
     return entry_type_name, section_model
 
 
-def _normalize_experience_entries(entries: list[Any]) -> list[Any]:
-    """Convert ExperienceEntry dicts to GroupedExperienceEntry format when mixed.
+def _normalize_raw_experience_entries(entries: list[Any]) -> list[Any]:
+    """Convert raw ExperienceEntry dicts to GroupedExperienceEntry format when mixed.
 
     Why:
         Users may want to mix regular ExperienceEntry and GroupedExperienceEntry
-        in the same section (e.g., some roles at a company grouped, others not).
-        When any entry uses the grouped format (has ``positions``), all entries
-        in the section are normalized to GroupedExperienceEntry so that validation
-        succeeds against a single entry type.
+        in the same section. During raw validation (YAML loading), this normalizes
+        mixed dicts so validation succeeds against a single entry type.
 
     Args:
-        entries: Raw entry dicts/strings/models for a section.
+        entries: Raw entry dicts/strings from YAML.
 
     Returns:
         Normalized entries, all convertible to GroupedExperienceEntry.
@@ -204,9 +202,6 @@ def _normalize_experience_entries(entries: list[Any]) -> list[Any]:
         if isinstance(entry, dict) and "positions" in entry:
             has_grouped = True
             break
-        if isinstance(entry, GroupedExperienceEntry):
-            has_grouped = True
-            break
 
     if not has_grouped:
         return entries
@@ -214,7 +209,6 @@ def _normalize_experience_entries(entries: list[Any]) -> list[Any]:
     normalized: list[Any] = []
     for entry in entries:
         if isinstance(entry, dict) and "positions" not in entry:
-            # Convert a regular ExperienceEntry dict to grouped format:
             position_entry: dict[str, Any] = {}
             company = entry.get("company", "")
             for key, value in entry.items():
@@ -224,6 +218,56 @@ def _normalize_experience_entries(entries: list[Any]) -> list[Any]:
         else:
             normalized.append(entry)
     return normalized
+
+
+def normalize_mixed_experience_sections(
+    sections: list[BaseRenderCVSection],
+) -> None:
+    """Convert validated ExperienceEntry instances to GroupedExperienceEntry in-place.
+
+    Why:
+        After validation, sections may contain validated ExperienceEntry instances
+        alongside GroupedExperienceEntry instances (detected via the section's
+        entry_type). This converts the regular entries to grouped format so the
+        template rendering uses a single entry type per section.
+
+    Args:
+        sections: List of validated section objects.
+    """
+    for section in sections:
+        if section.entry_type != "GroupedExperienceEntry":
+            continue
+
+        new_entries: list[Any] = []
+        for entry in section.entries:
+            if isinstance(entry, ExperienceEntry):
+                # Convert to GroupedExperienceEntry with a single position:
+                position_data: dict[str, Any] = {
+                    "position": entry.position,
+                }
+                if entry.start_date is not None:
+                    position_data["start_date"] = entry.start_date
+                if entry.end_date is not None:
+                    position_data["end_date"] = entry.end_date
+                if entry.date is not None:
+                    position_data["date"] = entry.date
+                if entry.location is not None:
+                    position_data["location"] = entry.location
+                if entry.summary is not None:
+                    position_data["summary"] = entry.summary
+                if entry.highlights is not None:
+                    position_data["highlights"] = entry.highlights
+                new_entries.append(
+                    GroupedExperienceEntry(
+                        company=entry.company,
+                        positions=[PositionEntry(**position_data)],
+                    )
+                )
+            else:
+                new_entries.append(entry)
+        section.entries = new_entries
+        # Update entry_type so template lookup uses GroupedExperienceEntry template:
+        section.entry_type = "GroupedExperienceEntry"
 
 
 def validate_section(sections_input: Any) -> Any:
@@ -245,7 +289,7 @@ def validate_section(sections_input: Any) -> Any:
             return sections_input
 
         # Normalize mixed experience entries before type detection:
-        sections_input = _normalize_experience_entries(sections_input)
+        sections_input = _normalize_raw_experience_entries(sections_input)
 
         # Find the entry type based on the first identifiable entry:
         entry_type_name = None
