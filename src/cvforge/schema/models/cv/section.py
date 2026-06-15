@@ -183,6 +183,49 @@ def get_entry_type_name_and_section_model(
     return entry_type_name, section_model
 
 
+def _normalize_experience_entries(entries: list[Any]) -> list[Any]:
+    """Convert ExperienceEntry dicts to GroupedExperienceEntry format when mixed.
+
+    Why:
+        Users may want to mix regular ExperienceEntry and GroupedExperienceEntry
+        in the same section (e.g., some roles at a company grouped, others not).
+        When any entry uses the grouped format (has ``positions``), all entries
+        in the section are normalized to GroupedExperienceEntry so that validation
+        succeeds against a single entry type.
+
+    Args:
+        entries: Raw entry dicts/strings/models for a section.
+
+    Returns:
+        Normalized entries, all convertible to GroupedExperienceEntry.
+    """
+    has_grouped = False
+    for entry in entries:
+        if isinstance(entry, dict) and "positions" in entry:
+            has_grouped = True
+            break
+        if isinstance(entry, GroupedExperienceEntry):
+            has_grouped = True
+            break
+
+    if not has_grouped:
+        return entries
+
+    normalized: list[Any] = []
+    for entry in entries:
+        if isinstance(entry, dict) and "positions" not in entry:
+            # Convert a regular ExperienceEntry dict to grouped format:
+            position_entry: dict[str, Any] = {}
+            company = entry.get("company", "")
+            for key, value in entry.items():
+                if key != "company":
+                    position_entry[key] = value
+            normalized.append({"company": company, "positions": [position_entry]})
+        else:
+            normalized.append(entry)
+    return normalized
+
+
 def validate_section(sections_input: Any) -> Any:
     """Validate section entries with automatic type detection and error reporting.
 
@@ -200,6 +243,9 @@ def validate_section(sections_input: Any) -> Any:
     if isinstance(sections_input, list):
         if len(sections_input) == 0:
             return sections_input
+
+        # Normalize mixed experience entries before type detection:
+        sections_input = _normalize_experience_entries(sections_input)
 
         # Find the entry type based on the first identifiable entry:
         entry_type_name = None

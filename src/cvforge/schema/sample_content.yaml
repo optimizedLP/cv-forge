@@ -16,7 +16,7 @@ cv:
     Welcome to RenderCV:
       - RenderCV reads a CV written in a YAML file, and generates a PDF with professional typography.
       - Each section title is arbitrary.
-      - You can choose any of the 9 entry types for each section.
+      - You can choose any of the 10 entry types for each section.
       - Markdown syntax is supported everywhere. This is **bold**, *italic*, and [link](https://example.com).
     education:
       - institution: Princeton University
@@ -88,16 +88,19 @@ cv:
           - Filed 2 patents on efficient model quantization techniques for edge inference
         company: Apple ML Research
         position: Research Intern
-      - date:
-        start_date: 2019-05
-        end_date: 2019-08
-        location: Redmond, WA
-        summary:
-        highlights:
-          - Implemented novel self-supervised learning framework for low-resource language modeling
-          - Research integrated into Azure Cognitive Services, reducing training data requirements by 60%
-        company: Microsoft Research
-        position: Research Intern
+      - company: Microsoft Research
+        positions:
+          - position: Research Intern
+            start_date: 2019-05
+            end_date: 2019-08
+            highlights:
+              - Implemented novel self-supervised learning framework for low-resource language modeling
+              - Research integrated into Azure Cognitive Services, reducing training data requirements by 60%
+          - position: Software Engineer Intern
+            start_date: 2018-06
+            end_date: 2018-08
+            highlights:
+              - Built internal tooling for the Azure DevOps team
     projects:
       - date:
         start_date: 2023-01
