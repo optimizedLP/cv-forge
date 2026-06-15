@@ -21,6 +21,7 @@ from cvforge.renderer.templater.entry_templates_from_input import (
 )
 from cvforge.schema.models.cv.entries.education import EducationEntry
 from cvforge.schema.models.cv.entries.experience import ExperienceEntry
+from cvforge.schema.models.cv.entries.grouped_experience import GroupedExperienceEntry, PositionEntry
 from cvforge.schema.models.cv.entries.normal import NormalEntry
 from cvforge.schema.models.cv.entries.publication import PublicationEntry
 from cvforge.schema.models.design.classic_theme import (
@@ -444,6 +445,66 @@ class TestRenderEntryTemplates:
 
         assert "!!!" not in entry.main_column  # ty: ignore[unresolved-attribute]
         assert entry.main_column == "**Project**"  # ty: ignore[unresolved-attribute]
+
+    def test_grouped_experience_entry_renders_company_and_positions(self):
+        entry = GroupedExperienceEntry(
+            company="Acme Corp",
+            positions=[
+                PositionEntry(
+                    position="Engineer",
+                    start_date="2020-01",
+                    end_date="2022-06",
+                    highlights=["Built the API"],
+                ),
+                PositionEntry(
+                    position="Senior Engineer",
+                    start_date="2022-07",
+                    end_date="present",
+                    highlights=["Led the team"],
+                ),
+            ],
+        )
+
+        entry = render_entry_templates(
+            entry,
+            templates=Templates(),
+            locale=EnglishLocale(),
+            show_time_span=False,
+            current_date=Date(2024, 1, 1),
+        )
+
+        # Company column should have the company name bolded
+        assert entry.company_column == "**Acme Corp**"  # ty: ignore[unresolved-attribute]
+        # Should have two rendered positions
+        assert len(entry._rendered_positions) == 2  # ty: ignore[unresolved-attribute]
+        # First position should have "Engineer" in main_column
+        assert "Engineer" in entry._rendered_positions[0]["main_column"]  # ty: ignore[unresolved-attribute]
+        # Second position should have "Senior Engineer" in main_column
+        assert "Senior Engineer" in entry._rendered_positions[1]["main_column"]  # ty: ignore[unresolved-attribute]
+
+    def test_grouped_experience_entry_with_company_location(self):
+        entry = GroupedExperienceEntry(
+            company="Tech Inc",
+            location="San Francisco, CA",
+            positions=[
+                PositionEntry(
+                    position="Dev",
+                    start_date="2021-01",
+                    end_date="2023-12",
+                ),
+            ],
+        )
+
+        entry = render_entry_templates(
+            entry,
+            templates=Templates(),
+            locale=EnglishLocale(),
+            show_time_span=False,
+            current_date=Date(2024, 1, 1),
+        )
+
+        assert "**Tech Inc**" in entry.company_column  # ty: ignore[unresolved-attribute]
+        assert len(entry._rendered_positions) == 1  # ty: ignore[unresolved-attribute]
 
     def test_inline_summary_not_wrapped_in_admonition(self):
         templates = Templates(

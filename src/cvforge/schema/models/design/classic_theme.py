@@ -739,6 +739,39 @@ class ExperienceEntryTemplate(BaseModelWithoutExtraKeys):
     )
 
 
+class GroupedExperienceEntryTemplate(BaseModelWithoutExtraKeys):
+    company_column: str = pydantic.Field(
+        default="**COMPANY**",
+        description=(
+            "Template for the company header in grouped experience entries. Available"
+            " placeholders:\n- `COMPANY`: Company name\n- `LOCATION`: Company-level"
+            " location\n- `SUMMARY`: Company-level summary\n\nThe default value is"
+            " `**COMPANY**`."
+        ),
+    )
+    position_main_column: str = pydantic.Field(
+        default="POSITION\nSUMMARY\nHIGHLIGHTS",
+        description=(
+            "Template for each position's main column within a grouped experience"
+            " entry. Available placeholders:\n- `POSITION`: Job title/position\n-"
+            " `SUMMARY`: Position summary text\n- `HIGHLIGHTS`: Position bullet points"
+            " list\n- `LOCATION`: Position location text\n- `DATE`: Formatted date or"
+            " date range\n\nThe default value is `POSITION\\nSUMMARY\\nHIGHLIGHTS`."
+        ),
+    )
+    position_date_and_location_column: str = pydantic.Field(
+        default="LOCATION\nDATE",
+        description=(
+            "Template for each position's date/location column within a grouped"
+            " experience entry. Available placeholders:\n- `POSITION`: Job"
+            " title/position\n- `SUMMARY`: Position summary text\n- `HIGHLIGHTS`:"
+            " Position bullet points list\n- `LOCATION`: Position location text\n-"
+            " `DATE`: Formatted date or date range\n\nThe default value is"
+            " `LOCATION\\nDATE`."
+        ),
+    )
+
+
 class PublicationEntryTemplate(BaseModelWithoutExtraKeys):
     main_column: str = pydantic.Field(
         default="**TITLE**\nSUMMARY\nAUTHORS\nURL (JOURNAL)",
@@ -853,6 +886,10 @@ class Templates(BaseModelWithoutExtraKeys):
     experience_entry: ExperienceEntryTemplate = pydantic.Field(
         default_factory=ExperienceEntryTemplate,
         description="Template for experience entries.",
+    )
+    grouped_experience_entry: GroupedExperienceEntryTemplate = pydantic.Field(
+        default_factory=GroupedExperienceEntryTemplate,
+        description="Template for grouped experience entries.",
     )
     publication_entry: PublicationEntryTemplate = pydantic.Field(
         default_factory=PublicationEntryTemplate,

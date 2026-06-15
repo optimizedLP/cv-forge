@@ -177,14 +177,41 @@ def process_fields(
         if isinstance(value, str):
             setattr(entry, field, apply_string_processors(value, string_processors))
         elif isinstance(value, list):
-            setattr(
-                entry,
-                field,
-                [apply_string_processors(v, string_processors) for v in value],
-            )
+            processed_list = []
+            for v in value:
+                if isinstance(v, dict):
+                    # Sub-entries (e.g., PositionEntry in GroupedExperienceEntry)
+                    processed_dict = {}
+                    for k, val in v.items():
+                        if k in skipped or k.startswith("_"):
+                            processed_dict[k] = val
+                        elif isinstance(val, str):
+                            processed_dict[k] = apply_string_processors(
+                                val, string_processors
+                            )
+                        else:
+                            processed_dict[k] = val
+                    processed_list.append(processed_dict)
+                elif isinstance(v, str):
+                    processed_list.append(
+                        apply_string_processors(v, string_processors)
+                    )
+                else:
+                    processed_list.append(v)
+            setattr(entry, field, processed_list)
         else:
             setattr(
                 entry, field, apply_string_processors(str(value), string_processors)
             )
+
+    # Process rendered positions for GroupedExperienceEntry
+    rendered_positions = getattr(entry, "_rendered_positions", None)
+    if rendered_positions is not None:
+        for pos in rendered_positions:
+            for key in list(pos.keys()):
+                if isinstance(pos[key], str):
+                    pos[key] = apply_string_processors(
+                        pos[key], string_processors
+                    )
 
     return entry

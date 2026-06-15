@@ -20,6 +20,24 @@ experience_entry:
       received more than **100,000 downloads**.
     - Managed a team of **5** engineers.
 
+grouped_experience_entry:
+  company: Some Company
+  location: TX, USA
+  positions:
+    - position: Software Engineer
+      start_date: 2020-07
+      end_date: 2021-08
+      highlights:
+        - Developed an [IOS application](https://example.com) that has
+          received more than **100,000 downloads**.
+        - Managed a team of **5** engineers.
+    - position: Senior Software Engineer
+      start_date: 2021-09
+      end_date: present
+      highlights:
+        - Led the migration to a **microservices** architecture.
+        - Mentored **3** junior developers and conducted code reviews.
+
 normal_entry:
   name: Some Project
   date: 2021-09

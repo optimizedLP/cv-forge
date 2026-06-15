@@ -4,6 +4,7 @@ from datetime import date as Date
 
 from cvforge.exception import RenderCVInternalError
 from cvforge.schema.models.cv.entries.publication import PublicationEntry
+from cvforge.schema.models.cv.entries.grouped_experience import GroupedExperienceEntry
 from cvforge.schema.models.cv.section import Entry
 from cvforge.schema.models.design.classic_theme import Templates
 from cvforge.schema.models.locale.locale import Locale
@@ -121,6 +122,17 @@ def render_entry_templates[EntryType: Entry](
         # It's a TextEntry, or an entry type without templates. Return it as is:
         return entry
 
+    # Handle GroupedExperienceEntry specially: process company-level and
+    # position-level templates separately.
+    if isinstance(entry, GroupedExperienceEntry):
+        return render_grouped_experience_entry(
+            entry,
+            templates=templates,
+            locale=locale,
+            show_time_span=show_time_span,
+            current_date=current_date,
+        )
+
     entry_templates: dict[str, str] = getattr(
         templates, entry.entry_type_in_snake_case
     ).model_dump(exclude_none=True)
@@ -223,6 +235,134 @@ def render_entry_templates[EntryType: Entry](
             substitute_placeholders(template, entry_fields),
         )
 
+    return entry
+
+
+def render_grouped_experience_entry[
+    EntryType: GroupedExperienceEntry
+](
+    entry: EntryType,
+    *,
+    templates: Templates,
+    locale: Locale,
+    show_time_span: bool,
+    current_date: Date,
+) -> EntryType:
+    """Process a GroupedExperienceEntry by rendering company and position templates.
+
+    Why:
+        Grouped entries have two levels of templates: company-level header and
+        per-position sub-entries. Each level uses different placeholders and
+        must be processed independently.
+
+    Args:
+        entry: The grouped experience entry to process.
+        templates: Template collection for entry types and dates.
+        locale: Locale for date and text formatting.
+        show_time_span: Whether to include duration calculation in dates.
+        current_date: Reference date for time span calculations.
+
+    Returns:
+        Entry with rendered template fields set as attributes.
+    """
+    grouped_templates: dict[str, str] = getattr(
+        templates, entry.entry_type_in_snake_case
+    ).model_dump(exclude_none=True)
+
+    # 1. Process company-level template
+    company_fields: dict[str, str] = {
+        "COMPANY": entry.company,
+    }
+    if entry.location:
+        company_fields["LOCATION"] = entry.location
+    if entry.summary:
+        company_fields["SUMMARY"] = entry.summary
+
+    company_templates = {"company_column": grouped_templates.get("company_column", "**COMPANY**")}
+    company_templates = remove_not_provided_placeholders(company_templates, company_fields)
+    entry.company_column = substitute_placeholders(  # ty: ignore[unresolved-attribute]
+        company_templates["company_column"], company_fields
+    )
+
+    # 2. Process each position's templates
+    rendered_positions: list[dict[str, str]] = []
+    for position in entry.positions:
+        position_fields: dict[str, str] = {}
+        pos_data = position.model_dump(exclude_none=True)
+        for key, value in pos_data.items():
+            if isinstance(value, str):
+                position_fields[key.upper()] = value
+
+        # Handle highlights
+        if position.highlights is not None:
+            position_fields["HIGHLIGHTS"] = process_highlights(position.highlights)
+
+        # Handle date
+        if (
+            "DATE" in position_fields
+            or "START_DATE" in position_fields
+            or "END_DATE" in position_fields
+        ):
+            position_fields["DATE"] = process_date(
+                date=getattr(position, "date", None),
+                start_date=getattr(position, "start_date", None),
+                end_date=getattr(position, "end_date", None),
+                locale=locale,
+                show_time_span=show_time_span,
+                current_date=current_date,
+                single_date_template=templates.single_date,
+                date_range_template=templates.date_range,
+                time_span_template=templates.time_span,
+            )
+
+        if "START_DATE" in position_fields:
+            start_date = getattr(position, "start_date", None)
+            if start_date is not None:
+                position_fields["START_DATE"] = format_single_date(
+                    start_date,
+                    locale=locale,
+                    single_date_template=templates.single_date,
+                )
+
+        if "END_DATE" in position_fields:
+            end_date = getattr(position, "end_date", None)
+            if end_date is not None:
+                position_fields["END_DATE"] = format_single_date(
+                    end_date,
+                    locale=locale,
+                    single_date_template=templates.single_date,
+                )
+
+        # Handle summary — only wrap in admonition when SUMMARY is standalone
+        if "SUMMARY" in position_fields:
+            summary_is_standalone = any(
+                line.strip() == "SUMMARY"
+                for template in [grouped_templates.get("position_main_column", "")]
+                for line in template.split("\n")
+            )
+            if summary_is_standalone:
+                position_fields["SUMMARY"] = process_summary(position_fields["SUMMARY"])
+
+        pos_main = grouped_templates.get(
+            "position_main_column", "POSITION\nSUMMARY\nHIGHLIGHTS"
+        )
+        pos_date_loc = grouped_templates.get("position_date_and_location_column", "LOCATION\nDATE")
+        pos_templates = {
+            "main_column": pos_main,
+            "date_and_location_column": pos_date_loc,
+        }
+        pos_templates = remove_not_provided_placeholders(pos_templates, position_fields)
+
+        rendered_positions.append({
+            "main_column": substitute_placeholders(
+                pos_templates["main_column"], position_fields
+            ),
+            "date_and_location_column": substitute_placeholders(
+                pos_templates["date_and_location_column"], position_fields
+            ),
+        })
+
+    entry._rendered_positions = rendered_positions  # ty: ignore[unresolved-attribute]
     return entry
 
 

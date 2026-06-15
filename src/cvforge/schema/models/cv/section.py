@@ -16,6 +16,7 @@ from .entries.numbered import NumberedEntry
 from .entries.one_line import OneLineEntry
 from .entries.publication import PublicationEntry
 from .entries.reversed_numbered import ReversedNumberedEntry
+from .entries.grouped_experience import GroupedExperienceEntry
 
 ########################################################################################
 # Below needs to be updated when new entry types are added.
@@ -25,6 +26,7 @@ type EntryModel = (
     OneLineEntry
     | NormalEntry
     | ExperienceEntry
+    | GroupedExperienceEntry
     | EducationEntry
     | PublicationEntry
     | BulletEntry

@@ -14,6 +14,7 @@ from cvforge.schema.models.cv.cv import Cv
 from cvforge.schema.models.cv.entries.bullet import BulletEntry
 from cvforge.schema.models.cv.entries.education import EducationEntry
 from cvforge.schema.models.cv.entries.experience import ExperienceEntry
+from cvforge.schema.models.cv.entries.grouped_experience import GroupedExperienceEntry, PositionEntry
 from cvforge.schema.models.cv.entries.normal import NormalEntry
 from cvforge.schema.models.cv.entries.numbered import NumberedEntry
 from cvforge.schema.models.cv.entries.one_line import OneLineEntry
@@ -173,6 +174,38 @@ def full_cvforge_model(testdata_dir: pathlib.Path) -> RenderCVModel:
             ],
             "Publication Entries": create_combinations_of_entry_type(PublicationEntry),
             "Experience Entries": create_combinations_of_entry_type(ExperienceEntry),
+            "Grouped Experience Entries": [
+                GroupedExperienceEntry(
+                    company="Some Company",
+                    positions=[
+                        PositionEntry(
+                            position="Software Engineer",
+                            start_date="2020-01",
+                            end_date="2022-06",
+                            highlights=["Built the payments system"],
+                        ),
+                        PositionEntry(
+                            position="Senior Software Engineer",
+                            start_date="2022-07",
+                            end_date="present",
+                            highlights=["Led migration to microservices"],
+                        ),
+                    ],
+                ),
+                GroupedExperienceEntry(
+                    company="Another Company",
+                    location="Remote",
+                    summary="Leading the engineering team.",
+                    positions=[
+                        PositionEntry(
+                            position="Team Lead",
+                            start_date="2021-03",
+                            end_date="present",
+                            highlights=["Managed a team of 10"],
+                        ),
+                    ],
+                ),
+            ],
             "Education Entries": create_combinations_of_entry_type(EducationEntry),
             "Normal Entries": create_combinations_of_entry_type(NormalEntry),
             "One Line Entries": [

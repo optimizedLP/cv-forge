@@ -16,6 +16,7 @@ from cvforge.schema.models.cv.section import (
     BulletEntry,
     EducationEntry,
     ExperienceEntry,
+    GroupedExperienceEntry,
     NormalEntry,
     NumberedEntry,
     OneLineEntry,
@@ -44,6 +45,7 @@ image_assets_directory = pathlib.Path(__file__).parent / "assets" / "images"
 class SampleEntries(pydantic.BaseModel):
     education_entry: EducationEntry
     experience_entry: ExperienceEntry
+    grouped_experience_entry: GroupedExperienceEntry
     normal_entry: NormalEntry
     publication_entry: PublicationEntry
     one_line_entry: OneLineEntry
