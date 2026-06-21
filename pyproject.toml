@@ -64,7 +64,7 @@ full = [
   "typst>=0.14.8",  # Render PDF from Typst source files
   "rendercv-fonts>=0.5.1",  # Font files for cVForge
   "packaging>=26.0",  # For version checking
-  "PyMuPDF>=1.26.5",  # PDF text extraction for ATS checker
+  "PyMuPDF>=1.27.2.3",  # PDF text extraction for ATS checker
 ]
 
 [project.urls]
@@ -109,7 +109,7 @@ docs = [
   "mkdocstrings[python]>=1.0.3",  # Build reference docs from docstrings
 ]
 update-entry-figures = [
-  "PyMuPDF==1.26.5",  # Convert PDF files to images
+  "PyMuPDF==1.27.2.3",  # Convert PDF files to images
   "pdfCropMargins==2.2.1",  # Generate entry figures for documentation
   "pillow==10.4.0",  # Lock dependency of pdfCropMargins
 ]
