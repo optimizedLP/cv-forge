@@ -171,7 +171,8 @@
           "moderncv": "#/$defs/ModerncvTheme",
           "opal": "#/$defs/OpalTheme",
           "sb2nov": "#/$defs/Sb2novTheme",
-          "sleek": "#/$defs/SleekTheme"
+          "sleek": "#/$defs/SleekTheme",
+          "standard": "#/$defs/StandardTheme"
         },
         "propertyName": "theme"
       },
@@ -214,6 +215,9 @@
         },
         {
           "$ref": "#/$defs/SleekTheme"
+        },
+        {
+          "$ref": "#/$defs/StandardTheme"
         }
       ]
     },
@@ -12397,6 +12401,46 @@
         }
       },
       "title": "Phrases",
+      "type": "object"
+    },
+    "StandardTheme": {
+      "additionalProperties": false,
+      "properties": {
+        "theme": {
+          "const": "standard",
+          "default": "standard",
+          "title": "Theme",
+          "type": "string"
+        },
+        "page": {
+          "$ref": "#/$defs/cvforge__schema__models__design__classic_theme__Page__2"
+        },
+        "colors": {
+          "$ref": "#/$defs/cvforge__schema__models__design__classic_theme__Colors__2"
+        },
+        "typography": {
+          "$ref": "#/$defs/cvforge__schema__models__design__classic_theme__Typography__2"
+        },
+        "links": {
+          "$ref": "#/$defs/cvforge__schema__models__design__classic_theme__Links__2"
+        },
+        "header": {
+          "$ref": "#/$defs/cvforge__schema__models__design__classic_theme__Header__2"
+        },
+        "section_titles": {
+          "$ref": "#/$defs/cvforge__schema__models__design__classic_theme__SectionTitles__2"
+        },
+        "sections": {
+          "$ref": "#/$defs/cvforge__schema__models__design__classic_theme__Sections__2"
+        },
+        "entries": {
+          "$ref": "#/$defs/cvforge__schema__models__design__classic_theme__Entries__2"
+        },
+        "templates": {
+          "$ref": "#/$defs/cvforge__schema__models__design__classic_theme__Templates__2"
+        }
+      },
+      "title": "StandardTheme",
       "type": "object"
     }
   },

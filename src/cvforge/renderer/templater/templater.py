@@ -201,6 +201,13 @@ def render_single_template(
                 f"{cvforge_model.design.theme}/{relative_template_path}"
             )
 
+        # Then try built-in theme-specific templates:
+        if template is None:
+            with contextlib.suppress(jinja2.TemplateNotFound):
+                template = jinja2_environment.get_template(
+                    f"{file_type}/{cvforge_model.design.theme}/{relative_template_path}"
+                )
+
     if template is None:
         template = jinja2_environment.get_template(
             f"{file_type}/{relative_template_path}"
