@@ -49,7 +49,7 @@
   links-show-external-link-icon: false,
   header-alignment: center,
   header-photo-width: 3.5cm,
-  header-space-below-name: 1pt,
+  header-space-below-name: 0.15cm,
   header-space-below-headline: 0.7cm,
   header-space-below-connections: 0.2cm,
   header-connections-hyperlink: true,

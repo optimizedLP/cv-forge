@@ -9062,8 +9062,8 @@
         },
         "space_below_name": {
           "$ref": "#/$defs/TypstDimension",
-          "default": "1pt",
-          "description": "Space below your name. It can be specified with units (cm, in, pt, mm, em). For example, `0.1cm`. The default value is `1pt`."
+          "default": "0.15cm",
+          "description": "Space below your name. It can be specified with units (cm, in, pt, mm, em). For example, `0.1cm`. The default value is `0.15cm`."
         },
         "space_below_headline": {
           "$ref": "#/$defs/TypstDimension",

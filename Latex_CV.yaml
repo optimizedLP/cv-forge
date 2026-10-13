@@ -1,0 +1,373 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/rendercv/rendercv/refs/tags/v2.8/schema.json
+cv:
+  name: DHRUV JANI
+  headline:
+  location: 
+  email: jani.dhruv1@gmail.com
+  photo:
+  phone: "+19165078230"
+  website: https://dpjani.github.io/
+  social_networks:
+    - network: LinkedIn
+      username: dpjani
+    - network: GitHub
+      username: optimizedlp
+  custom_connections:
+  
+  sections:
+
+
+    education:
+
+      - institution: Columbia University
+        area: Operations Research & Financial Engineering
+        degree: M.S.
+        date:
+        start_date: 
+        end_date: 
+        location: New York, NY
+        summary:
+        highlights:
+          # - 'Optimization, Statistical Modeling, Simulation, Financial Econometrics, Stochastics, Capital Markets'
+
+      - institution: University of California 
+        area: Mathematical Analytics & Statistics 
+        degree: B.S.
+        date:
+        start_date:
+        end_date: 
+        location: Davis, CA
+        summary:
+        highlights:
+          # - 'Applied Linear Algebra, Time-Series Analysis, Business Analytics, Quantitative Finance, Deep Learning'
+
+
+
+
+
+    experience:
+
+
+
+      - company: Columbia University Irving Medical Center
+        positions:
+          - position: Data Scientist
+            start_date: 2025-06
+            end_date: 2026-09
+            location: New York, NY
+            highlights:
+              - Developed Python-based data validation, cohort matching, and statistical analysis workflows across demographic, genetic, laboratory, and environmental datasets.
+              - Extracted and analyzed clinical datasets covering 393K+ patients, supporting research into disease associations and complex risk factors.
+              - Performed large-scale data analysis and translated findings into structured analytical outputs to support research and data-driven decision-making.
+
+
+
+      
+  
+      - company: NYC Department of Education
+        position: Data Analyst
+        date:
+        start_date: 2025-01
+        end_date: 2025-06
+        location: New York, NY
+        summary:
+        highlights:
+          - Analyzed 50K+ student records across multiple academic datasets, identifying data inconsistencies and improving reporting accuracy.
+          - Maintained dashboards tracking graduation rates, standardized test scores, and special education metrics across 100+ schools.
+          - Delivered analytical insights that accelerated leadership reporting and decision-making by 30%.
+
+
+
+      - company: Numeraxial 
+        position: Quantitative Analyst
+        date:
+        start_date: 2024-06
+        end_date: 2024-12
+        location: New York, NY
+        summary:
+        highlights:
+          - Developed regime-based portfolio allocation models by identifying macroeconomic cycles and generating systematic investment signals.
+          - Conducted quantitative research, portfolio optimization, backtesting, and risk analysis to rigorously evaluate investment strategies.
+          - Performed statistical and financial market analysis to derive insights supporting investment decision-making.
+
+
+
+      - company: New York Genome Center (NYGC) 
+        position: Data Science Intern
+        date:
+        start_date: 2024-06
+        end_date: 2024-08
+        location: New York, NY
+        summary:
+        highlights:
+          - Designed a graph-network pipeline to map 2D histological sections to corresponding locations within 3D reference volumes.
+          - Developed image-processing workflows for volumetric image segmentation, slice extraction, and graph representation of cellular spatial relationships.
+          - Implemented graph matching algorithms to evaluate relationships across multimodal imaging datasets.
+
+
+      - company: Numeraxial 
+        position: Quantitative Analyst
+        date:
+        start_date: 2024-06
+        end_date: 2024-12
+        location: New York, NY
+        summary:
+        highlights:
+          - Developed regime-based portfolio allocation models by identifying macroeconomic cycles and generating systematic investment signals.
+          - Conducted quantitative research, portfolio optimization, backtesting, and risk analysis to rigorously evaluate investment strategies.
+          - Performed statistical and financial market analysis to derive insights supporting investment decision-making.
+
+
+
+
+      - company: Apple 
+        position: Summer Analyst
+        date:
+        start_date: 2022-06
+        end_date: 2022-08
+        location: Mountain View, CA
+        summary:
+        highlights:
+          - Analyzed geospatial datasets to identify data discrepancies and support basemap quality improvements.
+          - Developed automated reporting workflows to track key data-quality metrics and streamline operational monitoring.
+
+
+
+    projects:
+
+
+      - name: AutoReport
+        date:
+        # start_date: 2026-06
+        # end_date: present
+        location:
+        summary: Natural language-to-interactive dashboard system with automated SQL generation and anomaly detection
+        highlights:
+          # - Built multi-agent LLM systems for causal factor attribution across 5,000+ tickers with 87% precision on daily price movement drivers           
+
+          
+      - name: OptiMarkets
+        date:
+        # start_date: 2026-03
+        # end_date: present
+        location:
+        summary: AI-powered investment analysis engine covering equities, ETFs, crypto, forex, and commodities
+        highlights:
+          # - Built multi-agent LLM systems for causal factor attribution across 5,000+ tickers with 87% precision on daily price movement drivers
+   
+
+
+
+
+    # publications:
+    #   - title: Multi-Agent Reinforcement Learning with Emergent Communication
+    #     authors:
+    #       - Maria Garcia
+    #       - '*John Doe*'
+    #       - Tom Anderson
+    #     summary:
+    #     doi: 10.1234/icml.2022.9012
+    #     url:
+    #     journal: ICML 2022
+    #     date: 2022-07
+
+
+
+    skills:
+      - label: Languages & Tools
+        details: Python, SQL, R, Git, Power BI
+      - label: ML Frameworks & AI
+        details: PyTorch, TensorFlow, NLP, LLMs, Graph Networks, Pandas, NumPy, SciPy, Scikit-learn
+      - label: Analytical
+        details: Portfolio Optimization, Quantitative Research, Financial Modeling, Risk Analysis, Statistical Analysis, Time Series Analysis, Regression Analysis, Causal Inference
+      - label: Domain
+        details: Data Quality, Data Validation, Dashboarding, Portfolio Optimization, Quantitative Research, Financial Modeling, Risk Analysis
+
+
+
+design:
+  theme: latex
+  page:
+    size: us-letter
+    top_margin: 0.40in
+    bottom_margin: 0.40in
+    left_margin: 0.40in
+    right_margin: 0.40in
+    show_footer: false
+    show_top_note: false
+  # colors:
+  #   body: rgb(0, 0, 0)
+  #   name: rgb(0, 79, 144)
+  #   headline: rgb(0, 79, 144)
+  #   connections: rgb(0, 79, 144)
+  #   section_titles: rgb(0, 79, 144)
+  #   links: rgb(0, 79, 144)
+  #   footer: rgb(128, 128, 128)
+  #   top_note: rgb(128, 128, 128)
+  # typography:
+  #   line_spacing: 0.6em
+  #   alignment: justified
+  #   date_and_location_column_alignment: right
+  #   font_family:
+  #     body: Source Sans 3
+  #     name: Source Sans 3
+  #     headline: Source Sans 3
+  #     connections: Source Sans 3
+  #     section_titles: Source Sans 3
+  #   font_size:
+  #     body: 10pt
+  #     name: 30pt
+  #     headline: 10pt
+  #     connections: 10pt
+  #     section_titles: 1.4em
+  #   small_caps:
+  #     name: false
+  #     headline: false
+  #     connections: false
+  #     section_titles: false
+  #   bold:
+  #     name: true
+  #     headline: false
+  #     connections: false
+  #     section_titles: true
+  # links:
+  #   underline: false
+  #   show_external_link_icon: false
+  # header:
+  #   alignment: center
+  #   photo_width: 3.5cm
+  #   photo_position: left
+  #   photo_space_left: 0.4cm
+  #   photo_space_right: 0.4cm
+  #   space_below_name: 0.7cm
+  #   space_below_headline: 0.7cm
+  #   space_below_connections: 0.7cm
+  #   connections:
+  #     phone_number_format: national
+  #     hyperlink: true
+  #     show_icons: true
+  #     display_urls_instead_of_usernames: false
+  #     separator: ''
+  #     space_between_connections: 0.5cm
+  # section_titles:
+  #   type: with_partial_line
+  #   line_thickness: 0.5pt
+  #   space_above: 0.5cm
+  #   space_below: 0.3cm
+  # sections:
+  #   allow_page_break: true
+  #   space_between_regular_entries: 1.2em
+  #   space_between_text_based_entries: 0.3em
+  #   show_time_spans_in: []
+  # entries:
+  #   date_and_location_width: 4.15cm
+  #   side_space: 0.2cm
+  #   space_between_columns: 0.1cm
+  #   allow_page_break: false
+  #   short_second_row: true
+  #   degree_width: 1cm
+  #   summary:
+  #     space_above: 0cm
+  #     space_left: 0cm
+  #   highlights:
+  #     bullet: •
+  #     nested_bullet: •
+  #     space_left: 0.15cm
+  #     space_above: 0cm
+  #     space_between_items: 0cm
+  #     space_between_bullet_and_text: 0.5em
+  # templates:
+  #   footer: '*NAME -- PAGE_NUMBER/TOTAL_PAGES*'
+  #   top_note: '*LAST_UPDATED CURRENT_DATE*'
+  #   single_date: MONTH_ABBREVIATION YEAR
+  #   date_range: START_DATE – END_DATE
+  #   time_span: HOW_MANY_YEARS YEARS HOW_MANY_MONTHS MONTHS
+  #   one_line_entry:
+  #     main_column: '**LABEL:** DETAILS'
+  #   education_entry:
+  #     main_column: |-
+  #       **INSTITUTION**, AREA
+  #       SUMMARY
+  #       HIGHLIGHTS
+  #     degree_column: '**DEGREE**'
+  #     date_and_location_column: |-
+  #       LOCATION
+  #       DATE
+  #   normal_entry:
+  #     main_column: |-
+  #       **NAME**
+  #       SUMMARY
+  #       HIGHLIGHTS
+  #     date_and_location_column: |-
+  #       LOCATION
+  #       DATE
+  #   experience_entry:
+  #     main_column: |-
+  #       **COMPANY**, POSITION
+  #       SUMMARY
+  #       HIGHLIGHTS
+  #     date_and_location_column: |-
+  #       LOCATION
+  #       DATE
+  #   publication_entry:
+  #     main_column: |-
+  #       **TITLE**
+  #       SUMMARY
+  #       AUTHORS
+  #       URL (JOURNAL)
+  #     date_and_location_column: DATE
+locale:
+  language: english
+  # last_updated: Last updated in
+  # month: month
+  # months: months
+  # year: year
+  # years: years
+  # present: present
+  # phrases:
+  #   degree_with_area: DEGREE in AREA
+  # month_abbreviations:
+  #   - Jan
+  #   - Feb
+  #   - Mar
+  #   - Apr
+  #   - May
+  #   - June
+  #   - July
+  #   - Aug
+  #   - Sept
+  #   - Oct
+  #   - Nov
+  #   - Dec
+  # month_names:
+  #   - January
+  #   - February
+  #   - March
+  #   - April
+  #   - May
+  #   - June
+  #   - July
+  #   - August
+  #   - September
+  #   - October
+  #   - November
+  #   - December
+settings:
+  current_date: today
+  render_command:
+    output_folder: cvforge_output
+    design:
+    locale:
+    typst_path: OUTPUT_FOLDER/NAME_IN_TITLE_SNAKE_CASE_CV.typ
+    pdf_path: OUTPUT_FOLDER/NAME_IN_TITLE_SNAKE_CASE.pdf
+    markdown_path: OUTPUT_FOLDER/NAME_IN_TITLE_SNAKE_CASE_CV.md
+    html_path: OUTPUT_FOLDER/NAME_IN_TITLE_SNAKE_CASE_CV.html
+    png_path: OUTPUT_FOLDER/NAME_IN_TITLE_SNAKE_CASE_CV.png
+    dont_generate_markdown: false
+    dont_generate_html: false
+    dont_generate_typst: false
+    dont_generate_pdf: false
+    dont_generate_png: false
+  section_order:
+  bold_keywords: []
+  pdf_title: NAME - CV

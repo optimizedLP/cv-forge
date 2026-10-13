@@ -255,7 +255,7 @@ design:
   #   photo_position: left
   #   photo_space_left: 0.4cm
   #   photo_space_right: 0.4cm
-  #   space_below_name: 1pt
+  #   space_below_name: 0.15cm
   #   space_below_headline: 0.7cm
   #   space_below_connections: 0.2cm
   #   connections:
