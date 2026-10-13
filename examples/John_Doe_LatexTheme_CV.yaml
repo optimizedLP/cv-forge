@@ -232,7 +232,7 @@ design:
   #     section_titles: New Computer Modern
   #   font_size:
   #     body: 10pt
-  #     name: 24pt
+  #     name: 20pt
   #     headline: 10pt
   #     connections: 10pt
   #     section_titles: 1.2em
@@ -255,7 +255,7 @@ design:
   #   photo_position: left
   #   photo_space_left: 0.4cm
   #   photo_space_right: 0.4cm
-  #   space_below_name: 0.15cm
+  #   space_below_name: 0.3cm
   #   space_below_headline: 0.7cm
   #   space_below_connections: 0.2cm
   #   connections:
