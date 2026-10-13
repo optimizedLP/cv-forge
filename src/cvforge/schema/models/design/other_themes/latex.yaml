@@ -1,0 +1,76 @@
+# yaml-language-server: $schema=../../../../../../schema.json
+design:
+  theme: latex
+  page:
+    top_margin: 0.5in
+    bottom_margin: 0.5in
+    left_margin: 0.5in
+    right_margin: 0.5in
+    show_footer: false
+    show_top_note: false
+  typography:
+    alignment: left
+    font_family:
+      body: New Computer Modern
+      name: New Computer Modern
+      headline: New Computer Modern
+      connections: New Computer Modern
+      section_titles: New Computer Modern
+    font_size:
+      name: 24pt
+      section_titles: 1.2em
+    small_caps:
+      name: true
+      headline: false
+      connections: false
+      section_titles: true
+    bold:
+      name: true
+      headline: false
+      connections: false
+      section_titles: false
+  colors:
+    name: rgb(0,0,0)
+    headline: rgb(0,0,0)
+    connections: rgb(0,0,0)
+    section_titles: rgb(0,0,0)
+    links: rgb(0,0,0)
+  links:
+    underline: true
+    show_external_link_icon: false
+  header:
+    alignment: center
+    space_below_name: 1pt
+    space_below_connections: 0.2cm
+    connections:
+      hyperlink: true
+      show_icons: false
+      display_urls_instead_of_usernames: true
+      separator: "|"
+  section_titles:
+    type: with_full_line
+    space_above: 0.3cm
+    space_below: 0.2cm
+  sections:
+    show_time_spans_in: []
+    space_between_regular_entries: 0.3cm
+    space_between_text_based_entries: 0.15cm
+  entries:
+    short_second_row: false
+    highlights:
+      bullet: "•"
+      nested_bullet: "•"
+      space_left: 0.2cm
+  templates:
+    education_entry:
+      main_column: "**INSTITUTION**\n*DEGREE_WITH_AREA*\nSUMMARY\nHIGHLIGHTS"
+      degree_column: null
+      date_and_location_column: "LOCATION\n*DATE*"
+    experience_entry:
+      main_column: "**POSITION**\n*COMPANY*\nSUMMARY\nHIGHLIGHTS"
+      date_and_location_column: "DATE\n*LOCATION*"
+    normal_entry:
+      main_column: "**NAME**\nSUMMARY\nHIGHLIGHTS"
+      date_and_location_column: DATE
+    grouped_experience_entry:
+      position_date_and_location_column: "DATE\n*LOCATION*"
